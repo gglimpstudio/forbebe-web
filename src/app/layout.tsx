@@ -15,10 +15,12 @@ export async function generateMetadata(): Promise<Metadata> {
     settings.defaultSeoDescription ||
     settings.description ||
     "포베베는 카시트와 유모차를 전문적으로 세탁·살균 케어하는 유아용품 세탁 브랜드입니다. 가까운 지점에서 간편하게 예약 문의하세요.";
+  const siteUrl = getSiteUrl();
   const faviconUrl = urlForImage(settings.favicon)?.width(64).height(64).fit("crop").url();
+  const ogImageUrl = urlForImage(settings.ogImage)?.width(1200).height(630).fit("crop").url() || `${siteUrl}/images/hero-forbebe.jpg`;
 
   return {
-    metadataBase: new URL(getSiteUrl()),
+    metadataBase: new URL(siteUrl),
     title: {
       default: title,
       template: `%s | ${siteName}`,
@@ -32,11 +34,17 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: getSiteUrl(),
+      url: siteUrl,
       siteName,
-      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: siteName }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: siteName }],
       locale: "ko_KR",
       type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImageUrl],
     },
   };
 }

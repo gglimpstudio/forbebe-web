@@ -1,4 +1,4 @@
-@import "@fontsource/pretendard";
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 @import "tailwindcss";
 
 :root {
@@ -37,7 +37,7 @@
   --color-text-sub: var(--text-sub);
   --color-text-inverse: var(--text-inverse);
   --color-hero-body: var(--hero-body);
-  --font-sans: "Pretendard", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Pretendard Variable", "Pretendard", ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", monospace;
 }
 
@@ -52,7 +52,7 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: "Pretendard", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Pretendard Variable", "Pretendard", ui-sans-serif, system-ui, sans-serif;
 }
 
 a {
