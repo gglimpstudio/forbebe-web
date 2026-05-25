@@ -45,7 +45,7 @@ export function IntroSection({ intro }: { intro?: IntroSectionData }) {
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-brand-primary">{intro?.sectionLabel || "ABOUT FORBEBE"}</p>
-            <h2 id="intro-title" className="mt-4 whitespace-pre-line text-3xl font-black leading-tight text-green-dark sm:text-4xl lg:text-5xl">
+            <h2 id="intro-title" className="mt-4 whitespace-pre text-3xl font-black leading-tight text-green-dark sm:text-4xl lg:text-5xl">
               {intro?.title || "아이에게 닿는 이동용품,\n전문 케어가 필요합니다."}
             </h2>
             <p className="mt-6 whitespace-pre-line text-base leading-8 text-text-sub sm:text-lg">
