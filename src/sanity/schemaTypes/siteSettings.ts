@@ -16,7 +16,10 @@ export const siteSettings = defineType({
   fields: [
     defineField({ name: "title", title: "사이트 이름", type: "string", validation: (Rule) => Rule.required() }),
     defineField({ name: "description", title: "사이트 설명", type: "text" }),
-    imageWithAlt("logo", "로고"),
+    imageWithAlt("logo", "기본 로고"),
+    imageWithAlt("headerLogo", "글로벌 헤더 로고"),
+    imageWithAlt("footerLogo", "푸터 로고"),
+    imageWithAlt("favicon", "파비콘"),
     imageWithAlt("ogImage", "공유 이미지"),
     defineField({ name: "phone", title: "대표 전화번호", type: "string" }),
     defineField({ name: "kakaoUrl", title: "카카오톡 채널 URL", type: "url" }),

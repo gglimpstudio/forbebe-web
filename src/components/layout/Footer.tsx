@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
+import { imageAlt, urlForImage } from "@/lib/sanity/image";
 import type { SiteSettings } from "@/types";
 
 type FooterLink = {
@@ -43,9 +44,16 @@ const contactInfo = [
   { label: "사업자정보", value: "추후 입력" },
 ];
 
+const FALLBACK_LOGO_SRC = "/forbebe-logo.png";
+
 export function Footer({ settings }: { settings: SiteSettings }) {
   const homeFooter = settings.homeFooter;
   const footerText = homeFooter?.description || settings.footerText || "아이의 이동 공간을 더 산뜻하고 안심할 수 있게 케어합니다.";
+  const footerLogo = settings.footerLogo || settings.logo;
+  const footerLogoSrc = urlForImage(footerLogo)?.width(486).height(100).fit("max").url() || FALLBACK_LOGO_SRC;
+  const footerLogoClassName = footerLogo
+    ? "h-10 w-auto object-contain"
+    : "h-10 w-auto object-contain [filter:brightness(0)_saturate(100%)_invert(90%)_sepia(15%)_saturate(419%)_hue-rotate(10deg)_brightness(95%)_contrast(87%)]";
   const businessInfo = homeFooter?.businessInfo;
   const contactItems = businessInfo
     ? [
@@ -66,11 +74,11 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           <div>
             <Link href="/" className="inline-flex items-center" aria-label="포베베 홈으로 이동">
               <Image
-                src="/포베베_로고투명.png"
-                alt="포베베"
+                src={footerLogoSrc}
+                alt={imageAlt(footerLogo, settings.title || "포베베")}
                 width={243}
                 height={50}
-                className="h-10 w-auto object-contain [filter:brightness(0)_saturate(100%)_invert(90%)_sepia(15%)_saturate(419%)_hue-rotate(10deg)_brightness(95%)_contrast(87%)]"
+                className={footerLogoClassName}
               />
             </Link>
             <p className="mt-6 text-lg font-black leading-7 text-[#F3EFE2]">{homeFooter?.brandName || "유모차와 카시트를 위한 프리미엄 세탁 케어 서비스"}</p>

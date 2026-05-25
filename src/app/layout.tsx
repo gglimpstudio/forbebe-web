@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { defaultNavigation } from "@/lib/constants";
+import { urlForImage } from "@/lib/sanity/image";
 import { getSiteSettings } from "@/lib/sanity/queries";
 import { getSiteUrl } from "@/lib/utils";
 import "./globals.css";
@@ -14,12 +15,18 @@ export async function generateMetadata(): Promise<Metadata> {
     settings.defaultSeoDescription ||
     settings.description ||
     "포베베는 카시트와 유모차를 전문적으로 세탁·살균 케어하는 유아용품 세탁 브랜드입니다. 가까운 지점에서 간편하게 예약 문의하세요.";
+  const faviconUrl = urlForImage(settings.favicon)?.width(64).height(64).fit("crop").url();
 
   return {
     metadataBase: new URL(getSiteUrl()),
     title: {
       default: title,
       template: `%s | ${siteName}`,
+    },
+    icons: {
+      icon: faviconUrl || "/favicon.ico",
+      shortcut: faviconUrl || "/favicon.ico",
+      apple: faviconUrl || "/favicon.ico",
     },
     description,
     openGraph: {

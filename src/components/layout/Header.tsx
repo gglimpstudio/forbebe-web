@@ -4,16 +4,22 @@ import Link from "next/link";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import type { NavigationItem } from "@/types";
+import { imageAlt, urlForImage } from "@/lib/sanity/image";
+import type { NavigationItem, SiteSettings } from "@/types";
 
-export function Header({ navigation }: { navigation: NavigationItem[] }) {
+const FALLBACK_LOGO_SRC = "/forbebe-logo.png";
+
+export function Header({ navigation, settings }: { navigation: NavigationItem[]; settings: SiteSettings }) {
+  const logo = settings.headerLogo || settings.logo;
+  const logoSrc = urlForImage(logo)?.width(486).height(100).fit("max").url() || FALLBACK_LOGO_SRC;
+
   return (
     <header className="sticky top-0 z-40 border-b border-border-soft/80 bg-background-main/90 backdrop-blur">
       <Container className="flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/포베베_로고투명.png"
-            alt="포베베"
+            src={logoSrc}
+            alt={imageAlt(logo, settings.title || "포베베")}
             width={243}
             height={50}
             className="h-8 w-auto object-contain sm:h-10"

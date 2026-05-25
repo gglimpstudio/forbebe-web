@@ -15,6 +15,9 @@ export type SiteSettings = {
   title: string;
   description?: string;
   logo?: SanityImage;
+  headerLogo?: SanityImage;
+  footerLogo?: SanityImage;
+  favicon?: SanityImage;
   ogImage?: SanityImage;
   phone?: string;
   kakaoUrl?: string;

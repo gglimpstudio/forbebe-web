@@ -25,7 +25,7 @@ export function SiteChrome({
 
   return (
     <>
-      <Header navigation={navigation} />
+      <Header navigation={navigation} settings={settings} />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />
       <MobileBottomCta settings={settings} />
