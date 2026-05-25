@@ -125,11 +125,6 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             ) : null}
           </nav>
         </div>
-
-        <div className="mt-12 flex flex-col gap-3 border-t border-[rgba(223,217,179,0.12)] pt-6 text-sm text-[rgba(243,239,226,0.55)] lg:flex-row lg:items-center lg:justify-between">
-          <p>{homeFooter?.copyright || "© 2026 Forbebe. All rights reserved."}</p>
-          <p>Website by gglimpstudio</p>
-        </div>
       </Container>
     </footer>
   );
