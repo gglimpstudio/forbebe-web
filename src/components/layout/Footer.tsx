@@ -52,8 +52,8 @@ export function Footer({ settings }: { settings: SiteSettings }) {
   const footerLogo = settings.footerLogo || settings.logo;
   const footerLogoSrc = urlForImage(footerLogo)?.width(486).height(100).fit("max").url() || FALLBACK_LOGO_SRC;
   const footerLogoClassName = footerLogo
-    ? "h-10 w-auto object-contain"
-    : "h-10 w-auto object-contain [filter:brightness(0)_saturate(100%)_invert(90%)_sepia(15%)_saturate(419%)_hue-rotate(10deg)_brightness(95%)_contrast(87%)]";
+    ? "h-8 w-auto object-contain sm:h-10"
+    : "h-8 w-auto object-contain [filter:brightness(0)_saturate(100%)_invert(90%)_sepia(15%)_saturate(419%)_hue-rotate(10deg)_brightness(95%)_contrast(87%)] sm:h-10";
   const businessInfo = homeFooter?.businessInfo;
   const contactItems = businessInfo
     ? [
@@ -66,11 +66,12 @@ export function Footer({ settings }: { settings: SiteSettings }) {
       ].filter((item): item is { label: string; value: string } => Boolean(item.value))
     : contactInfo;
   const extraLinks = homeFooter?.links?.filter((link) => link.label && link.href) || [];
+  const compactFooterLinks = [...footerMenus.flatMap((menu) => menu.links), ...extraLinks];
 
   return (
-    <footer className="border-t border-[rgba(223,217,179,0.12)] bg-[#082B25] pb-24 pt-14 text-[#F3EFE2] md:pb-14" aria-label="사이트 푸터">
+    <footer className="border-t border-[rgba(223,217,179,0.12)] bg-[#082B25] pb-20 pt-8 text-[#F3EFE2] sm:pb-24 sm:pt-14 md:pb-14" aria-label="사이트 푸터">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1.15fr_1.35fr] lg:gap-16">
+        <div className="grid gap-6 sm:gap-10 lg:grid-cols-[1.15fr_1.35fr] lg:gap-16">
           <div>
             <Link href="/" className="inline-flex items-center" aria-label="포베베 홈으로 이동">
               <Image
@@ -81,23 +82,31 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 className={footerLogoClassName}
               />
             </Link>
-            <p className="mt-6 text-lg font-black leading-7 text-[#F3EFE2]">{homeFooter?.brandName || "유모차와 카시트를 위한 프리미엄 세탁 케어 서비스"}</p>
-            <p className="mt-3 max-w-md text-sm leading-7 text-[rgba(243,239,226,0.68)]">{footerText}</p>
+            <p className="mt-4 text-sm font-medium leading-6 text-[#F3EFE2] sm:mt-6 sm:text-lg sm:leading-7">{homeFooter?.brandName || "유모차와 카시트를 위한 프리미엄 세탁 케어 서비스"}</p>
+            <p className="mt-3 hidden max-w-md text-sm leading-7 text-[rgba(243,239,226,0.68)] sm:block">{footerText}</p>
 
-            <dl className="mt-8 grid gap-3 text-sm text-[rgba(243,239,226,0.68)] sm:grid-cols-2">
+            <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 text-[13px] text-[rgba(243,239,226,0.68)] sm:mt-8 sm:gap-3 sm:text-sm">
               {contactItems.map((item) => (
-                <div key={item.label}>
-                  <dt className="font-bold text-[#F3EFE2]">{item.label}</dt>
-                  <dd className="mt-1">{item.value}</dd>
+                <div key={item.label} className="min-w-0">
+                  <dt className="font-medium leading-5 text-[#F3EFE2]">{item.label}</dt>
+                  <dd className="mt-0.5 break-keep leading-5 sm:mt-1">{item.value}</dd>
                 </div>
               ))}
             </dl>
           </div>
 
-          <nav className="grid gap-8 sm:grid-cols-3" aria-label="푸터 메뉴">
+          <nav className="flex flex-wrap gap-x-3 gap-y-2 border-t border-[rgba(223,217,179,0.12)] pt-4 sm:hidden" aria-label="푸터 메뉴">
+            {compactFooterLinks.map((link) => (
+              <Link key={`${link.href}-${link.label}`} href={link.href || "/"} className="inline-flex min-h-8 items-center text-[13px] font-medium text-[rgba(243,239,226,0.82)] transition hover:text-[#DFD9B3]">
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          <nav className="hidden gap-8 sm:grid sm:grid-cols-3" aria-label="푸터 메뉴">
             {footerMenus.map((menu) => (
               <div key={menu.title}>
-                <p className="text-sm font-black text-[#F3EFE2]">{menu.title}</p>
+                <p className="text-sm font-medium text-[#F3EFE2]">{menu.title}</p>
                 <ul className="mt-4 grid gap-2.5">
                   {menu.links.map((link) => (
                     <li key={link.href}>
@@ -111,7 +120,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             ))}
             {extraLinks.length ? (
               <div>
-                <p className="text-sm font-black text-[#F3EFE2]">바로가기</p>
+                <p className="text-sm font-medium text-[#F3EFE2]">바로가기</p>
                 <ul className="mt-4 grid gap-2.5">
                   {extraLinks.map((link) => (
                     <li key={link.href}>
@@ -126,7 +135,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-[rgba(223,217,179,0.12)] pt-6 text-sm text-[rgba(243,239,226,0.55)] lg:flex-row lg:items-center lg:justify-between">
+        <div className="mt-6 flex flex-col gap-3 border-t border-[rgba(223,217,179,0.12)] pt-4 text-xs text-[rgba(243,239,226,0.55)] sm:mt-12 sm:pt-6 sm:text-sm lg:flex-row lg:items-center lg:justify-between">
           <p>{homeFooter?.copyright || "© 2026 Forbebe. All rights reserved."}</p>
         </div>
       </Container>

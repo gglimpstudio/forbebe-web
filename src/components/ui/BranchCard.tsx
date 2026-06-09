@@ -6,12 +6,14 @@ import { Card } from "@/components/ui/Card";
 import type { Branch } from "@/types";
 
 export function BranchCard({ branch }: { branch: Branch }) {
+  const bookingUrl = branch.naverBookingUrl || branch.bookingUrl;
+
   return (
     <Card className="h-full">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div>
           <Badge>{branch.region}</Badge>
-          <h3 className="mt-3 text-xl font-bold text-brand-primary">{branch.name}</h3>
+          <h3 className="mt-3 text-xl font-medium text-brand-primary">{branch.name}</h3>
         </div>
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-background-soft text-brand-primary">
           <MapPin className="h-5 w-5" aria-hidden />
@@ -47,9 +49,9 @@ export function BranchCard({ branch }: { branch: Branch }) {
             <Navigation className="h-4 w-4" /> 상담
           </Button>
         ) : null}
-        {branch.bookingUrl ? (
-          <Button href={branch.bookingUrl} size="sm">
-            예약 링크
+        {bookingUrl ? (
+          <Button href={bookingUrl} size="sm">
+            네이버예약
           </Button>
         ) : null}
         {branch.blogUrl ? (

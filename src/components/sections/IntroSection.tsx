@@ -22,7 +22,7 @@ function IntroCard({ item }: { item: HomeCard }) {
   const Icon = iconMap[item.icon as keyof typeof iconMap] || ShieldCheck;
 
   return (
-    <article className="rounded-[24px] border border-border-soft bg-background-light p-6 shadow-[0_18px_50px_rgba(18,58,50,0.05)]">
+    <article className="rounded-[18px] border border-border-soft bg-background-light p-4 shadow-[0_18px_50px_rgba(18,58,50,0.05)] sm:rounded-[24px] sm:p-6">
       {item.image?.asset ? (
         <SanityImage image={item.image} alt={item.title || "소개 항목"} className="mb-5 aspect-[4/3] rounded-[18px]" sizes="(min-width: 1024px) 24vw, 86vw" />
       ) : (
@@ -30,8 +30,8 @@ function IntroCard({ item }: { item: HomeCard }) {
           <Icon className="h-5 w-5" aria-hidden />
         </div>
       )}
-      <h3 className="text-xl font-black text-green-dark">{item.title}</h3>
-      {item.description ? <p className="mt-3 text-sm leading-7 text-text-sub">{item.description}</p> : null}
+      <h3 className="text-lg font-medium text-green-dark sm:text-xl">{item.title}</h3>
+      {item.description ? <p className="mt-3 whitespace-pre-line text-sm leading-7 text-text-sub sm:whitespace-normal">{item.description}</p> : null}
     </article>
   );
 }
@@ -40,23 +40,28 @@ export function IntroSection({ intro }: { intro?: IntroSectionData }) {
   const items = intro?.items?.length ? intro.items : defaultItems;
 
   return (
-    <section id="intro" className="bg-background-main py-20 sm:py-24" aria-labelledby="intro-title">
+    <section id="intro" className="bg-background-main py-14 sm:py-20 lg:py-24" aria-labelledby="intro-title">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-          <div>
+          <div className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-brand-primary">{intro?.sectionLabel || "ABOUT FORBEBE"}</p>
-            <h2 id="intro-title" className="mt-4 whitespace-pre text-3xl font-black leading-tight text-green-dark sm:text-4xl lg:text-5xl">
+            <h2 id="intro-title" className="cms-lines cms-lines-mobile-wrap fluid-section-title mt-4 max-w-full font-semibold leading-tight text-green-dark">
               {intro?.title || "아이에게 닿는 이동용품,\n전문 케어가 필요합니다."}
             </h2>
-            <p className="mt-6 whitespace-pre-line text-base leading-8 text-text-sub sm:text-lg">
+            <p className="cms-lines cms-lines-mobile-wrap intro-description-text mt-6 max-w-full leading-8 text-text-sub">
               {intro?.description ||
                 "포베베는 유모차와 카시트처럼 아이가 자주 닿는 제품을 제품 상태와 소재에 맞춰 세심하게 관리하는 전문 세탁 케어 브랜드입니다."}
             </p>
           </div>
-          <SanityImage image={intro?.image} alt={intro?.title || "포베베 소개"} className="aspect-[4/3] rounded-[28px]" priority={false} />
+          <SanityImage
+            image={intro?.image}
+            alt={intro?.title || "포베베 소개"}
+            className="aspect-[4/3] w-full max-w-[460px] justify-self-center rounded-[28px] lg:justify-self-end"
+            priority={false}
+          />
         </div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:mt-12 sm:gap-5 md:grid-cols-3">
           {items.map((item) => (
             <IntroCard key={item.title} item={item} />
           ))}

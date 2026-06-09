@@ -63,7 +63,7 @@ export function ContactForm({ type }: { type: "franchise" | "partnership" }) {
     <form className="grid gap-4" onSubmit={handleSubmit}>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {formFields[type].map((field) => (
-        <label key={field.name} className="grid gap-2 text-sm font-bold text-brand-primary">
+        <label key={field.name} className="grid gap-2 text-sm font-medium text-brand-primary">
           {field.label}
           {field.type === "textarea" ? (
             <textarea

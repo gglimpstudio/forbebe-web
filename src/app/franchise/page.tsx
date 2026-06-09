@@ -20,7 +20,7 @@ const benefits = [
 export default function FranchisePage() {
   return (
     <>
-      <section className="bg-background-main py-14 sm:py-20">
+      <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
           <SectionHeader
             eyebrow="Franchise"
@@ -29,7 +29,7 @@ export default function FranchisePage() {
           />
         </Container>
       </section>
-      <section className="bg-background-light py-12 sm:py-16">
+      <section className="bg-background-light py-10 sm:py-14 lg:py-16">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
@@ -41,7 +41,7 @@ export default function FranchisePage() {
                         <Icon className="h-5 w-5" aria-hidden />
                       </div>
                       <div>
-                        <h2 className="text-lg font-bold text-brand-primary">{title}</h2>
+                        <h2 className="text-lg font-medium text-brand-primary">{title}</h2>
                         <p className="mt-2 text-sm leading-7 text-text-sub">{description}</p>
                       </div>
                     </div>
@@ -56,7 +56,7 @@ export default function FranchisePage() {
               </Card>
             </div>
             <Card>
-              <h2 className="mb-5 text-2xl font-bold text-brand-primary">창업문의 폼</h2>
+              <h2 className="mb-5 text-2xl font-medium text-brand-primary">창업문의 폼</h2>
               <ContactForm type="franchise" />
             </Card>
           </div>

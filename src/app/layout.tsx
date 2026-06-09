@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { defaultNavigation } from "@/lib/constants";
 import { urlForImage } from "@/lib/sanity/image";
-import { getSiteSettings } from "@/lib/sanity/queries";
+import { getBranches, getHomePage, getSiteSettings } from "@/lib/sanity/queries";
 import { getSiteUrl } from "@/lib/utils";
 import "./globals.css";
 
@@ -14,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     settings.defaultSeoDescription ||
     settings.description ||
-    "포베베는 카시트와 유모차를 전문적으로 세탁·살균 케어하는 유아용품 세탁 브랜드입니다. 가까운 지점에서 간편하게 예약 문의하세요.";
+    "포베베는 카시트와 유모차를 전문적으로 세탁·살균 케어하는 유아용품 세탁 브랜드입니다. 가까운 지점의 네이버 예약과 전화번호를 확인하세요.";
   const siteUrl = getSiteUrl();
   const faviconUrl = urlForImage(settings.favicon)?.width(64).height(64).fit("crop").url();
   const ogImageUrl = urlForImage(settings.ogImage)?.width(1200).height(630).fit("crop").url() || `${siteUrl}/images/hero-forbebe.jpg`;
@@ -54,12 +54,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = await getSiteSettings();
+  const [settings, branches, homePage] = await Promise.all([getSiteSettings(), getBranches(), getHomePage()]);
 
   return (
     <html lang="ko" className="h-full">
       <body className="flex min-h-full flex-col bg-background-main text-text-main antialiased">
-        <SiteChrome navigation={defaultNavigation} settings={settings}>
+        <SiteChrome navigation={defaultNavigation} settings={settings} branches={branches} floatingCta={homePage?.floatingCta}>
           {children}
         </SiteChrome>
       </body>

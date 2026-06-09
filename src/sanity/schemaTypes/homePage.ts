@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from "sanity";
+import { ALL_FIELDS_GROUP, defineArrayMember, defineField, defineType } from "sanity";
 
 const imageWithAlt = (name: string, title: string, description?: string) =>
   defineField({
@@ -46,13 +46,15 @@ const visibilityField = defineField({
 });
 
 const homePageGroups = [
-  { name: "hero", title: "히어로", default: true },
+  { ...ALL_FIELDS_GROUP, default: true },
+  { name: "hero", title: "히어로" },
   { name: "intro", title: "소개" },
   { name: "necessity", title: "세탁 필요성" },
   { name: "slogan", title: "슬로건" },
   { name: "beforeAfter", title: "전후사진" },
   { name: "processSummary", title: "세탁과정" },
   { name: "finalCta", title: "마지막 CTA" },
+  { name: "floatingCta", title: "플로팅 CTA" },
   { name: "footer", title: "푸터" },
 ];
 
@@ -263,6 +265,62 @@ export const homePage = defineType({
           of: [defineArrayMember({ type: "object", fields: ctaFields, preview: { select: { title: "label", subtitle: "href" } } })],
         }),
         defineField({ name: "copyright", title: "저작권 문구", type: "string" }),
+      ],
+    }),
+    defineField({
+      name: "floatingCta",
+      title: "모바일 플로팅 CTA",
+      type: "object",
+      group: "floatingCta",
+      fields: [
+        defineField({
+          name: "isVisible",
+          title: "노출 여부",
+          description: "끄면 모바일 하단 플로팅 CTA 전체를 숨깁니다.",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({
+          name: "emptyMessage",
+          title: "지점 정보 없음 문구",
+          type: "text",
+          rows: 2,
+          initialValue: "표시할 지점 정보가 없습니다. Sanity 지점 문서에 연락처와 링크를 입력해주세요.",
+        }),
+        defineField({
+          name: "actions",
+          title: "버튼 목록",
+          description: "전화, 네이버예약, 카카오톡 버튼의 아이콘 이미지를 관리합니다. 실제 링크는 지점 문서에서 관리합니다.",
+          type: "array",
+          of: [
+            defineArrayMember({
+              type: "object",
+              fields: [
+                defineField({
+                  name: "actionType",
+                  title: "버튼 동작",
+                  type: "string",
+                  validation: (Rule) => Rule.required(),
+                  options: {
+                    list: [
+                      { title: "전화", value: "phone" },
+                      { title: "네이버예약", value: "booking" },
+                      { title: "카카오톡", value: "kakao" },
+                    ],
+                    layout: "radio",
+                  },
+                }),
+                imageWithAlt("iconImage", "아이콘 이미지", "비워두면 기본 아이콘을 사용합니다."),
+                defineField({ name: "order", title: "정렬 순서", type: "number", initialValue: 0 }),
+                defineField({ name: "isVisible", title: "노출 여부", type: "boolean", initialValue: true }),
+              ],
+              preview: {
+                select: { subtitle: "actionType", media: "iconImage" },
+                prepare: ({ subtitle, media }) => ({ title: "플로팅 CTA 버튼", subtitle, media }),
+              },
+            }),
+          ],
+        }),
       ],
     }),
   ],

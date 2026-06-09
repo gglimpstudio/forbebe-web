@@ -140,6 +140,21 @@ export type FinalCtaSection = {
   isVisible?: boolean;
 };
 
+export type FloatingCtaActionType = "phone" | "booking" | "kakao";
+
+export type FloatingCtaAction = {
+  actionType?: FloatingCtaActionType;
+  iconImage?: SanityImage;
+  order?: number;
+  isVisible?: boolean;
+};
+
+export type FloatingCtaSettings = {
+  isVisible?: boolean;
+  emptyMessage?: string;
+  actions?: FloatingCtaAction[];
+};
+
 export type FooterBusinessInfo = {
   companyName?: string;
   representative?: string;
@@ -165,6 +180,7 @@ export type HomePage = {
   beforeAfter?: BeforeAfterSection;
   processSummary?: ProcessSummarySection;
   finalCta?: FinalCtaSection;
+  floatingCta?: FloatingCtaSettings;
   footer?: FooterData;
 };
 
@@ -207,6 +223,7 @@ export type Branch = {
   phone?: string;
   operatingHours?: string;
   naverMapUrl?: string;
+  naverBookingUrl?: string;
   kakaoMapUrl?: string;
   kakaoUrl?: string;
   blogUrl?: string;

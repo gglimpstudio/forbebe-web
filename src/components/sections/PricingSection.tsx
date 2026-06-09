@@ -5,7 +5,7 @@ import type { PricingItem } from "@/types";
 
 export function PricingSection({ items }: { items: PricingItem[] }) {
   return (
-    <section className="bg-background-main py-16 sm:py-20">
+    <section className="bg-background-main py-12 sm:py-16 lg:py-20">
       <Container>
         <SectionHeader
           title="가격 안내"

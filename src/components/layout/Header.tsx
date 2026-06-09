@@ -15,14 +15,14 @@ export function Header({ navigation, settings }: { navigation: NavigationItem[];
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-soft/80 bg-background-main/90 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex h-14 items-center justify-between gap-3 sm:h-16 sm:gap-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
             src={logoSrc}
             alt={imageAlt(logo, settings.title || "포베베")}
             width={243}
             height={50}
-            className="h-8 w-auto object-contain sm:h-10"
+            className="h-7 w-auto object-contain sm:h-10"
             priority
           />
         </Link>
@@ -34,8 +34,8 @@ export function Header({ navigation, settings }: { navigation: NavigationItem[];
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Button href="/contact" size="sm" className="hidden sm:inline-flex">
-            예약 문의
+          <Button href="/branches" size="sm" className="hidden sm:inline-flex">
+            지점 안내
           </Button>
           <MobileNav items={navigation} />
         </div>

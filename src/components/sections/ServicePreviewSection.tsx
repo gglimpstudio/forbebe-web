@@ -6,7 +6,7 @@ import type { Service } from "@/types";
 
 export function ServicePreviewSection({ services }: { services: Service[] }) {
   return (
-    <section className="bg-background-light py-16 sm:py-20">
+    <section className="bg-background-light py-12 sm:py-16 lg:py-20">
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeader title="세탁 가능 품목" description="카시트와 유모차를 중심으로 지점 상담 후 다양한 유아용품 케어 가능 여부를 안내합니다." />

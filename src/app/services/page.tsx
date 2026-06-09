@@ -21,7 +21,7 @@ export default async function ServicesPage() {
 
   return (
     <>
-      <section className="bg-background-main py-14 sm:py-20">
+      <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
           <SectionHeader
             eyebrow="Services"
@@ -30,18 +30,18 @@ export default async function ServicesPage() {
           />
         </Container>
       </section>
-      <section className="bg-background-light py-12 sm:py-16">
+      <section className="bg-background-light py-10 sm:py-14 lg:py-16">
         <Container>
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-4 sm:gap-6 lg:grid-cols-2">
             {services.map((service) => (
               <Card key={service.slug} className="grid gap-5 md:grid-cols-[0.9fr_1.1fr]">
                 <SanityImage image={service.image} alt={service.title} className="aspect-[4/3]" sizes="(min-width: 1024px) 35vw, 100vw" />
                 <div>
                   <Badge>{service.title}</Badge>
-                  <h2 className="mt-3 text-2xl font-bold text-brand-primary">{service.title}</h2>
+                  <h2 className="mt-3 text-xl font-medium text-brand-primary sm:text-2xl">{service.title}</h2>
                   <p className="mt-3 text-sm leading-7 text-text-sub">{service.description}</p>
                   <div className="mt-5">
-                    <p className="text-sm font-bold text-brand-primary">추천 관리 포인트</p>
+                    <p className="text-sm font-medium text-brand-primary">추천 관리 포인트</p>
                     <ul className="mt-2 space-y-2 text-sm text-text-sub">
                       {(service.carePoints || []).map((point) => (
                         <li key={point}>· {point}</li>
@@ -53,10 +53,10 @@ export default async function ServicesPage() {
               </Card>
             ))}
           </div>
-          <div className="mt-10 rounded-[22px] bg-background-main p-6">
-            <h2 className="text-xl font-bold text-brand-primary">예약 전 확인사항</h2>
+          <div className="mt-8 rounded-[18px] bg-background-main p-4 sm:mt-10 sm:rounded-[22px] sm:p-6">
+            <h2 className="text-xl font-medium text-brand-primary">예약 전 확인사항</h2>
             <p className="mt-3 text-sm leading-7 text-text-sub">브랜드와 모델명, 오염 부위 사진을 함께 보내주시면 세탁 가능 여부와 예상 금액을 더 정확하게 안내할 수 있습니다.</p>
-            <Button href="/contact" className="mt-5">예약 문의하기</Button>
+            <Button href="/branches" className="mt-5">가까운 지점 확인</Button>
           </div>
         </Container>
       </section>

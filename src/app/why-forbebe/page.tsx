@@ -22,7 +22,7 @@ const strengths = [
 export default function WhyForbebePage() {
   return (
     <>
-      <section className="bg-background-main py-14 sm:py-20">
+      <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
           <SectionHeader
             eyebrow="Why Forbebe"
@@ -31,26 +31,26 @@ export default function WhyForbebePage() {
           />
         </Container>
       </section>
-      <section className="bg-background-light py-12 sm:py-16">
+      <section className="bg-background-light py-10 sm:py-14 lg:py-16">
         <Container>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4">
             {strengths.map(({ title, description, icon: Icon }) => (
               <Card key={title}>
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-background-soft text-brand-primary">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-background-soft text-brand-primary sm:mb-4 sm:h-12 sm:w-12 sm:rounded-2xl">
                   <Icon className="h-6 w-6" aria-hidden />
                 </div>
-                <h2 className="text-xl font-bold text-brand-primary">{title}</h2>
+                <h2 className="text-xl font-medium text-brand-primary">{title}</h2>
                 <p className="mt-3 text-sm leading-7 text-text-sub">{description}</p>
               </Card>
             ))}
           </div>
-          <div className="mt-10 rounded-[24px] bg-background-main p-6 sm:p-8">
+          <div className="mt-8 rounded-[18px] bg-background-main p-4 sm:mt-10 sm:rounded-[24px] sm:p-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-background-light text-brand-primary">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-background-light text-brand-primary sm:mb-4 sm:h-12 sm:w-12 sm:rounded-2xl">
                   <MapPinned className="h-6 w-6" aria-hidden />
                 </div>
-                <h2 className="text-2xl font-bold text-brand-primary">가까운 지점에서 제품 상태를 상담하세요.</h2>
+                <h2 className="text-xl font-medium text-brand-primary sm:text-2xl">가까운 지점에서 제품 상태를 상담하세요.</h2>
                 <p className="mt-3 text-sm leading-7 text-text-sub">
                   실제 세탁 범위와 비용은 제품 모델, 오염도, 소재 상태에 따라 달라질 수 있습니다. 가까운 지점에서 사진과 함께 상담하면 더 정확합니다.
                 </p>

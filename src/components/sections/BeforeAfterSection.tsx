@@ -3,7 +3,6 @@ import path from "node:path";
 
 import Image from "next/image";
 
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { imageAlt, urlForImage } from "@/lib/sanity/image";
 import type { BeforeAfterSection as BeforeAfterSectionData, SanityImage } from "@/types";
@@ -74,7 +73,7 @@ function ComparisonImage({
 
   return (
     <div className="group relative aspect-square min-h-0 min-w-0 overflow-hidden rounded-[18px] bg-background-soft">
-      <span className={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-[11px] font-black uppercase tracking-[0.12em] shadow-sm ${labelClassName}`}>
+      <span className={`absolute left-3 top-3 z-10 rounded-full px-3 py-1 text-[11px] font-medium uppercase tracking-[0.12em] shadow-sm ${labelClassName}`}>
         {label}
       </span>
       {imageSrc ? (
@@ -90,7 +89,7 @@ function ComparisonImage({
         <div className="flex h-full items-center justify-center bg-background-main px-4 text-center">
           <div>
             <div className="mx-auto mb-3 h-12 w-12 rounded-full bg-background-light/80 shadow-inner" />
-            <p className="text-sm font-bold text-text-sub">{label} 이미지 준비 중</p>
+            <p className="text-sm font-medium text-text-sub">{label} 이미지 준비 중</p>
           </div>
         </div>
       )}
@@ -99,6 +98,7 @@ function ComparisonImage({
 }
 
 export function BeforeAfterSection({ beforeAfter }: { beforeAfter?: BeforeAfterSectionData }) {
+  const description = beforeAfter?.description || "오염 상태와 소재에 맞춰 카시트와 유모차를 세심하게 관리합니다.";
   const items: BeforeAfterItem[] = beforeAfter?.items?.length
     ? beforeAfter.items.map((item) => ({
         title: item.title || "전후사진",
@@ -110,29 +110,28 @@ export function BeforeAfterSection({ beforeAfter }: { beforeAfter?: BeforeAfterS
         objectPosition: "center center",
       }))
     : beforeAfterItems;
-  const ctaHref = beforeAfter?.ctaHref || "/process";
 
   return (
-    <section id="before-after" className="bg-background-main py-20 sm:py-24" aria-labelledby="before-after-title">
-      <Container className="max-w-none !px-2 sm:!px-4 lg:!px-5">
+    <section id="before-after" className="bg-background-main py-14 sm:py-20 lg:py-24" aria-labelledby="before-after-title">
+      <Container className="max-w-none !px-3 sm:!px-4 lg:!px-5">
         <div className="before-after-reveal mx-auto max-w-3xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.26em] text-brand-primary">{beforeAfter?.sectionLabel || "BEFORE & AFTER"}</p>
-          <h2 id="before-after-title" className="mt-4 whitespace-pre-line text-3xl font-black leading-tight text-green-dark sm:text-4xl lg:text-5xl">
+          <h2 id="before-after-title" className="cms-lines fluid-section-title mt-4 font-semibold leading-tight text-green-dark">
             {beforeAfter?.title || "눈으로 확인하는 포베베 케어 전후"}
           </h2>
-          <p className="mt-6 whitespace-pre-line text-base leading-8 text-text-sub sm:text-lg">
-            {beforeAfter?.description || "오염 상태와 소재에 맞춰 카시트와 유모차를 세심하게 관리합니다."}
+          <p className="cms-lines cms-lines-mobile-wrap fluid-body mt-4 leading-7 text-text-sub sm:mt-6 sm:leading-8">
+            {description}
           </p>
         </div>
 
-        <div className="mx-auto mt-12 grid max-w-[96rem] gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-8 grid max-w-[96rem] gap-3 sm:mt-12 md:grid-cols-2 lg:grid-cols-3">
           {items.map((item, index) => (
             <article
               key={item.title}
-              className="before-after-reveal rounded-[30px] border border-border-soft bg-background-light p-2.5 shadow-[0_14px_38px_rgba(18,58,50,0.055)] sm:p-3 lg:p-4"
+              className="before-after-reveal rounded-[22px] border border-border-soft bg-background-light p-2.5 shadow-[0_14px_38px_rgba(18,58,50,0.055)] sm:rounded-[26px] sm:p-3 lg:rounded-[30px] lg:p-4"
               style={{ animationDelay: `${100 + index * 90}ms` }}
             >
-              <h3 className="px-1 pt-1 text-xl font-black leading-tight text-green-dark lg:text-2xl">{item.title}</h3>
+              <h3 className="px-1 pt-1 text-xl font-medium leading-tight text-green-dark lg:text-2xl">{item.title}</h3>
               <div className="mt-3 grid grid-cols-2 gap-1 rounded-[22px] sm:gap-2">
                 <ComparisonImage src={item.beforeImage} alt={item.beforeAlt} label="Before" objectPosition={item.objectPosition} />
                 <ComparisonImage src={item.afterImage} alt={item.afterAlt} label="After" objectPosition={item.objectPosition} />
@@ -144,14 +143,6 @@ export function BeforeAfterSection({ beforeAfter }: { beforeAfter?: BeforeAfterS
           ))}
         </div>
 
-        <div className="before-after-reveal mx-auto mt-10 flex max-w-7xl flex-col items-center justify-between gap-5 rounded-[28px] bg-background-soft px-6 py-6 text-center sm:px-8 lg:flex-row lg:text-left">
-          <p className="text-lg font-bold leading-7 text-text-main">우리 아이 제품도 다시 안심할 수 있도록 관리합니다.</p>
-          {ctaHref ? (
-            <Button href={ctaHref} size="lg" className="w-full px-7 sm:w-auto">
-              {beforeAfter?.ctaLabel || "세탁 과정 보기"}
-            </Button>
-          ) : null}
-        </div>
       </Container>
     </section>
   );

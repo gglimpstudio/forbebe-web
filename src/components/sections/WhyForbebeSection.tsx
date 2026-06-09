@@ -14,7 +14,7 @@ const reasons = [
 
 export function WhyForbebeSection() {
   return (
-    <section className="bg-background-main py-16 sm:py-20">
+    <section className="bg-background-main py-12 sm:py-16 lg:py-20">
       <Container>
         <SectionHeader title="포베베를 선택해야 하는 이유" align="center" />
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
@@ -23,7 +23,7 @@ export function WhyForbebeSection() {
               <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-background-soft text-brand-primary">
                 <Icon className="h-5 w-5" />
               </div>
-              <h3 className="text-base font-bold text-brand-primary">{title}</h3>
+              <h3 className="text-base font-medium text-brand-primary">{title}</h3>
               <p className="mt-2 text-sm leading-6 text-text-sub">{description}</p>
             </Card>
           ))}

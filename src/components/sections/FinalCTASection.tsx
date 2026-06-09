@@ -9,14 +9,14 @@ const FINAL_CTA_BACKGROUND_IMAGE = "";
 
 export function FinalCtaSection() {
   return (
-    <section className="bg-[radial-gradient(circle_at_center,#1E584A_0%,#123F35_45%,#0B3029_100%)] py-16 text-text-inverse sm:py-20">
+    <section className="bg-[radial-gradient(circle_at_center,#1E584A_0%,#123F35_45%,#0B3029_100%)] py-12 text-text-inverse sm:py-16 lg:py-20">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-black leading-tight sm:text-4xl">아이에게 닿는 용품, 이제 전문 세탁으로 관리하세요.</h2>
+          <h2 className="cms-lines fluid-panel-title font-semibold leading-tight">아이에게 닿는 용품, 이제 전문 세탁으로 관리하세요.</h2>
           <p className="mt-4 text-base leading-7 text-brand-secondary">가까운 포베베 지점으로 간편하게 문의하세요.</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href="/contact" variant="secondary" size="lg" className="!bg-[#DFD9B3] !text-[#123F35] hover:!bg-[#F3EFE2]">
-              예약 문의하기
+            <Button href="/branches" variant="secondary" size="lg" className="!bg-[#DFD9B3] !text-[#123F35] hover:!bg-[#F3EFE2]">
+              가까운 지점 확인하기
             </Button>
             <Button href="/branches" variant="outline" size="lg" className="!border-[rgba(223,217,179,0.55)] !text-[#DFD9B3] hover:bg-text-inverse/10">
               가까운 지점 찾기
@@ -42,7 +42,7 @@ export function FinalCTASection({ finalCta }: { finalCta?: FinalCtaSection }) {
   return (
     <section
       id="final-cta"
-      className="final-cta-reveal relative overflow-hidden bg-[#0B3029] py-16 sm:py-20 lg:py-24"
+      className="final-cta-reveal relative overflow-hidden bg-[#0B3029] py-12 sm:py-16 lg:py-24"
       aria-labelledby="final-cta-title"
     >
       {backgroundImage ? (
@@ -57,21 +57,21 @@ export function FinalCTASection({ finalCta }: { finalCta?: FinalCtaSection }) {
       <Container className="relative">
         <div className="mx-auto max-w-4xl text-center">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-secondary">{label}</p>
-          <h2 id="final-cta-title" className="mx-auto mt-4 max-w-3xl whitespace-pre-line text-[2rem] font-black leading-tight text-text-inverse sm:text-4xl lg:text-5xl">
+          <h2 id="final-cta-title" className="cms-lines fluid-section-title mx-auto mt-4 max-w-3xl font-semibold leading-tight text-text-inverse">
             {title}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl whitespace-pre-line text-base leading-7 text-brand-secondary sm:text-lg sm:leading-8">
+          <p className="cms-lines fluid-body mx-auto mt-5 max-w-2xl leading-7 text-brand-secondary sm:leading-8">
             {description}
           </p>
 
           <div className="mx-auto mt-9 flex w-full max-w-xl flex-col justify-center gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:gap-4">
             {primaryCtaHref ? (
-              <Button href={primaryCtaHref} variant="secondary" size="lg" className="h-[52px] w-full gap-2 !bg-[#DFD9B3] px-8 text-base !text-[#123F35] shadow-sm hover:!bg-[#F3EFE2] sm:w-auto">
+              <Button href={primaryCtaHref} variant="secondary" size="lg" className="min-h-[48px] w-full gap-2 !bg-[#DFD9B3] px-5 text-sm !text-[#123F35] shadow-sm hover:!bg-[#F3EFE2] sm:min-h-[52px] sm:w-auto sm:px-8 sm:text-base">
                 {primaryCtaLabel} <ArrowRight className="h-5 w-5" aria-hidden />
               </Button>
             ) : null}
             {secondaryCtaHref ? (
-              <Button href={secondaryCtaHref} variant="outline" size="lg" className="h-[52px] w-full !border-[rgba(223,217,179,0.55)] px-8 text-base !text-[#DFD9B3] hover:bg-text-inverse/10 sm:w-auto">
+              <Button href={secondaryCtaHref} variant="outline" size="lg" className="min-h-[48px] w-full !border-[rgba(223,217,179,0.55)] px-5 text-sm !text-[#DFD9B3] hover:bg-text-inverse/10 sm:min-h-[52px] sm:w-auto sm:px-8 sm:text-base">
                 {secondaryCtaLabel}
               </Button>
             ) : null}

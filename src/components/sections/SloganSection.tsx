@@ -16,13 +16,14 @@ const sloganItems: SloganItem[] = [
 ];
 
 export function SloganSection({ slogan }: { slogan?: SloganSectionData }) {
-  const items = sloganItems;
+  const cmsItems = slogan?.slogans?.filter((item) => item.text || item.subText);
+  const items = cmsItems?.length ? cmsItems : sloganItems;
   const backgroundImage = urlForImage(slogan?.backgroundImage)?.width(1600).height(1000).fit("crop").url() || SLOGAN_BACKGROUND_IMAGE;
 
   return (
     <section
       id="slogan"
-      className="slogan-section-reveal relative overflow-hidden bg-green-dark py-20 sm:py-24 lg:py-28"
+      className="slogan-section-reveal relative overflow-hidden bg-green-dark py-14 sm:py-20 lg:py-28"
       aria-labelledby="slogan-title"
     >
       {backgroundImage ? (
@@ -37,26 +38,24 @@ export function SloganSection({ slogan }: { slogan?: SloganSectionData }) {
 
       <Container className="relative">
         <div className="mx-auto max-w-5xl text-center">
-          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-brand-secondary/90">FORBEBE CARE</p>
+          <p className="text-[0.68rem] font-semibold uppercase tracking-[0.34em] text-brand-secondary/90">{slogan?.sectionLabel || "FORBEBE CARE"}</p>
           <h2 id="slogan-title" className="sr-only">
             슬로건
           </h2>
-          <div className="relative mx-auto mt-8 min-h-[14.5rem] max-w-4xl sm:min-h-[13.5rem] lg:min-h-[14rem]" aria-live="off">
+          <div className="relative mx-auto mt-6 min-h-[13rem] max-w-4xl sm:mt-8 sm:min-h-[13.5rem] lg:min-h-[14rem]" aria-live="off">
             {items.map((item, itemIndex) => {
               return (
                 <div
-                  key={item.text}
+                  key={`${item.text || "slogan"}-${itemIndex}`}
                   className={`slogan-copy-fade absolute inset-0 flex flex-col items-center justify-center ${
                     itemIndex === 0 ? "slogan-copy-fade-first" : "slogan-copy-fade-second"
                   }`}
                   aria-hidden={itemIndex !== 0}
                 >
-                  <p className="mx-auto max-w-full whitespace-nowrap text-[clamp(1.74rem,7vw,3.55rem)] font-black leading-[1.14] text-text-inverse sm:text-[clamp(3rem,5vw,4.25rem)]">
-                    {item.text}
-                  </p>
-                  <p className="mx-auto mt-7 max-w-2xl text-[0.98rem] leading-8 text-brand-secondary/90 sm:text-lg">
-                    {item.subText}
-                  </p>
+                  {item.text ? (
+                    <p className="cms-lines slogan-title-text mx-auto max-w-full font-semibold leading-[1.14] text-text-inverse">{item.text}</p>
+                  ) : null}
+                  {item.subText ? <p className="cms-lines slogan-sub-text mx-auto mt-7 max-w-2xl leading-8 text-brand-secondary/90">{item.subText}</p> : null}
                 </div>
               );
             })}

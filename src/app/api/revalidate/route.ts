@@ -10,7 +10,6 @@ const paths = [
   "/branches",
   "/cases",
   "/faq",
-  "/contact",
   "/franchise",
   "/partnership",
   "/why-forbebe",

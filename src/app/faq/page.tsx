@@ -18,12 +18,12 @@ export default async function FaqPage() {
 
   return (
     <>
-      <section className="bg-background-main py-14 sm:py-20">
+      <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
           <SectionHeader eyebrow="FAQ" title="자주 묻는 질문" description="예약 전 궁금한 내용을 확인하세요. 제품 상태가 다르면 가까운 지점 상담을 권장합니다." />
         </Container>
       </section>
-      <section className="bg-background-light py-12 sm:py-16">
+      <section className="bg-background-light py-10 sm:py-14 lg:py-16">
         <Container className="max-w-4xl">
           <FaqFilter faqs={faqs} />
         </Container>

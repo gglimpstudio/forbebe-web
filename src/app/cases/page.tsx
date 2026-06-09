@@ -18,12 +18,12 @@ export default async function CasesPage() {
 
   return (
     <>
-      <section className="bg-background-main py-14 sm:py-20">
+      <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
           <SectionHeader eyebrow="Cases" title="세탁 전후 사례" description="Before/After 이미지는 실제 제품 상태와 오염도에 따라 결과가 달라질 수 있습니다." />
         </Container>
       </section>
-      <section className="bg-background-light py-12 sm:py-16">
+      <section className="bg-background-light py-10 sm:py-14 lg:py-16">
         <Container>
           <CaseFilter cases={cases} />
         </Container>

@@ -19,14 +19,14 @@ export default async function PricingPage() {
 
   return (
     <>
-      <section className="bg-background-main py-14 sm:py-20">
+      <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
           <SectionHeader eyebrow="Pricing" title="가격 안내" description="전 지점 동일 기준으로 안내되며 제품 종류, 오염도, 추가 케어 범위에 따라 최종 금액이 달라질 수 있습니다." />
         </Container>
       </section>
-      <section className="bg-background-light py-12 sm:py-16">
+      <section className="bg-background-light py-10 sm:py-14 lg:py-16">
         <Container>
-          <div className="mb-10 overflow-hidden rounded-[28px] bg-brand-primary shadow-[0_22px_60px_rgba(27,89,74,0.16)]">
+          <div className="mb-8 overflow-hidden rounded-[20px] bg-brand-primary shadow-[0_22px_60px_rgba(27,89,74,0.16)] sm:mb-10 sm:rounded-[28px]">
             <Image
               src="/forbebe-price.png"
               alt="포베베 카시트, 유모차, 옵션 가격표"
@@ -37,8 +37,8 @@ export default async function PricingPage() {
             />
           </div>
           <PricingTable items={items} />
-          <div className="mt-8 rounded-[22px] bg-background-main p-6 text-sm leading-7 text-text-sub">
-            <p className="font-bold text-brand-primary">추가 비용 및 주의사항</p>
+          <div className="mt-8 rounded-[18px] bg-background-main p-4 text-sm leading-7 text-text-sub sm:rounded-[22px] sm:p-6">
+            <p className="font-medium text-brand-primary">추가 비용 및 주의사항</p>
             <p className="mt-2">심한 오염, 곰팡이, 장기 보관 제품, 특수 소재 제품은 상담 후 추가 비용 또는 진행 불가 안내가 있을 수 있습니다. 정확한 금액은 제품 상태 확인 후 안내드립니다.</p>
           </div>
         </Container>

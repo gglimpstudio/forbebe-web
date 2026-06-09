@@ -126,6 +126,16 @@ const homePageFields = `{
     backgroundImage ${imageFields},
     isVisible
   },
+  floatingCta {
+    isVisible,
+    emptyMessage,
+    actions[] {
+      actionType,
+      iconImage ${imageFields},
+      order,
+      isVisible
+    }
+  },
   footer {
     brandName,
     description,

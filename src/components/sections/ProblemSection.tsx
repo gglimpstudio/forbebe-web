@@ -13,7 +13,7 @@ const problems = [
 
 export function ProblemSection() {
   return (
-    <section className="bg-background-light py-16 sm:py-20">
+    <section className="bg-background-light py-12 sm:py-16 lg:py-20">
       <Container>
         <SectionHeader
           title="겉으로 깨끗해 보여도, 내부 오염은 다릅니다."
@@ -26,7 +26,7 @@ export function ProblemSection() {
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-green-soft text-brand-primary">
                 <Icon className="h-6 w-6" />
               </div>
-              <h3 className="text-lg font-bold text-brand-primary">{title}</h3>
+              <h3 className="text-lg font-medium text-brand-primary">{title}</h3>
               <p className="mt-2 text-sm leading-6 text-text-sub">{description}</p>
             </Card>
           ))}

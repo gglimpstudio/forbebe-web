@@ -46,22 +46,99 @@
 }
 
 html {
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
   scroll-behavior: smooth;
 }
 
 body {
+  max-width: 100%;
+  overflow-x: clip;
   background: var(--background);
   color: var(--foreground);
   font-family: "Pretendard Variable", "Pretendard", ui-sans-serif, system-ui, sans-serif;
+}
+
+@supports not (overflow: clip) {
+  body {
+    overflow-x: hidden;
+  }
 }
 
 a {
   text-decoration: none;
 }
 
-::selection {
+.site-selection ::selection {
   background: var(--brand-secondary);
   color: var(--green-dark);
+}
+
+.cms-lines {
+  white-space: pre;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  line-break: strict;
+}
+
+.cms-lines-mobile-wrap {
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 640px) {
+  .cms-lines-mobile-wrap {
+    white-space: pre;
+    overflow-wrap: normal;
+  }
+}
+
+.fluid-hero-title {
+  font-size: clamp(2.05rem, 1.35rem + 2.8vw, 3.85rem);
+}
+
+.fluid-page-title {
+  font-size: clamp(1.85rem, 1.25rem + 2.35vw, 3.2rem);
+}
+
+.fluid-section-title {
+  font-size: clamp(1.65rem, 1.18rem + 1.8vw, 2.85rem);
+}
+
+.fluid-panel-title {
+  font-size: clamp(1.42rem, 1.12rem + 1.05vw, 2.15rem);
+}
+
+.fluid-body-lg {
+  font-size: clamp(1rem, 0.94rem + 0.28vw, 1.18rem);
+}
+
+.fluid-body {
+  font-size: clamp(0.94rem, 0.9rem + 0.18vw, 1.06rem);
+}
+
+.slogan-title-text {
+  font-size: clamp(1.9rem, 1.2rem + 2.8vw, 3.85rem);
+}
+
+.slogan-sub-text {
+  font-size: clamp(0.92rem, 0.88rem + 0.18vw, 1.125rem);
+}
+
+.intro-description-text {
+  font-size: clamp(0.72rem, 0.8rem + 0.18vw, 1.06rem);
+}
+
+.fit-line-to-viewport {
+  --fit-line-mobile-size: 0.94rem;
+}
+
+@media (max-width: 639px) {
+  .fit-line-to-viewport {
+    font-size: min(1.06rem, var(--fit-line-mobile-size));
+    line-height: 1.75;
+  }
 }
 
 .hero-image-fade {

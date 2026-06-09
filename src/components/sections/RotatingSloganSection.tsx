@@ -25,8 +25,8 @@ export function RotatingSloganSection() {
     <section className="bg-brand-primary py-12 text-text-inverse sm:py-16">
       <Container>
         <div className="mx-auto max-w-4xl text-center">
-          <p className="text-sm font-bold text-brand-secondary">Forbebe Care Standard</p>
-          <p className="mt-4 min-h-[7rem] text-3xl font-black leading-tight sm:min-h-[6rem] sm:text-5xl">
+          <p className="text-sm font-semibold text-brand-secondary">Forbebe Care Standard</p>
+          <p className="cms-lines fluid-section-title mt-4 min-h-[7rem] font-semibold leading-tight sm:min-h-[6rem]">
             {slogans[index]}
           </p>
         </div>

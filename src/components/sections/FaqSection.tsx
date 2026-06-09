@@ -6,7 +6,7 @@ import type { FaqItem } from "@/types";
 
 export function FaqSection({ faqs }: { faqs: FaqItem[] }) {
   return (
-    <section className="bg-background-light py-16 sm:py-20">
+    <section className="bg-background-light py-12 sm:py-16 lg:py-20">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>

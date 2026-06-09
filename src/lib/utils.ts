@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function isExternalHref(href: string) {
-  return /^https?:\/\//.test(href) || href.startsWith("tel:") || href.startsWith("mailto:");
+  return /^https?:\/\//.test(href) || href.startsWith("tel:") || href.startsWith("sms:") || href.startsWith("mailto:");
 }
 
 export function getSiteUrl() {

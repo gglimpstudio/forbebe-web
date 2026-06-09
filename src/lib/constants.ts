@@ -11,7 +11,7 @@ import type {
   Testimonial,
 } from "@/types";
 
-export const regions = ["전체", "서울", "경기", "인천", "충청", "경상", "전라", "기타"] as const;
+export const regions = ["전체", "충남", "인천", "경기도 북부", "경기도 남부"] as const;
 
 export const defaultNavigation: NavigationItem[] = [
   { title: "포베베 소개", href: "/", order: 1 },
@@ -34,7 +34,7 @@ export const defaultSettings: SiteSettings = {
   footerText: "아이에게 닿는 용품을 더 안심할 수 있도록 꼼꼼하게 케어합니다.",
   defaultSeoTitle: "포베베 | 카시트 & 유모차 전문 세탁",
   defaultSeoDescription:
-    "포베베는 카시트와 유모차를 전문적으로 세탁·살균 케어하는 유아용품 세탁 브랜드입니다. 가까운 지점에서 간편하게 예약 문의하세요.",
+    "포베베는 카시트와 유모차를 전문적으로 세탁·살균 케어하는 유아용품 세탁 브랜드입니다. 가까운 지점의 네이버 예약과 전화번호를 확인하세요.",
 };
 
 export const defaultHero: Hero = {
@@ -166,33 +166,33 @@ export const defaultPricingItems: PricingItem[] = [
 
 export const defaultBranches: Branch[] = [
   {
-    name: "포베베 서울점",
-    region: "서울",
-    serviceArea: "서울 전 지역 상담",
-    address: "서울특별시 주소 입력",
+    name: "포베베 충남점",
+    region: "충남",
+    serviceArea: "충남 주요 지역 상담",
+    address: "충남 주소 입력",
     phone: "010-0000-0000",
     operatingHours: "평일 10:00-18:00",
     naverMapUrl: "https://map.naver.com/",
     kakaoMapUrl: "https://map.kakao.com/",
     kakaoUrl: "https://pf.kakao.com/",
     blogUrl: "https://blog.naver.com/",
-    bookingUrl: "/contact",
+    bookingUrl: "/branches",
     description: "방문 및 예약 가능 여부는 지점 상담으로 확인해주세요.",
     order: 1,
     isActive: true,
   },
   {
-    name: "포베베 경기점",
-    region: "경기",
-    serviceArea: "경기 주요 지역 상담",
-    address: "경기도 주소 입력",
+    name: "포베베 인천점",
+    region: "인천",
+    serviceArea: "인천 주요 지역 상담",
+    address: "인천 주소 입력",
     phone: "010-0000-0000",
     operatingHours: "평일 10:00-18:00",
     naverMapUrl: "https://map.naver.com/",
     kakaoMapUrl: "https://map.kakao.com/",
     kakaoUrl: "https://pf.kakao.com/",
     blogUrl: "https://blog.naver.com/",
-    bookingUrl: "/contact",
+    bookingUrl: "/branches",
     description: "제품 사진을 보내주시면 상담이 더 정확합니다.",
     order: 2,
     isActive: true,

@@ -16,7 +16,7 @@ export function Accordion({ items }: { items: FaqItem[] }) {
         return (
           <div key={`${item.question}-${index}`} className="rounded-[18px] border border-border-soft bg-background-light">
             <button
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-bold text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
+              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left text-base font-medium text-brand-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-primary"
               aria-expanded={isOpen}
               onClick={() => setOpenIndex(isOpen ? -1 : index)}
             >
