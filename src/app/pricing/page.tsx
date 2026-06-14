@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
-import { FinalCtaSection } from "@/components/sections/FinalCTASection";
 import { Container } from "@/components/ui/Container";
-import { PricingTable } from "@/components/ui/PricingTable";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getPricingItems } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "가격 안내",
@@ -14,9 +11,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
-export default async function PricingPage() {
-  const items = await getPricingItems();
-
+export default function PricingPage() {
   return (
     <>
       <section className="bg-background-main py-12 sm:py-16 lg:py-20">
@@ -36,14 +31,11 @@ export default async function PricingPage() {
               priority
             />
           </div>
-          <PricingTable items={items} />
-          <div className="mt-8 rounded-[18px] bg-background-main p-4 text-sm leading-7 text-text-sub sm:rounded-[22px] sm:p-6">
-            <p className="font-medium text-brand-primary">추가 비용 및 주의사항</p>
-            <p className="mt-2">심한 오염, 곰팡이, 장기 보관 제품, 특수 소재 제품은 상담 후 추가 비용 또는 진행 불가 안내가 있을 수 있습니다. 정확한 금액은 제품 상태 확인 후 안내드립니다.</p>
-          </div>
+          <p className="mx-auto max-w-2xl whitespace-normal rounded-[16px] border border-brand-primary/15 bg-background-main px-4 py-4 text-center text-sm font-semibold leading-7 text-brand-primary shadow-[0_12px_32px_rgba(27,89,74,0.08)] [overflow-wrap:anywhere] [word-break:normal] sm:rounded-[20px] sm:px-8 sm:py-5 sm:text-lg">
+            옵션을 잘 모르실 경우, 지점에 문의 주세요.
+          </p>
         </Container>
       </section>
-      <FinalCtaSection />
     </>
   );
 }

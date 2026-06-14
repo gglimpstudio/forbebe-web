@@ -14,7 +14,7 @@ import type {
 export const regions = ["전체", "충남", "인천", "경기도 북부", "경기도 남부"] as const;
 
 export const defaultNavigation: NavigationItem[] = [
-  { title: "왜 포베베인가", href: "/why-forbebe", order: 2 },
+  { title: "포베베에 맡겨야하는 이유", href: "/why-forbebe", order: 2 },
   { title: "세탁과정", href: "/process", order: 3 },
   { title: "가격안내", href: "/pricing", order: 4 },
   { title: "지점소개", href: "/branches", order: 5 },
@@ -123,7 +123,7 @@ export const defaultProcessSteps: ProcessStep[] = [
   },
   {
     title: "분해 및 사전 점검",
-    description: "제품 구조와 소재 상태를 확인한 뒤 무리하지 않는 범위에서 분리 가능한 부위를 분해합니다.",
+    description: "제품 구조와 소재 상태를 확인한 뒤 제조사 메뉴얼에 맞춰서 분리 가능한 부위를 분해합니다.",
   },
   {
     title: "오염 제거",
@@ -135,11 +135,11 @@ export const defaultProcessSteps: ProcessStep[] = [
   },
   {
     title: "건조 및 살균 관리",
-    description: "충분한 건조 상태를 확인하고 위생 케어가 필요한 부위를 꼼꼼하게 점검합니다.",
+    description: "충분한 건조 상태 확인 후 1차 UV+오존 살균 합니다.",
   },
   {
     title: "조립 및 최종 확인",
-    description: "분해했던 부위를 조립하고 안전벨트, 체결부, 건조 상태, 주요 오염 부위를 다시 확인합니다.",
+    description: "분해했던 부위를 조립하고 안전벨트, 체결부, 건조 상태, 주요 오염 부위를 다시 확인합니다. 오염 부위 다시 확인 후 2차 UV+오존 살균으로 마지막까지 확실하게 살균합니다.",
   },
   {
     title: "고객 인도",

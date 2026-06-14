@@ -76,9 +76,9 @@ a {
 }
 
 .cms-lines {
-  white-space: pre;
+  white-space: pre-line;
   word-break: keep-all;
-  overflow-wrap: normal;
+  overflow-wrap: anywhere;
   line-break: strict;
 }
 
@@ -195,6 +195,24 @@ a {
   animation: section-fade-up 720ms ease-out both;
 }
 
+.mobile-nav-overlay-enter {
+  animation: mobile-nav-overlay-enter 220ms ease-out both;
+}
+
+.mobile-nav-overlay-exit {
+  animation: mobile-nav-overlay-exit 180ms ease-in both;
+}
+
+.mobile-nav-panel-enter {
+  animation: mobile-nav-panel-enter 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform;
+}
+
+.mobile-nav-panel-exit {
+  animation: mobile-nav-panel-exit 190ms ease-in both;
+  will-change: transform;
+}
+
 @keyframes hero-image-fade {
   from {
     opacity: 0;
@@ -228,6 +246,46 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes mobile-nav-overlay-enter {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mobile-nav-overlay-exit {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes mobile-nav-panel-enter {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes mobile-nav-panel-exit {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(100%);
   }
 }
 
@@ -306,6 +364,13 @@ a {
   }
 
   .slogan-indicator-dot {
+    animation: none;
+  }
+
+  .mobile-nav-overlay-enter,
+  .mobile-nav-overlay-exit,
+  .mobile-nav-panel-enter,
+  .mobile-nav-panel-exit {
     animation: none;
   }
 }

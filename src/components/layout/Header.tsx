@@ -12,6 +12,7 @@ const FALLBACK_LOGO_SRC = "/forbebe-logo.png";
 export function Header({ navigation, settings }: { navigation: NavigationItem[]; settings: SiteSettings }) {
   const logo = settings.headerLogo || settings.logo;
   const logoSrc = urlForImage(logo)?.width(486).height(100).fit("max").url() || FALLBACK_LOGO_SRC;
+  const logoAlt = imageAlt(logo, settings.title || "포베베");
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-soft/80 bg-background-main/90 backdrop-blur">
@@ -19,7 +20,7 @@ export function Header({ navigation, settings }: { navigation: NavigationItem[];
         <Link href="/" className="flex items-center gap-2">
           <Image
             src={logoSrc}
-            alt={imageAlt(logo, settings.title || "포베베")}
+            alt={logoAlt}
             width={243}
             height={50}
             className="h-7 w-auto object-contain sm:h-10"
@@ -37,7 +38,7 @@ export function Header({ navigation, settings }: { navigation: NavigationItem[];
           <Button href="/branches" size="sm" className="hidden sm:inline-flex">
             지점 안내
           </Button>
-          <MobileNav items={navigation} />
+          <MobileNav items={navigation} logoSrc={logoSrc} logoAlt={logoAlt} />
         </div>
       </Container>
     </header>
