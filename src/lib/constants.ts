@@ -14,7 +14,6 @@ import type {
 export const regions = ["전체", "충남", "인천", "경기도 북부", "경기도 남부"] as const;
 
 export const defaultNavigation: NavigationItem[] = [
-  { title: "포베베 소개", href: "/", order: 1 },
   { title: "왜 포베베인가", href: "/why-forbebe", order: 2 },
   { title: "세탁과정", href: "/process", order: 3 },
   { title: "가격안내", href: "/pricing", order: 4 },

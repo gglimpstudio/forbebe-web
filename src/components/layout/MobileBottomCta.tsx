@@ -118,7 +118,7 @@ export function MobileBottomCta({
       {activeAction ? (
         <button
           type="button"
-          className="fixed inset-0 z-40 bg-green-dark/18 backdrop-blur-[2px] md:hidden"
+          className="fixed inset-0 z-40 bg-green-dark/18 backdrop-blur-[2px] lg:hidden"
           aria-label="지점 선택 닫기"
           onClick={() => setActiveAction(null)}
         />
@@ -126,7 +126,7 @@ export function MobileBottomCta({
 
       <div
         className={cn(
-          "fixed inset-x-0 bottom-[calc(74px+env(safe-area-inset-bottom))] z-50 mx-3 overflow-hidden rounded-[22px] border border-border-soft/80 bg-background-main/90 p-3 shadow-[0_-18px_58px_rgba(18,58,50,0.2)] backdrop-blur transition md:hidden",
+          "fixed inset-x-0 bottom-[calc(74px+env(safe-area-inset-bottom))] z-50 mx-3 overflow-hidden rounded-[22px] border border-border-soft/80 bg-background-main/90 p-3 shadow-[0_-18px_58px_rgba(18,58,50,0.2)] backdrop-blur transition lg:hidden",
           activeAction ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-5 opacity-0",
         )}
       >
@@ -178,7 +178,93 @@ export function MobileBottomCta({
         ) : null}
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] md:hidden">
+      <div
+        className={cn(
+          "fixed right-[132px] top-1/2 z-50 hidden w-[340px] -translate-y-1/2 overflow-hidden rounded-[22px] border border-border-soft/80 bg-background-main/96 p-4 shadow-[0_18px_46px_rgba(18,58,50,0.17)] backdrop-blur transition lg:block",
+          activeAction ? "translate-x-0 opacity-100" : "pointer-events-none translate-x-3 opacity-0",
+        )}
+      >
+        {activeMeta ? (
+          <>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-primary/70">BRANCH</p>
+                <p className="mt-1 text-base font-semibold leading-6 text-green-dark">{activeMeta.title}</p>
+              </div>
+              <button
+                type="button"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-background-main text-brand-primary transition hover:bg-background-soft"
+                aria-label="지점 선택 닫기"
+                onClick={() => setActiveAction(null)}
+              >
+                <X className="h-4 w-4" aria-hidden />
+              </button>
+            </div>
+            <div className="grid max-h-[460px] gap-2 overflow-y-auto pr-1">
+              {actionLinks.length > 0 ? (
+                actionLinks.map(({ branch, href, value }) => (
+                  <a
+                    key={`desktop-${activeAction}-${branch.name}`}
+                    href={href}
+                    target={isExternalHref(href) && !href.startsWith("tel:") ? "_blank" : undefined}
+                    rel={isExternalHref(href) && !href.startsWith("tel:") ? "noopener noreferrer" : undefined}
+                    className="group flex min-h-[68px] items-center justify-between gap-3 rounded-[16px] border border-border-soft bg-background-main px-3.5 py-3 text-left transition hover:border-brand-primary hover:bg-background-soft"
+                    onClick={() => setActiveAction(null)}
+                  >
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-semibold text-green-dark">{branch.name}</span>
+                      {branch.serviceArea ? <span className="mt-1 block truncate text-xs font-medium text-text-sub">{branch.serviceArea}</span> : null}
+                      <span className="mt-1 block truncate text-xs font-medium text-brand-primary">{value}</span>
+                    </span>
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-background-light text-brand-primary transition group-hover:bg-brand-primary group-hover:text-text-inverse">
+                      <ChevronRight className="h-4 w-4" aria-hidden />
+                    </span>
+                  </a>
+                ))
+              ) : (
+                <p className="rounded-[16px] bg-background-main p-4 text-sm leading-6 text-text-sub">
+                  {emptyMessage}
+                </p>
+              )}
+            </div>
+          </>
+        ) : null}
+      </div>
+
+      <div className="fixed right-7 top-1/2 z-50 hidden -translate-y-1/2 lg:block">
+        <div className="grid gap-3">
+          {visibleActions.map((meta) => {
+            const Icon = meta.icon;
+            const isActive = activeAction === meta.actionType;
+
+            return (
+              <button
+                key={`desktop-${meta.actionType}`}
+                type="button"
+                className={cn(
+                  "flex h-[92px] w-[92px] flex-col items-center justify-center gap-2 rounded-[24px] bg-background-main/95 px-2 text-sm font-semibold leading-tight text-brand-primary shadow-[0_10px_28px_rgba(18,58,50,0.14)] ring-1 ring-border-soft/90 backdrop-blur transition hover:-translate-y-0.5 hover:bg-background-soft hover:shadow-[0_14px_34px_rgba(18,58,50,0.18)]",
+                  isActive ? "bg-background-soft ring-2 ring-brand-primary" : "",
+                )}
+                aria-expanded={isActive}
+                onClick={() => setActiveAction(isActive ? null : meta.actionType)}
+              >
+                {meta.iconImageUrl ? (
+                  <span
+                    className="h-8 w-8 bg-contain bg-center bg-no-repeat"
+                    style={{ backgroundImage: `url('${meta.iconImageUrl}')` }}
+                    aria-hidden
+                  />
+                ) : (
+                  <Icon className="h-8 w-8" aria-hidden />
+                )}
+                <span className="max-w-full truncate">{meta.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="fixed inset-x-0 bottom-0 z-50 px-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] lg:hidden">
         <div className="rounded-[22px] border border-border-soft/80 bg-background-main/90 p-1.5 shadow-[0_-10px_38px_rgba(18,58,50,0.18)] backdrop-blur">
           <div className="grid gap-1.5" style={{ gridTemplateColumns: `repeat(${visibleActions.length}, minmax(0, 1fr))` }}>
           {visibleActions.map((meta) => {

@@ -14,7 +14,6 @@ const footerMenus: { title: string; links: FooterLink[] }[] = [
   {
     title: "서비스",
     links: [
-      { label: "포베베 소개", href: "/" },
       { label: "왜 포베베에 맡겨야 하나요", href: "/why-forbebe" },
       { label: "세탁과정", href: "/process" },
       { label: "가격안내", href: "/pricing" },
