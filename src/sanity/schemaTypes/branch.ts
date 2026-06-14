@@ -12,6 +12,7 @@ export const branch = defineType({
       type: "string",
       options: {
         list: [
+          { title: "본사", value: "본사" },
           { title: "충남", value: "충남" },
           { title: "인천", value: "인천" },
           { title: "경기도 북부", value: "경기도 북부" },

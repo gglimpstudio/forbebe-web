@@ -1,36 +1,37 @@
 "use client";
 
-import { CalendarCheck, MapPin, MessageSquare, Phone } from "lucide-react";
+import { CalendarCheck, MapPin, Phone } from "lucide-react";
 import { useMemo, useState } from "react";
 
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
-import {
-  type BranchFilter,
-  type BranchLocation,
-  type BranchRegion,
-  branchFilterOptions,
-  branchLocations,
-  branchRegionOrder,
-} from "@/lib/branchLocations";
 import { cn } from "@/lib/utils";
+import type { Branch } from "@/types";
 
-const regionAccents: Record<BranchRegion, { bg: string; text: string; border: string }> = {
-  "본사·충남": { bg: "bg-[#F3E8D0]", text: "text-[#6B4C21]", border: "border-[#D8BE8A]" },
+const preferredRegionOrder = ["본사", "충남", "인천", "경기도 북부", "경기도 남부"];
+
+const regionAccents: Record<string, { bg: string; text: string; border: string }> = {
+  본사: { bg: "bg-[#F3E8D0]", text: "text-[#6B4C21]", border: "border-[#D8BE8A]" },
+  충남: { bg: "bg-[#F3E8D0]", text: "text-[#6B4C21]", border: "border-[#D8BE8A]" },
   인천: { bg: "bg-[#DDEBDD]", text: "text-brand-primary", border: "border-[#B8D0BA]" },
   "경기도 북부": { bg: "bg-[#F2DFBF]", text: "text-[#6B4C21]", border: "border-[#D8BE8A]" },
   "경기도 남부": { bg: "bg-[#E7EADC]", text: "text-brand-primary", border: "border-[#C8D3B9]" },
 };
 
-export function BranchLocationExperience() {
-  const [filter, setFilter] = useState<BranchFilter>("전체");
+const defaultRegionAccent = { bg: "bg-[#E7EADC]", text: "text-brand-primary", border: "border-[#C8D3B9]" };
+
+export function BranchLocationExperience({ branches }: { branches: Branch[] }) {
+  const [filter, setFilter] = useState("전체");
+
+  const regionOrder = useMemo(() => getRegionOrder(branches), [branches]);
+  const filterOptions = useMemo(() => ["전체", ...regionOrder], [regionOrder]);
 
   const visibleBranches = useMemo(
-    () => branchLocations.filter((branch) => filter === "전체" || branch.region === filter),
-    [filter],
+    () => branches.filter((branch) => filter === "전체" || branch.region === filter),
+    [branches, filter],
   );
 
-  function updateFilter(nextFilter: BranchFilter) {
+  function updateFilter(nextFilter: string) {
     setFilter(nextFilter);
   }
 
@@ -47,11 +48,11 @@ export function BranchLocationExperience() {
           </p>
         </div>
 
-        <RegionFilter value={filter} onChange={updateFilter} />
+        <RegionFilter value={filter} options={filterOptions} onChange={updateFilter} />
 
         <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,0.42fr)_minmax(0,0.58fr)] lg:items-start">
           <div className="lg:sticky lg:top-24">
-            <QuickRegionPanel value={filter} onChange={updateFilter} />
+            <QuickRegionPanel value={filter} branches={branches} regionOrder={regionOrder} onChange={updateFilter} />
           </div>
 
           <div id="branch-finder-results" aria-live="polite">
@@ -64,7 +65,7 @@ export function BranchLocationExperience() {
             </div>
             <div className="grid gap-4">
               {visibleBranches.map((branch) => (
-                <BranchContactCard key={branch.id} branch={branch} />
+                <BranchContactCard key={slugifyBranchId(branch)} branch={branch} />
               ))}
             </div>
           </div>
@@ -74,11 +75,11 @@ export function BranchLocationExperience() {
   );
 }
 
-function RegionFilter({ value, onChange }: { value: BranchFilter; onChange: (filter: BranchFilter) => void }) {
+function RegionFilter({ value, options, onChange }: { value: string; options: string[]; onChange: (filter: string) => void }) {
   return (
     <div className="mt-8 overflow-x-auto pb-2 sm:mt-10" role="tablist" aria-label="지점 지역 필터">
       <div className="flex min-w-max gap-2 sm:justify-center">
-        {branchFilterOptions.map((option) => (
+        {options.map((option) => (
           <button
             key={option}
             type="button"
@@ -101,7 +102,7 @@ function RegionFilter({ value, onChange }: { value: BranchFilter; onChange: (fil
   );
 }
 
-function QuickRegionPanel({ value, onChange }: { value: BranchFilter; onChange: (filter: BranchRegion) => void }) {
+function QuickRegionPanel({ value, branches, regionOrder, onChange }: { value: string; branches: Branch[]; regionOrder: string[]; onChange: (filter: string) => void }) {
   return (
     <aside className="rounded-[22px] border border-border-soft bg-[#fffdf7] p-4 shadow-[0_18px_44px_rgba(18,58,50,0.07)] sm:p-6" aria-labelledby="quick-region-title">
       <div className="mb-5 flex items-start justify-between gap-4">
@@ -113,14 +114,14 @@ function QuickRegionPanel({ value, onChange }: { value: BranchFilter; onChange: 
           <p className="mt-2 text-sm leading-6 text-text-sub">이용하려는 지역을 선택하세요.</p>
         </div>
         <span className="rounded-full bg-background-soft px-3 py-1 text-xs font-semibold text-brand-primary">
-          {branchLocations.length}개 지점
+          {branches.length}개 지점
         </span>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-        {branchRegionOrder.map((region) => {
-          const branches = branchLocations.filter((branch) => branch.region === region);
+        {regionOrder.map((region) => {
+          const regionBranches = branches.filter((branch) => branch.region === region);
           const active = value === region;
-          const accent = regionAccents[region];
+          const accent = regionAccents[region] || defaultRegionAccent;
 
           return (
             <button
@@ -137,10 +138,10 @@ function QuickRegionPanel({ value, onChange }: { value: BranchFilter; onChange: 
               <span className="flex items-center justify-between gap-3">
                 <span className="text-base font-semibold text-green-dark">{region}</span>
                 <span className={cn("rounded-full border px-2.5 py-1 text-xs font-semibold", accent.bg, accent.text, accent.border)}>
-                  {branches.length}개
+                  {regionBranches.length}개
                 </span>
               </span>
-              <span className="mt-3 block text-sm leading-6 text-text-sub">{branches.map((branch) => branch.name).join(", ")}</span>
+              <span className="mt-3 block text-sm leading-6 text-text-sub">{regionBranches.map((branch) => branch.name).join(", ")}</span>
             </button>
           );
         })}
@@ -149,58 +150,59 @@ function QuickRegionPanel({ value, onChange }: { value: BranchFilter; onChange: 
   );
 }
 
-function BranchContactCard({ branch }: { branch: BranchLocation }) {
-  const mapUrl = getBranchMapUrl(branch);
+function BranchContactCard({ branch }: { branch: Branch }) {
+  const bookingUrl = branch.naverBookingUrl || branch.bookingUrl;
+  const phoneHref = branch.phone ? `tel:${branch.phone}` : undefined;
 
   return (
     <article
-      id={`branch-card-${branch.id}`}
+      id={`branch-card-${slugifyBranchId(branch)}`}
       aria-label={`${branch.name} 연락처 카드`}
       className="rounded-[20px] border border-border-soft bg-[#fffdf7] p-5 shadow-[0_14px_36px_rgba(18,58,50,0.06)] sm:p-6"
     >
       <div className="flex flex-wrap gap-2">
         <Badge>{branch.region}</Badge>
-        {branch.isHeadOffice ? <Badge className="bg-[#EFE3C9] text-[#6B4C21]">본사</Badge> : null}
       </div>
       <h4 className="mt-3 text-xl font-semibold leading-tight text-green-dark">{branch.name}</h4>
-      <p className="mt-2 text-sm leading-6 text-text-sub">{branch.description}</p>
+      {branch.description || branch.serviceArea ? <p className="mt-2 text-sm leading-6 text-text-sub">{branch.description || branch.serviceArea}</p> : null}
       {branch.address ? (
         <p className="mt-3 flex gap-2 text-sm leading-6 text-text-sub">
           <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary" aria-hidden />
           {branch.address}
         </p>
       ) : null}
-      <a href={`tel:${branch.phone}`} className="mt-3 inline-flex text-lg font-semibold text-brand-primary" aria-label={`${branch.name} ${branch.phone}로 전화하기`}>
-        {branch.phone}
-      </a>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Button href={`tel:${branch.phone}`} className="gap-2" aria-label={`${branch.name} 전화하기`}>
+      {branch.phone ? (
+        <a href={`tel:${branch.phone}`} className="mt-3 inline-flex text-lg font-semibold text-brand-primary" aria-label={`${branch.name} ${branch.phone}로 전화하기`}>
+          {branch.phone}
+        </a>
+      ) : null}
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <Button href={phoneHref} className="gap-2" disabled={!phoneHref} aria-label={`${branch.name} 전화하기`}>
           <Phone className="h-4 w-4" aria-hidden />
           전화하기
         </Button>
-        <Button href={`sms:${branch.phone}`} variant="outline" className="gap-2 !bg-[#fffdf7]" aria-label={`${branch.name} 문자 문의하기`}>
-          <MessageSquare className="h-4 w-4" aria-hidden />
-          문자 문의
+        <Button href={bookingUrl} variant="secondary" className="gap-2" disabled={!bookingUrl} aria-label={`${branch.name} 네이버 예약하기`}>
+          <CalendarCheck className="h-4 w-4" aria-hidden />
+          {bookingUrl ? "네이버 예약" : "예약 준비중"}
         </Button>
-        {branch.naverBookingUrl ? (
-          <Button href={branch.naverBookingUrl} variant="secondary" className="gap-2" aria-label={`${branch.name} 네이버 예약하기`}>
-            <CalendarCheck className="h-4 w-4" aria-hidden />
-            네이버 예약
-          </Button>
-        ) : null}
-        {mapUrl ? (
-          <Button href={mapUrl} variant="outline" className="gap-2 !bg-[#fffdf7]" aria-label={`${branch.name} 지도 보기`}>
-            <MapPin className="h-4 w-4" aria-hidden />
-            지도 보기
-          </Button>
-        ) : null}
       </div>
     </article>
   );
 }
 
-function getBranchMapUrl(branch: BranchLocation) {
-  if (branch.naverMapUrl) return branch.naverMapUrl;
-  if (branch.address) return `https://map.naver.com/p/search/${encodeURIComponent(branch.address)}`;
-  return branch.naverBookingUrl;
+function getRegionOrder(branches: Branch[]) {
+  const regions = Array.from(new Set(branches.map((branch) => branch.region).filter(Boolean)));
+
+  return regions.sort((a, b) => {
+    const aIndex = preferredRegionOrder.indexOf(a);
+    const bIndex = preferredRegionOrder.indexOf(b);
+    if (aIndex === -1 && bIndex === -1) return a.localeCompare(b, "ko");
+    if (aIndex === -1) return 1;
+    if (bIndex === -1) return -1;
+    return aIndex - bIndex;
+  });
+}
+
+function slugifyBranchId(branch: Branch) {
+  return `${branch.region}-${branch.name}`.replace(/\s+/g, "-");
 }

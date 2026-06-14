@@ -11,7 +11,7 @@ import type {
   Testimonial,
 } from "@/types";
 
-export const regions = ["전체", "충남", "인천", "경기도 북부", "경기도 남부"] as const;
+export const regions = ["전체", "본사", "충남", "인천", "경기도 북부", "경기도 남부"] as const;
 
 export const defaultNavigation: NavigationItem[] = [
   { title: "포베베에 맡겨야하는 이유", href: "/why-forbebe", order: 2 },

@@ -4,14 +4,18 @@ import { MapPin, Phone, Search } from "lucide-react";
 import { BranchLocationExperience } from "@/components/sections/BranchLocationExperience";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { branchLocations, branchRegionOrder, primaryBranchPhone } from "@/lib/branchLocations";
+import { getBranches } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "지점 안내",
   description: "전국 주요 지역의 가까운 포베베 지점 연락처와 전화 문의 정보를 확인하세요.",
 };
 
-export default function BranchesPage() {
+export default async function BranchesPage() {
+  const branches = await getBranches();
+  const primaryBranchPhone = branches.find((branch) => branch.region === "본사")?.phone || branches[0]?.phone;
+  const regionCount = new Set(branches.map((branch) => branch.region).filter(Boolean)).size;
+
   return (
     <>
       <section className="relative overflow-hidden bg-background-main py-12 sm:py-16 lg:py-22">
@@ -47,14 +51,14 @@ export default function BranchesPage() {
                 </span>
               </div>
               <div className="mt-5 grid grid-cols-2 gap-3">
-                <SummaryMetric value={`${branchLocations.length}개`} label="지점" />
-                <SummaryMetric value={`${branchRegionOrder.length}개`} label="권역" />
+                <SummaryMetric value={`${branches.length}개`} label="지점" />
+                <SummaryMetric value={`${regionCount}개`} label="권역" />
                 <div className="col-span-2 rounded-2xl border border-border-soft bg-background-light px-4 py-4">
                   <div className="flex items-center gap-2 text-sm font-semibold text-green-dark">
                     <Phone className="h-4 w-4 text-brand-primary" aria-hidden />
-                    전화·문자 문의 가능
+                    전화·네이버 예약 가능
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-text-sub">지역을 선택하면 지점별 문의 버튼이 표시됩니다.</p>
+                  <p className="mt-2 text-sm leading-6 text-text-sub">지역을 선택하면 지점별 전화와 예약 버튼이 표시됩니다.</p>
                 </div>
               </div>
               <Button href="#branch-finder" className="mt-5 w-full gap-2">
@@ -66,7 +70,7 @@ export default function BranchesPage() {
         </Container>
       </section>
 
-      <BranchLocationExperience />
+      <BranchLocationExperience branches={branches} />
 
       <section className="bg-[radial-gradient(circle_at_center,#1E584A_0%,#123F35_48%,#0B3029_100%)] py-16 text-text-inverse sm:py-20">
         <Container>

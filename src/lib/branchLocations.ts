@@ -1,4 +1,4 @@
-export type BranchRegion = "본사·충남" | "인천" | "경기도 북부" | "경기도 남부";
+export type BranchRegion = "본사" | "충남" | "인천" | "경기도 북부" | "경기도 남부";
 
 export type BranchLocation = {
   id: string;
@@ -12,7 +12,7 @@ export type BranchLocation = {
   isHeadOffice?: boolean;
 };
 
-export const branchRegionOrder: BranchRegion[] = ["본사·충남", "인천", "경기도 북부", "경기도 남부"];
+export const branchRegionOrder: BranchRegion[] = ["본사", "충남", "인천", "경기도 북부", "경기도 남부"];
 
 export const branchFilterOptions = ["전체", ...branchRegionOrder] as const;
 
@@ -21,22 +21,22 @@ export type BranchFilter = (typeof branchFilterOptions)[number];
 export const branchLocations: BranchLocation[] = [
   {
     id: "head-office",
-    region: "본사·충남",
+    region: "본사",
     name: "본사",
     phone: "010-4445-4880",
-    description: "포베베 대표번호로 서비스와 지점 문의 안내 가능",
+    description: "창업 문의 및 지점 안내 가능",
     isHeadOffice: true,
   },
   {
     id: "cheonan-asan-1",
-    region: "본사·충남",
+    region: "충남",
     name: "천안아산 1호점",
     phone: "010-6492-4880",
     description: "천안·아산 인근 카시트·유모차 세탁 상담 가능",
   },
   {
     id: "cheonan-asan-2",
-    region: "본사·충남",
+    region: "충남",
     name: "천안아산 2호점",
     phone: "010-8673-0480",
     description: "천안·아산 인근 카시트·유모차 세탁 상담 가능",
