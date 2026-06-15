@@ -140,6 +140,90 @@ export type FinalCtaSection = {
   isVisible?: boolean;
 };
 
+export type PageHero = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  image?: SanityImage;
+};
+
+export type ContentCard = {
+  title: string;
+  description?: string;
+  icon?: string;
+  image?: SanityImage;
+};
+
+export type InfoCard = {
+  title: string;
+  description?: string;
+};
+
+export type PageCta = Pick<
+  FinalCtaSection,
+  "isVisible" | "title" | "description" | "primaryCtaLabel" | "primaryCtaHref" | "secondaryCtaLabel" | "secondaryCtaHref"
+>;
+
+export type ServicesPage = {
+  hero?: PageHero;
+  reservationNote?: {
+    title?: string;
+    description?: string;
+    ctaLabel?: string;
+    ctaHref?: string;
+  };
+  finalCta?: PageCta;
+};
+
+export type ProcessPage = {
+  hero?: PageHero;
+  noticeCards?: InfoCard[];
+  finalCta?: PageCta;
+};
+
+export type PricingPage = {
+  hero?: PageHero;
+  priceImage?: SanityImage;
+  note?: string;
+};
+
+export type CasesPage = {
+  hero?: PageHero;
+  finalCta?: PageCta;
+};
+
+export type FaqPage = {
+  hero?: PageHero;
+  finalCta?: PageCta;
+};
+
+export type WhyForbebePage = {
+  hero?: PageHero;
+  strengths?: ContentCard[];
+  branchCta?: {
+    title?: string;
+    description?: string;
+    primaryCtaLabel?: string;
+    primaryCtaHref?: string;
+    secondaryCtaLabel?: string;
+    secondaryCtaHref?: string;
+  };
+  finalCta?: PageCta;
+};
+
+export type FranchisePage = {
+  hero?: PageHero;
+  benefits?: ContentCard[];
+  notice?: InfoCard;
+  formTitle?: string;
+};
+
+export type PartnershipPage = {
+  hero?: PageHero;
+  partnershipTypes?: ContentCard[];
+  formTitle?: string;
+};
+
 export type FloatingCtaActionType = "phone" | "booking" | "kakao";
 
 export type FloatingCtaAction = {

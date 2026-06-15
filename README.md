@@ -42,10 +42,22 @@ NEXT_PUBLIC_SANITY_PROJECT_ID=
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2025-01-01
 SANITY_API_READ_TOKEN=
+SANITY_API_WRITE_TOKEN=
+SANITY_REVALIDATE_SECRET=
 NEXT_PUBLIC_SITE_URL=https://example.com
 ```
 
 `SANITY_API_READ_TOKEN`이 없어도 public dataset이면 읽기를 시도합니다. Sanity 설정이 비어 있거나 데이터가 없으면 mock 콘텐츠로 화면이 깨지지 않도록 구성했습니다.
+
+## Sanity 즉시 반영
+
+Sanity publish 후 즉시 반영하려면 배포 환경과 로컬 `.env.local`에 `NEXT_PUBLIC_SITE_URL`, `SANITY_REVALIDATE_SECRET`, `SANITY_API_WRITE_TOKEN`을 설정한 뒤 webhook을 등록합니다.
+
+```bash
+npm run setup:sanity-webhook
+```
+
+등록된 webhook은 Sanity 문서가 publish될 때 `/api/revalidate`를 호출하고, Next.js 캐시 태그와 주요 페이지 경로를 즉시 만료합니다.
 
 ## 콘텐츠 관리
 

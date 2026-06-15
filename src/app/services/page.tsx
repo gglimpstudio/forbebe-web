@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { SanityImage } from "@/components/ui/SanityImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getServices } from "@/lib/sanity/queries";
+import { getServices, getServicesPage } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "서비스",
@@ -17,16 +17,18 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function ServicesPage() {
-  const services = await getServices();
+  const [services, page] = await Promise.all([getServices(), getServicesPage()]);
+  const hero = page?.hero;
+  const reservationNote = page?.reservationNote;
 
   return (
     <>
       <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
           <SectionHeader
-            eyebrow="Services"
-            title="카시트와 유모차 구조에 맞춘 전문 케어"
-            description="품목별 소재, 분해 가능 범위, 오염 상태를 먼저 확인하고 제품에 무리가 가지 않는 방식으로 진행합니다."
+            eyebrow={hero?.eyebrow || "Services"}
+            title={hero?.title || "카시트와 유모차 구조에 맞춘 전문 케어"}
+            description={hero?.description || "품목별 소재, 분해 가능 범위, 오염 상태를 먼저 확인하고 제품에 무리가 가지 않는 방식으로 진행합니다."}
           />
         </Container>
       </section>
@@ -54,13 +56,15 @@ export default async function ServicesPage() {
             ))}
           </div>
           <div className="mt-8 rounded-[18px] bg-background-main p-4 sm:mt-10 sm:rounded-[22px] sm:p-6">
-            <h2 className="text-xl font-medium text-brand-primary">예약 전 확인사항</h2>
-            <p className="mt-3 text-sm leading-7 text-text-sub">브랜드와 모델명, 오염 부위 사진을 함께 보내주시면 세탁 가능 여부와 예상 금액을 더 정확하게 안내할 수 있습니다.</p>
-            <Button href="/branches" className="mt-5">가까운 지점 확인</Button>
+            <h2 className="text-xl font-medium text-brand-primary">{reservationNote?.title || "예약 전 확인사항"}</h2>
+            <p className="mt-3 text-sm leading-7 text-text-sub">
+              {reservationNote?.description || "브랜드와 모델명, 오염 부위 사진을 함께 보내주시면 세탁 가능 여부와 예상 금액을 더 정확하게 안내할 수 있습니다."}
+            </p>
+            <Button href={reservationNote?.ctaHref || "/branches"} className="mt-5">{reservationNote?.ctaLabel || "가까운 지점 확인"}</Button>
           </div>
         </Container>
       </section>
-      <FinalCtaSection />
+      {page?.finalCta?.isVisible === false ? null : <FinalCtaSection finalCta={page?.finalCta} />}
     </>
   );
 }

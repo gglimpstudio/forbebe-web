@@ -5,6 +5,16 @@ import { faq } from "./faq";
 import { homePage } from "./homePage";
 import { legalPage } from "./legalPage";
 import { navigation } from "./navigation";
+import {
+  casesPage,
+  faqPage,
+  franchisePage,
+  partnershipPage,
+  pricingPage,
+  processPage,
+  servicesPage,
+  whyForbebePage,
+} from "./pageDocuments";
 import { pricingItem } from "./pricingItem";
 import { processStep } from "./processStep";
 import { service } from "./service";
@@ -18,6 +28,14 @@ export const schemaTypes = [
   processStep,
   pricingItem,
   branch,
+  servicesPage,
+  processPage,
+  pricingPage,
+  casesPage,
+  faqPage,
+  whyForbebePage,
+  franchisePage,
+  partnershipPage,
   beforeAfterCase,
   cleaningCase,
   testimonial,

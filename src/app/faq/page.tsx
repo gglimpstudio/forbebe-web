@@ -4,7 +4,7 @@ import { FinalCtaSection } from "@/components/sections/FinalCTASection";
 import { Container } from "@/components/ui/Container";
 import { FaqFilter } from "@/components/ui/FaqFilter";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getFaqs } from "@/lib/sanity/queries";
+import { getFaqPage, getFaqs } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -14,13 +14,18 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function FaqPage() {
-  const faqs = await getFaqs();
+  const [faqs, page] = await Promise.all([getFaqs(), getFaqPage()]);
+  const hero = page?.hero;
 
   return (
     <>
       <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
-          <SectionHeader eyebrow="FAQ" title="자주 묻는 질문" description="예약 전 궁금한 내용을 확인하세요. 제품 상태가 다르면 가까운 지점 상담을 권장합니다." />
+          <SectionHeader
+            eyebrow={hero?.eyebrow || "FAQ"}
+            title={hero?.title || "자주 묻는 질문"}
+            description={hero?.description || "예약 전 궁금한 내용을 확인하세요. 제품 상태가 다르면 가까운 지점 상담을 권장합니다."}
+          />
         </Container>
       </section>
       <section className="bg-background-light py-10 sm:py-14 lg:py-16">
@@ -28,7 +33,7 @@ export default async function FaqPage() {
           <FaqFilter faqs={faqs} />
         </Container>
       </section>
-      <FinalCtaSection />
+      {page?.finalCta?.isVisible === false ? null : <FinalCtaSection finalCta={page?.finalCta} />}
     </>
   );
 }

@@ -3,24 +3,35 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { urlForImage } from "@/lib/sanity/image";
-import type { FinalCtaSection } from "@/types";
+import type { FinalCtaSection as FinalCtaSectionData, PageCta } from "@/types";
 
 const FINAL_CTA_BACKGROUND_IMAGE = "";
 
-export function FinalCtaSection() {
+export function FinalCtaSection({ finalCta }: { finalCta?: PageCta } = {}) {
+  const title = finalCta?.title || "아이에게 닿는 용품, 이제 전문 세탁으로 관리하세요.";
+  const description = finalCta?.description || "가까운 포베베 지점으로 간편하게 문의하세요.";
+  const primaryCtaLabel = finalCta?.primaryCtaLabel || "가까운 지점 확인하기";
+  const primaryCtaHref = finalCta?.primaryCtaHref || "/branches";
+  const secondaryCtaLabel = finalCta?.secondaryCtaLabel || "가까운 지점 찾기";
+  const secondaryCtaHref = finalCta?.secondaryCtaHref || "/branches";
+
   return (
     <section className="bg-[radial-gradient(circle_at_center,#1E584A_0%,#123F35_45%,#0B3029_100%)] py-12 text-text-inverse sm:py-16 lg:py-20">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="cms-lines fluid-panel-title font-semibold leading-tight">아이에게 닿는 용품, 이제 전문 세탁으로 관리하세요.</h2>
-          <p className="mt-4 text-base leading-7 text-brand-secondary">가까운 포베베 지점으로 간편하게 문의하세요.</p>
+          <h2 className="cms-lines fluid-panel-title font-semibold leading-tight">{title}</h2>
+          <p className="mt-4 text-base leading-7 text-brand-secondary">{description}</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href="/branches" variant="secondary" size="lg" className="!bg-[#DFD9B3] !text-[#123F35] hover:!bg-[#F3EFE2]">
-              가까운 지점 확인하기
-            </Button>
-            <Button href="/branches" variant="outline" size="lg" className="!border-[rgba(223,217,179,0.55)] !text-[#DFD9B3] hover:bg-text-inverse/10">
-              가까운 지점 찾기
-            </Button>
+            {primaryCtaHref ? (
+              <Button href={primaryCtaHref} variant="secondary" size="lg" className="!bg-[#DFD9B3] !text-[#123F35] hover:!bg-[#F3EFE2]">
+                {primaryCtaLabel}
+              </Button>
+            ) : null}
+            {secondaryCtaHref ? (
+              <Button href={secondaryCtaHref} variant="outline" size="lg" className="!border-[rgba(223,217,179,0.55)] !text-[#DFD9B3] hover:bg-text-inverse/10">
+                {secondaryCtaLabel}
+              </Button>
+            ) : null}
           </div>
         </div>
       </Container>
@@ -28,7 +39,7 @@ export function FinalCtaSection() {
   );
 }
 
-export function FinalCTASection({ finalCta }: { finalCta?: FinalCtaSection }) {
+export function FinalCTASection({ finalCta }: { finalCta?: FinalCtaSectionData }) {
   const backgroundImage = urlForImage(finalCta?.backgroundImage)?.width(1600).height(1000).fit("crop").url() || FINAL_CTA_BACKGROUND_IMAGE;
   const label = finalCta?.label || "CONTACT FORBEBE";
   const title = finalCta?.title || "카시트와 유모차 케어,\n가까운 포베베에서 시작하세요.";

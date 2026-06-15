@@ -4,7 +4,7 @@ import { FinalCtaSection } from "@/components/sections/FinalCTASection";
 import { CaseFilter } from "@/components/ui/CaseFilter";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { getCases } from "@/lib/sanity/queries";
+import { getCases, getCasesPage } from "@/lib/sanity/queries";
 
 export const metadata: Metadata = {
   title: "세탁 사례",
@@ -14,13 +14,18 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function CasesPage() {
-  const cases = await getCases();
+  const [cases, page] = await Promise.all([getCases(), getCasesPage()]);
+  const hero = page?.hero;
 
   return (
     <>
       <section className="bg-background-main py-12 sm:py-16 lg:py-20">
         <Container>
-          <SectionHeader eyebrow="Cases" title="세탁 전후 사례" description="Before/After 이미지는 실제 제품 상태와 오염도에 따라 결과가 달라질 수 있습니다." />
+          <SectionHeader
+            eyebrow={hero?.eyebrow || "Cases"}
+            title={hero?.title || "세탁 전후 사례"}
+            description={hero?.description || "Before/After 이미지는 실제 제품 상태와 오염도에 따라 결과가 달라질 수 있습니다."}
+          />
         </Container>
       </section>
       <section className="bg-background-light py-10 sm:py-14 lg:py-16">
@@ -28,7 +33,7 @@ export default async function CasesPage() {
           <CaseFilter cases={cases} />
         </Container>
       </section>
-      <FinalCtaSection />
+      {page?.finalCta?.isVisible === false ? null : <FinalCtaSection finalCta={page?.finalCta} />}
     </>
   );
 }

@@ -15,16 +15,24 @@ import {
 import { fetchSanity } from "@/lib/sanity/client";
 import type {
   Branch,
+  CasesPage,
   CleaningCase,
+  FaqPage,
   FaqItem,
+  FranchisePage,
   HomeData,
   HomePage,
   NavigationItem,
+  PartnershipPage,
+  PricingPage,
   PricingItem,
+  ProcessPage,
   ProcessStep,
   Service,
+  ServicesPage,
   SiteSettings,
   Testimonial,
+  WhyForbebePage,
 } from "@/types";
 
 const imageFields = `{
@@ -38,6 +46,20 @@ const homeCardFields = `{
   description,
   icon,
   image ${imageFields}
+}`;
+
+const pageFields = `{
+  ...,
+  hero {
+    eyebrow,
+    title,
+    description,
+    image ${imageFields}
+  },
+  priceImage ${imageFields},
+  strengths[] ${homeCardFields},
+  benefits[] ${homeCardFields},
+  partnershipTypes[] ${homeCardFields}
 }`;
 
 const homePageFields = `{
@@ -176,6 +198,14 @@ export const settingsQuery = groq`{
   "homeFooter": *[_type == "homePage"][0].footer
 }`;
 export const homePageQuery = groq`*[_type == "homePage"][0] ${homePageFields}`;
+export const servicesPageQuery = groq`*[_type == "servicesPage"][0] ${pageFields}`;
+export const processPageQuery = groq`*[_type == "processPage"][0] ${pageFields}`;
+export const pricingPageQuery = groq`*[_type == "pricingPage"][0] ${pageFields}`;
+export const casesPageQuery = groq`*[_type == "casesPage"][0] ${pageFields}`;
+export const faqPageQuery = groq`*[_type == "faqPage"][0] ${pageFields}`;
+export const whyForbebePageQuery = groq`*[_type == "whyForbebePage"][0] ${pageFields}`;
+export const franchisePageQuery = groq`*[_type == "franchisePage"][0] ${pageFields}`;
+export const partnershipPageQuery = groq`*[_type == "partnershipPage"][0] ${pageFields}`;
 
 function withFallback<T>(data: T[] | null | undefined, fallback: T[]) {
   return data && data.length > 0 ? data : fallback;
@@ -206,6 +236,38 @@ export async function getHomeData(): Promise<HomeData> {
 
 export async function getHomePage() {
   return fetchSanity<HomePage>(homePageQuery);
+}
+
+export async function getServicesPage() {
+  return fetchSanity<ServicesPage>(servicesPageQuery);
+}
+
+export async function getProcessPage() {
+  return fetchSanity<ProcessPage>(processPageQuery);
+}
+
+export async function getPricingPage() {
+  return fetchSanity<PricingPage>(pricingPageQuery);
+}
+
+export async function getCasesPage() {
+  return fetchSanity<CasesPage>(casesPageQuery);
+}
+
+export async function getFaqPage() {
+  return fetchSanity<FaqPage>(faqPageQuery);
+}
+
+export async function getWhyForbebePage() {
+  return fetchSanity<WhyForbebePage>(whyForbebePageQuery);
+}
+
+export async function getFranchisePage() {
+  return fetchSanity<FranchisePage>(franchisePageQuery);
+}
+
+export async function getPartnershipPage() {
+  return fetchSanity<PartnershipPage>(partnershipPageQuery);
 }
 
 export async function getServices() {
