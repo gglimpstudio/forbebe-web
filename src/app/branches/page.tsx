@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 export default async function BranchesPage() {
   const branches = await getBranches();
   const primaryBranchPhone = branches.find((branch) => branch.region === "본사")?.phone || branches[0]?.phone;
-  const regionCount = new Set(branches.map((branch) => branch.region).filter(Boolean)).size;
 
   return (
     <>
@@ -50,10 +49,9 @@ export default async function BranchesPage() {
                   <MapPin className="h-5 w-5" aria-hidden />
                 </span>
               </div>
-              <div className="mt-5 grid grid-cols-2 gap-3">
+              <div className="mt-5 grid gap-3">
                 <SummaryMetric value={`${branches.length}개`} label="지점" />
-                <SummaryMetric value={`${regionCount}개`} label="권역" />
-                <div className="col-span-2 rounded-2xl border border-border-soft bg-background-light px-4 py-4">
+                <div className="rounded-2xl border border-border-soft bg-background-light px-4 py-4">
                   <div className="flex items-center gap-2 text-sm font-semibold text-green-dark">
                     <Phone className="h-4 w-4 text-brand-primary" aria-hidden />
                     전화·네이버 예약 가능
