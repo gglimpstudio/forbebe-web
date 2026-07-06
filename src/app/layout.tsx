@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
     icons: {
       icon: faviconUrl || "/favicon.ico",
       shortcut: faviconUrl || "/favicon.ico",
-      apple: faviconUrl || "/favicon.ico",
+      apple: "/apple-touch-icon.png",
     },
     description,
     openGraph: {
