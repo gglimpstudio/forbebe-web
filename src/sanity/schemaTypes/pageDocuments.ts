@@ -111,6 +111,37 @@ export const pricingPage = defineType({
   preview: singletonPreview("가격 안내 페이지"),
 });
 
+export const branchesPage = defineType({
+  name: "branchesPage",
+  title: "지점 안내 페이지",
+  type: "document",
+  fields: [
+    pageHeroField,
+    defineField({
+      name: "summary",
+      title: "상단 요약 카드",
+      type: "object",
+      fields: [
+        defineField({ name: "label", title: "라벨", type: "string" }),
+        defineField({ name: "title", title: "제목", type: "string" }),
+        defineField({ name: "description", title: "설명", type: "text", rows: 2 }),
+      ],
+    }),
+    defineField({
+      name: "finder",
+      title: "지점 찾기 영역",
+      type: "object",
+      fields: [
+        defineField({ name: "eyebrow", title: "상단 라벨", type: "string" }),
+        defineField({ name: "title", title: "제목", type: "string" }),
+        defineField({ name: "description", title: "설명", type: "text", rows: 2 }),
+      ],
+    }),
+    finalCtaField,
+  ],
+  preview: singletonPreview("지점 안내 페이지"),
+});
+
 export const casesPage = defineType({
   name: "casesPage",
   title: "세탁 사례 페이지",

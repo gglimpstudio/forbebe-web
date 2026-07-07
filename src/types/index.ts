@@ -187,6 +187,21 @@ export type PricingPage = {
   note?: string;
 };
 
+export type BranchesPage = {
+  hero?: PageHero;
+  summary?: {
+    label?: string;
+    title?: string;
+    description?: string;
+  };
+  finder?: {
+    eyebrow?: string;
+    title?: string;
+    description?: string;
+  };
+  finalCta?: PageCta;
+};
+
 export type CasesPage = {
   hero?: PageHero;
   finalCta?: PageCta;

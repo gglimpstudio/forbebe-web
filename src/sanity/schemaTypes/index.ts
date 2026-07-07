@@ -6,6 +6,7 @@ import { homePage } from "./homePage";
 import { legalPage } from "./legalPage";
 import { navigation } from "./navigation";
 import {
+  branchesPage,
   casesPage,
   faqPage,
   franchisePage,
@@ -31,6 +32,7 @@ export const schemaTypes = [
   servicesPage,
   processPage,
   pricingPage,
+  branchesPage,
   casesPage,
   faqPage,
   whyForbebePage,

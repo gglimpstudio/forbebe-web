@@ -241,24 +241,29 @@ const pageDocuments = [
     note: "옵션을 잘 모르실 경우, 지점에 문의 주세요.",
   },
   {
-    _id: "casesPage",
-    _type: "casesPage",
+    _id: "branchesPage",
+    _type: "branchesPage",
     hero: {
-      eyebrow: "Cases",
-      title: "세탁 전후 사례",
-      description: "Before/After 이미지는 실제 제품 상태와 오염도에 따라 결과가 달라질 수 있습니다.",
+      eyebrow: "FORBEBE BRANCH",
+      title: "가까운 포베베 지점을 확인하세요",
+      description: "카시트와 유모차 세탁이 필요한 지역을 선택하면 가까운 포베베 지점의 연락처와 예약 정보를 바로 확인할 수 있습니다.",
     },
-    finalCta,
-  },
-  {
-    _id: "faqPage",
-    _type: "faqPage",
-    hero: {
-      eyebrow: "FAQ",
-      title: "자주 묻는 질문",
-      description: "예약 전 궁금한 내용을 확인하세요. 제품 상태가 다르면 가까운 지점 상담을 권장합니다.",
+    summary: {
+      label: "BRANCH SUMMARY",
+      title: "지역별 지점 안내",
+      description: "지역을 선택하면 지점별 전화와 예약 버튼이 표시됩니다.",
     },
-    finalCta,
+    finder: {
+      eyebrow: "BRANCH FINDER",
+      title: "지역별 지점을 빠르게 찾아보세요",
+      description: "원하는 지역을 선택하면 해당 권역의 지점 연락처와 문의 버튼이 바로 표시됩니다.",
+    },
+    finalCta: {
+      isVisible: true,
+      title: "가까운 지점에서 세탁 상담을 받아보세요",
+      description: "카시트와 유모차의 상태, 오염 정도, 소재에 맞춰 가까운 포베베 지점에서 상담을 도와드립니다.",
+      primaryCtaLabel: "대표번호로 문의하기",
+    },
   },
   {
     _id: "whyForbebePage",

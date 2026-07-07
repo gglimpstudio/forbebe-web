@@ -15,6 +15,7 @@ import {
 import { fetchSanity } from "@/lib/sanity/client";
 import type {
   Branch,
+  BranchesPage,
   CasesPage,
   CleaningCase,
   FaqPage,
@@ -186,6 +187,7 @@ export const homeQuery = groq`{
 }`;
 
 export const servicesQuery = groq`*[_type == "service"] | order(order asc){..., "slug": slug.current, image ${imageFields}}`;
+export const navigationQuery = groq`*[_type == "navigation"] | order(order asc)`;
 export const processStepsQuery = groq`*[_type == "processStep"] | order(order asc){..., image ${imageFields}}`;
 export const pricingItemsQuery = groq`*[_type == "pricingItem"] | order(order asc)`;
 export const branchesQuery = groq`*[_type == "branch" && isActive != false] | order(order asc)`;
@@ -201,6 +203,7 @@ export const homePageQuery = groq`*[_type == "homePage"][0] ${homePageFields}`;
 export const servicesPageQuery = groq`*[_type == "servicesPage"][0] ${pageFields}`;
 export const processPageQuery = groq`*[_type == "processPage"][0] ${pageFields}`;
 export const pricingPageQuery = groq`*[_type == "pricingPage"][0] ${pageFields}`;
+export const branchesPageQuery = groq`*[_type == "branchesPage"][0] ${pageFields}`;
 export const casesPageQuery = groq`*[_type == "casesPage"][0] ${pageFields}`;
 export const faqPageQuery = groq`*[_type == "faqPage"][0] ${pageFields}`;
 export const whyForbebePageQuery = groq`*[_type == "whyForbebePage"][0] ${pageFields}`;
@@ -250,6 +253,10 @@ export async function getPricingPage() {
   return fetchSanity<PricingPage>(pricingPageQuery);
 }
 
+export async function getBranchesPage() {
+  return fetchSanity<BranchesPage>(branchesPageQuery);
+}
+
 export async function getCasesPage() {
   return fetchSanity<CasesPage>(casesPageQuery);
 }
@@ -268,6 +275,10 @@ export async function getFranchisePage() {
 
 export async function getPartnershipPage() {
   return fetchSanity<PartnershipPage>(partnershipPageQuery);
+}
+
+export async function getNavigation() {
+  return withFallback<NavigationItem>(await fetchSanity<NavigationItem[]>(navigationQuery), defaultNavigation);
 }
 
 export async function getServices() {

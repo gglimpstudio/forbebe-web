@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { KoreaMap } from "@/components/ui/KoreaMap";
 import { cn } from "@/lib/utils";
-import type { Branch } from "@/types";
+import type { Branch, BranchesPage } from "@/types";
 
 const preferredRegionOrder = ["본사", "충남", "인천", "경기도 북부", "경기도 남부"];
 
@@ -19,7 +19,7 @@ const regionCardMeta: Record<string, { countLabel: string; description: string }
   "경기도 남부": { countLabel: "1개", description: "수지·광교 인근 상담이 가능합니다." },
 };
 
-export function BranchLocationExperience({ branches }: { branches: Branch[] }) {
+export function BranchLocationExperience({ branches, finder }: { branches: Branch[]; finder?: BranchesPage["finder"] }) {
   const [filter, setFilter] = useState("전체");
 
   const regionOrder = useMemo(() => getRegionOrder(branches), [branches]);
@@ -37,12 +37,12 @@ export function BranchLocationExperience({ branches }: { branches: Branch[] }) {
     <section id="branch-finder" className="bg-[#fffaf0] py-12 sm:py-16 lg:py-20" aria-labelledby="branch-finder-title">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 xl:px-10">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-primary">BRANCH FINDER</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-primary">{finder?.eyebrow || "BRANCH FINDER"}</p>
           <h2 id="branch-finder-title" className="cms-lines fluid-panel-title mt-3 font-semibold leading-tight text-green-dark">
-            지역별 지점을 빠르게 찾아보세요
+            {finder?.title || "지역별 지점을 빠르게 찾아보세요"}
           </h2>
           <p className="mt-4 text-base leading-7 text-text-sub">
-            원하는 지역을 선택하면 해당 권역의 지점 연락처와 문의 버튼이 바로 표시됩니다.
+            {finder?.description || "원하는 지역을 선택하면 해당 권역의 지점 연락처와 문의 버튼이 바로 표시됩니다."}
           </p>
         </div>
 

@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 
 import { SiteChrome } from "@/components/layout/SiteChrome";
-import { defaultNavigation } from "@/lib/constants";
 import { urlForImage } from "@/lib/sanity/image";
-import { getBranches, getHomePage, getSiteSettings } from "@/lib/sanity/queries";
+import { getBranches, getHomePage, getNavigation, getSiteSettings } from "@/lib/sanity/queries";
 import { getSiteUrl } from "@/lib/utils";
 import "./globals.css";
 
@@ -54,12 +53,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [settings, branches, homePage] = await Promise.all([getSiteSettings(), getBranches(), getHomePage()]);
+  const [settings, branches, homePage, navigation] = await Promise.all([getSiteSettings(), getBranches(), getHomePage(), getNavigation()]);
 
   return (
     <html lang="ko" className="h-full">
       <body className="flex min-h-full flex-col bg-background-main text-text-main antialiased">
-        <SiteChrome navigation={defaultNavigation} settings={settings} branches={branches} floatingCta={homePage?.floatingCta}>
+        <SiteChrome navigation={navigation} settings={settings} branches={branches} floatingCta={homePage?.floatingCta}>
           {children}
         </SiteChrome>
       </body>
