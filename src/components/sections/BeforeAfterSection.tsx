@@ -131,12 +131,12 @@ export function BeforeAfterSection({ beforeAfter }: { beforeAfter?: BeforeAfterS
               className="before-after-reveal rounded-[22px] border border-border-soft bg-background-light p-2.5 shadow-[0_14px_38px_rgba(18,58,50,0.055)] sm:rounded-[26px] sm:p-3 lg:rounded-[30px] lg:p-4"
               style={{ animationDelay: `${100 + index * 90}ms` }}
             >
-              <h3 className="px-1 pt-1 text-xl font-medium leading-tight text-green-dark lg:text-2xl">{item.title}</h3>
+              <h3 className="cms-lines px-1 pt-1 text-xl font-medium leading-tight text-green-dark lg:text-2xl">{item.title}</h3>
               <div className="mt-3 grid grid-cols-2 gap-1 rounded-[22px] sm:gap-2">
                 <ComparisonImage src={item.beforeImage} alt={item.beforeAlt} label="Before" objectPosition={item.objectPosition} />
                 <ComparisonImage src={item.afterImage} alt={item.afterAlt} label="After" objectPosition={item.objectPosition} />
               </div>
-              <p className="mt-3 overflow-hidden px-1 pb-1 text-sm leading-6 text-text-sub [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
+              <p className="cms-lines mt-3 overflow-hidden px-1 pb-1 text-sm leading-6 text-text-sub [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
                 {item.description}
               </p>
             </article>

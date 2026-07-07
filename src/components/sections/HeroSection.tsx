@@ -38,7 +38,7 @@ export function HeroSection({ hero }: { hero: Hero }) {
           <h1 className="cms-lines-mobile-wrap text-[42px] font-semibold leading-[1.08] text-green-dark sm:text-[clamp(2.05rem,1.35rem+2.8vw,3.85rem)] sm:leading-[1.12]">
             {hero.title}
           </h1>
-          {hero.highlightText ? <p className="mt-4 text-base font-semibold text-brand-primary sm:mt-4 sm:text-xl">{hero.highlightText}</p> : null}
+          {hero.highlightText ? <p className="cms-lines mt-4 text-base font-semibold text-brand-primary sm:mt-4 sm:text-xl">{hero.highlightText}</p> : null}
           <p className="cms-lines-mobile-wrap fluid-body-lg mt-5 font-medium leading-7 text-hero-body sm:mt-7 sm:leading-9">
             {hero.description}
           </p>

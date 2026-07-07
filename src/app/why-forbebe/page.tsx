@@ -50,8 +50,8 @@ export default async function WhyForbebePage() {
                   <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-background-soft text-brand-primary sm:mb-4 sm:h-12 sm:w-12 sm:rounded-2xl">
                     <Icon className="h-6 w-6" aria-hidden />
                   </div>
-                  <h2 className="text-xl font-medium text-brand-primary">{title}</h2>
-                  <p className="mt-3 text-sm leading-7 text-text-sub">{description}</p>
+                  <h2 className="cms-lines text-xl font-medium text-brand-primary">{title}</h2>
+                  <p className="cms-lines mt-3 text-sm leading-7 text-text-sub">{description}</p>
                 </Card>
               );
             })}
@@ -62,8 +62,8 @@ export default async function WhyForbebePage() {
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-background-light text-brand-primary sm:mb-4 sm:h-12 sm:w-12 sm:rounded-2xl">
                   <MapPinned className="h-6 w-6" aria-hidden />
                 </div>
-                <h2 className="text-xl font-medium text-brand-primary sm:text-2xl">{branchCta?.title || "가까운 지점에서 제품 상태를 상담하세요."}</h2>
-                <p className="mt-3 text-sm leading-7 text-text-sub">
+                <h2 className="cms-lines text-xl font-medium text-brand-primary sm:text-2xl">{branchCta?.title || "가까운 지점에서 제품 상태를 상담하세요."}</h2>
+                <p className="cms-lines mt-3 text-sm leading-7 text-text-sub">
                   {branchCta?.description || "실제 세탁 범위와 비용은 제품 모델, 오염도, 소재 상태에 따라 달라질 수 있습니다. 가까운 지점에서 사진과 함께 상담하면 더 정확합니다."}
                 </p>
               </div>

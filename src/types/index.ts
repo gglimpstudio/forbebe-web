@@ -72,8 +72,6 @@ export type NecessitySection = {
   signalsLabel?: string;
   signalsTitle?: string;
   signals?: string[];
-  ctaLabel?: string;
-  ctaHref?: string;
   isVisible?: boolean;
 };
 
@@ -85,8 +83,6 @@ export type SloganItem = {
 export type SloganSection = {
   sectionLabel?: string;
   slogans?: SloganItem[];
-  displayType?: "fade" | "slide" | "static";
-  backgroundImage?: SanityImage;
   isVisible?: boolean;
 };
 
@@ -102,8 +98,6 @@ export type BeforeAfterSection = {
   title?: string;
   description?: string;
   items?: BeforeAfterItem[];
-  ctaLabel?: string;
-  ctaHref?: string;
   isVisible?: boolean;
 };
 
@@ -133,10 +127,7 @@ export type FinalCtaSection = {
   primaryCtaHref?: string;
   secondaryCtaLabel?: string;
   secondaryCtaHref?: string;
-  tertiaryCtaLabel?: string;
-  tertiaryCtaHref?: string;
   note?: string;
-  backgroundImage?: SanityImage;
   isVisible?: boolean;
 };
 
@@ -177,6 +168,7 @@ export type ServicesPage = {
 
 export type ProcessPage = {
   hero?: PageHero;
+  coreCareItems?: ContentCard[];
   noticeCards?: InfoCard[];
   finalCta?: PageCta;
 };
@@ -267,7 +259,6 @@ export type FooterData = {
   brandName?: string;
   description?: string;
   businessInfo?: FooterBusinessInfo;
-  links?: Cta[];
   copyright?: string;
 };
 

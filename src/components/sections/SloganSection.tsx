@@ -1,8 +1,5 @@
 import { Container } from "@/components/ui/Container";
-import { urlForImage } from "@/lib/sanity/image";
 import type { SloganItem, SloganSection as SloganSectionData } from "@/types";
-
-const SLOGAN_BACKGROUND_IMAGE = "";
 
 const sloganItems: SloganItem[] = [
   {
@@ -18,7 +15,6 @@ const sloganItems: SloganItem[] = [
 export function SloganSection({ slogan }: { slogan?: SloganSectionData }) {
   const cmsItems = slogan?.slogans?.filter((item) => item.text || item.subText);
   const items = cmsItems?.length ? cmsItems : sloganItems;
-  const backgroundImage = urlForImage(slogan?.backgroundImage)?.width(1600).height(1000).fit("crop").url() || SLOGAN_BACKGROUND_IMAGE;
 
   return (
     <section
@@ -26,13 +22,6 @@ export function SloganSection({ slogan }: { slogan?: SloganSectionData }) {
       className="slogan-section-reveal relative overflow-hidden bg-green-dark py-14 sm:py-20 lg:py-28"
       aria-labelledby="slogan-title"
     >
-      {backgroundImage ? (
-        <div
-          className="absolute inset-y-0 right-0 hidden w-1/2 bg-cover bg-center opacity-18 lg:block"
-          style={{ backgroundImage: `url('${backgroundImage}')` }}
-          aria-hidden
-        />
-      ) : null}
       <div className="absolute inset-x-0 top-0 h-px bg-brand-secondary" aria-hidden />
       <div className="absolute inset-x-0 bottom-0 h-px bg-brand-secondary" aria-hidden />
 

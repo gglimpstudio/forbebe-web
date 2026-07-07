@@ -48,14 +48,14 @@ export default async function PartnershipPage() {
                     <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-background-soft text-brand-primary">
                       <Icon className="h-5 w-5" aria-hidden />
                     </div>
-                    <h2 className="text-lg font-medium text-brand-primary">{title}</h2>
-                    <p className="mt-2 text-sm leading-7 text-text-sub">{description}</p>
+                    <h2 className="cms-lines text-lg font-medium text-brand-primary">{title}</h2>
+                    <p className="cms-lines mt-2 text-sm leading-7 text-text-sub">{description}</p>
                   </Card>
                 );
               })}
             </div>
             <Card>
-              <h2 className="mb-5 text-2xl font-medium text-brand-primary">{page?.formTitle || "제휴문의 폼"}</h2>
+              <h2 className="cms-lines mb-5 text-2xl font-medium text-brand-primary">{page?.formTitle || "제휴문의 폼"}</h2>
               <ContactForm type="partnership" />
             </Card>
           </div>

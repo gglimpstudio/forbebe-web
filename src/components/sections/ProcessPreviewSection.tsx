@@ -71,8 +71,8 @@ export function ProcessPreviewSection({ processSummary }: { processSummary?: Pro
                   {item.step}
                 </span>
                 <div className="min-w-0 xl:mt-5">
-                  <h3 className="text-base font-medium leading-snug text-text-main [overflow-wrap:anywhere] sm:text-xl xl:text-[1.2rem]">{item.title}</h3>
-                  <p className="mt-1.5 text-sm leading-6 text-text-sub [word-break:keep-all] sm:mt-2.5 xl:leading-[1.7]">{item.description}</p>
+                  <h3 className="cms-lines text-base font-medium leading-snug text-text-main [overflow-wrap:anywhere] sm:text-xl xl:text-[1.2rem]">{item.title}</h3>
+                  <p className="cms-lines mt-1.5 text-sm leading-6 text-text-sub [word-break:keep-all] sm:mt-2.5 xl:leading-[1.7]">{item.description}</p>
                 </div>
               </div>
             </article>

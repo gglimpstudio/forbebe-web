@@ -57,6 +57,7 @@ const pageFields = `{
     description,
     image ${imageFields}
   },
+  coreCareItems[] ${homeCardFields},
   priceImage ${imageFields},
   strengths[] ${homeCardFields},
   benefits[] ${homeCardFields},
@@ -92,8 +93,6 @@ const homePageFields = `{
     signalsLabel,
     signalsTitle,
     signals,
-    ctaLabel,
-    ctaHref,
     isVisible
   },
   slogan {
@@ -102,8 +101,6 @@ const homePageFields = `{
       text,
       subText
     },
-    displayType,
-    backgroundImage ${imageFields},
     isVisible
   },
   beforeAfter {
@@ -116,8 +113,6 @@ const homePageFields = `{
       title,
       description
     },
-    ctaLabel,
-    ctaHref,
     isVisible
   },
   processSummary {
@@ -143,10 +138,7 @@ const homePageFields = `{
     primaryCtaHref,
     secondaryCtaLabel,
     secondaryCtaHref,
-    tertiaryCtaLabel,
-    tertiaryCtaHref,
     note,
-    backgroundImage ${imageFields},
     isVisible
   },
   floatingCta {
@@ -163,10 +155,6 @@ const homePageFields = `{
     brandName,
     description,
     businessInfo,
-    links[] {
-      label,
-      href
-    },
     copyright
   }
 }`;

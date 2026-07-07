@@ -52,8 +52,8 @@ export default async function FranchisePage() {
                           <Icon className="h-5 w-5" aria-hidden />
                         </div>
                         <div>
-                          <h2 className="text-lg font-medium text-brand-primary">{title}</h2>
-                          <p className="mt-2 text-sm leading-7 text-text-sub">{description}</p>
+                          <h2 className="cms-lines text-lg font-medium text-brand-primary">{title}</h2>
+                          <p className="cms-lines mt-2 text-sm leading-7 text-text-sub">{description}</p>
                         </div>
                       </div>
                     </Card>
@@ -62,13 +62,13 @@ export default async function FranchisePage() {
               </div>
               <Card className="mt-4 bg-background-main">
                 <Handshake className="mb-3 h-6 w-6 text-brand-primary" aria-hidden />
-                <p className="text-sm leading-7 text-text-sub">
+                <p className="cms-lines text-sm leading-7 text-text-sub">
                   {notice?.description || "상담 신청 후 담당자가 지역, 운영 형태, 준비 상황을 확인해 순차적으로 연락드립니다."}
                 </p>
               </Card>
             </div>
             <Card>
-              <h2 className="mb-5 text-2xl font-medium text-brand-primary">{page?.formTitle || "창업문의 폼"}</h2>
+              <h2 className="cms-lines mb-5 text-2xl font-medium text-brand-primary">{page?.formTitle || "창업문의 폼"}</h2>
               <ContactForm type="franchise" />
             </Card>
           </div>

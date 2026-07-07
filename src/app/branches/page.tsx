@@ -46,7 +46,7 @@ export default async function BranchesPage() {
               <div className="flex items-center justify-between gap-4 border-b border-border-soft pb-4">
                 <div>
                   <p className="text-xs font-semibold tracking-[0.22em] text-brand-primary">{summary?.label || "BRANCH SUMMARY"}</p>
-                  <h2 className="mt-2 text-2xl font-semibold text-green-dark">{summary?.title || "지역별 지점 안내"}</h2>
+                  <h2 className="cms-lines mt-2 text-2xl font-semibold text-green-dark">{summary?.title || "지역별 지점 안내"}</h2>
                 </div>
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-background-soft text-brand-primary">
                   <MapPin className="h-5 w-5" aria-hidden />
@@ -59,7 +59,7 @@ export default async function BranchesPage() {
                     <Phone className="h-4 w-4 text-brand-primary" aria-hidden />
                     전화·네이버 예약 가능
                   </div>
-                  <p className="mt-2 text-sm leading-6 text-text-sub">{summary?.description || "지역을 선택하면 지점별 전화와 예약 버튼이 표시됩니다."}</p>
+                  <p className="cms-lines mt-2 text-sm leading-6 text-text-sub">{summary?.description || "지역을 선택하면 지점별 전화와 예약 버튼이 표시됩니다."}</p>
                 </div>
               </div>
               <Button href="#branch-finder" className="mt-5 w-full gap-2">

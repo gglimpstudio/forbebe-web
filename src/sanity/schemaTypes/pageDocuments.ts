@@ -93,6 +93,14 @@ export const processPage = defineType({
   type: "document",
   fields: [
     pageHeroField,
+    defineField({
+      name: "coreCareItems",
+      title: "한눈에 보는 세탁 과정 카드",
+      description: "세탁 과정 페이지 상단의 4개 대표 과정 카드입니다. 이미지를 넣으면 사이트에 사진으로 표시됩니다.",
+      type: "array",
+      of: [cardMember],
+      validation: (Rule) => Rule.max(4).warning("권장 개수는 4개입니다."),
+    }),
     defineField({ name: "noticeCards", title: "하단 안내 카드", type: "array", of: [infoCardMember] }),
     finalCtaField,
   ],

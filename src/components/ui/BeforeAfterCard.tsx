@@ -21,8 +21,8 @@ export function BeforeAfterCard({ item }: { item: CleaningCase }) {
           {item.itemType ? <Badge>{item.itemType}</Badge> : null}
           {item.problemType ? <Badge className="bg-background-main text-text-sub">{item.problemType}</Badge> : null}
         </div>
-        <h3 className="text-lg font-medium text-brand-primary">{item.title}</h3>
-        <p className="mt-2 text-sm leading-6 text-text-sub">{item.description}</p>
+        <h3 className="cms-lines text-lg font-medium text-brand-primary">{item.title}</h3>
+        <p className="cms-lines mt-2 text-sm leading-6 text-text-sub">{item.description}</p>
       </div>
     </Card>
   );

@@ -103,8 +103,8 @@ export function CleaningNeedSection({ necessity }: { necessity?: NecessitySectio
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-soft text-brand-primary">
                   <Icon className="h-4.5 w-4.5" aria-hidden />
                 </div>
-                <h3 className="mt-3.5 text-lg font-medium leading-snug text-green-dark">{item.title}</h3>
-                <p className="mt-2 line-clamp-2 text-sm leading-6 text-text-sub">{compactCardDescription(item.description)}</p>
+                <h3 className="cms-lines mt-3.5 text-lg font-medium leading-snug text-green-dark">{item.title}</h3>
+                <p className="cms-lines mt-2 line-clamp-2 text-sm leading-6 text-text-sub">{compactCardDescription(item.description)}</p>
               </article>
             );
           })}

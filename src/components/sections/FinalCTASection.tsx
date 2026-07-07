@@ -2,10 +2,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { urlForImage } from "@/lib/sanity/image";
 import type { FinalCtaSection as FinalCtaSectionData, PageCta } from "@/types";
-
-const FINAL_CTA_BACKGROUND_IMAGE = "";
 
 export function FinalCtaSection({ finalCta }: { finalCta?: PageCta } = {}) {
   const title = finalCta?.title || "아이에게 닿는 용품, 이제 전문 세탁으로 관리하세요.";
@@ -20,7 +17,7 @@ export function FinalCtaSection({ finalCta }: { finalCta?: PageCta } = {}) {
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="cms-lines fluid-panel-title font-semibold leading-tight">{title}</h2>
-          <p className="mt-4 text-base leading-7 text-brand-secondary">{description}</p>
+          <p className="cms-lines mt-4 text-base leading-7 text-brand-secondary">{description}</p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             {primaryCtaHref ? (
               <Button href={primaryCtaHref} variant="secondary" size="lg" className="!bg-[#DFD9B3] !text-[#123F35] hover:!bg-[#F3EFE2]">
@@ -28,7 +25,7 @@ export function FinalCtaSection({ finalCta }: { finalCta?: PageCta } = {}) {
               </Button>
             ) : null}
             {secondaryCtaHref ? (
-              <Button href={secondaryCtaHref} variant="outline" size="lg" className="!border-[rgba(223,217,179,0.55)] !text-[#DFD9B3] hover:bg-text-inverse/10">
+              <Button href={secondaryCtaHref} size="lg" className="!border !border-[rgba(223,217,179,0.42)] !bg-[#2A6B5B] !text-[#F3EFE2] shadow-[0_12px_28px_rgba(8,43,37,0.22)] hover:!bg-[#347866]">
                 {secondaryCtaLabel}
               </Button>
             ) : null}
@@ -40,7 +37,6 @@ export function FinalCtaSection({ finalCta }: { finalCta?: PageCta } = {}) {
 }
 
 export function FinalCTASection({ finalCta }: { finalCta?: FinalCtaSectionData }) {
-  const backgroundImage = urlForImage(finalCta?.backgroundImage)?.width(1600).height(1000).fit("crop").url() || FINAL_CTA_BACKGROUND_IMAGE;
   const label = finalCta?.label || "CONTACT FORBEBE";
   const title = finalCta?.title || "카시트와 유모차 케어,\n가까운 포베베에서 시작하세요.";
   const description = finalCta?.description || "제품 상태가 궁금하다면 가까운 지점에서\n가격 안내와 상담을 먼저 확인해보세요.";
@@ -56,13 +52,6 @@ export function FinalCTASection({ finalCta }: { finalCta?: FinalCtaSectionData }
       className="final-cta-reveal relative overflow-hidden bg-[#0B3029] py-12 sm:py-16 lg:py-24"
       aria-labelledby="final-cta-title"
     >
-      {backgroundImage ? (
-        <div
-          className="absolute inset-y-0 right-0 hidden w-1/2 bg-cover bg-center opacity-16 lg:block"
-          style={{ backgroundImage: `url('${backgroundImage}')` }}
-          aria-hidden
-        />
-      ) : null}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#1E584A_0%,#123F35_45%,#0B3029_100%)]" aria-hidden />
 
       <Container className="relative">
@@ -82,13 +71,13 @@ export function FinalCTASection({ finalCta }: { finalCta?: FinalCtaSectionData }
               </Button>
             ) : null}
             {secondaryCtaHref ? (
-              <Button href={secondaryCtaHref} variant="outline" size="lg" className="min-h-[48px] w-full !border-[rgba(223,217,179,0.55)] px-5 text-sm !text-[#DFD9B3] hover:bg-text-inverse/10 sm:min-h-[52px] sm:w-auto sm:px-8 sm:text-base">
+              <Button href={secondaryCtaHref} size="lg" className="min-h-[48px] w-full !border !border-[rgba(223,217,179,0.42)] !bg-[#2A6B5B] px-5 text-sm !text-[#F3EFE2] shadow-[0_12px_28px_rgba(8,43,37,0.22)] hover:!bg-[#347866] sm:min-h-[52px] sm:w-auto sm:px-8 sm:text-base">
                 {secondaryCtaLabel}
               </Button>
             ) : null}
           </div>
 
-          <p className="mt-4 text-sm leading-6 text-text-inverse/70">{note}</p>
+          <p className="cms-lines mt-4 text-sm leading-6 text-text-inverse/70">{note}</p>
         </div>
       </Container>
     </section>

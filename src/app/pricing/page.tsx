@@ -44,7 +44,7 @@ export default async function PricingPage() {
               />
             )}
           </div>
-          <p className="mx-auto max-w-2xl whitespace-normal rounded-[16px] border border-brand-primary/15 bg-background-main px-4 py-4 text-center text-sm font-semibold leading-7 text-brand-primary shadow-[0_12px_32px_rgba(27,89,74,0.08)] [overflow-wrap:anywhere] [word-break:normal] sm:rounded-[20px] sm:px-8 sm:py-5 sm:text-lg">
+          <p className="cms-lines mx-auto max-w-2xl rounded-[16px] border border-brand-primary/15 bg-background-main px-4 py-4 text-center text-sm font-semibold leading-7 text-brand-primary shadow-[0_12px_32px_rgba(27,89,74,0.08)] sm:rounded-[20px] sm:px-8 sm:py-5 sm:text-lg">
             {page?.note || "옵션을 잘 모르실 경우, 지점에 문의 주세요."}
           </p>
         </Container>

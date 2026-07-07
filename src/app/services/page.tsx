@@ -40,8 +40,8 @@ export default async function ServicesPage() {
                 <SanityImage image={service.image} alt={service.title} className="aspect-[4/3]" sizes="(min-width: 1024px) 35vw, 100vw" />
                 <div>
                   <Badge>{service.title}</Badge>
-                  <h2 className="mt-3 text-xl font-medium text-brand-primary sm:text-2xl">{service.title}</h2>
-                  <p className="mt-3 text-sm leading-7 text-text-sub">{service.description}</p>
+                  <h2 className="cms-lines mt-3 text-xl font-medium text-brand-primary sm:text-2xl">{service.title}</h2>
+                  <p className="cms-lines mt-3 text-sm leading-7 text-text-sub">{service.description}</p>
                   <div className="mt-5">
                     <p className="text-sm font-medium text-brand-primary">추천 관리 포인트</p>
                     <ul className="mt-2 space-y-2 text-sm text-text-sub">
@@ -50,14 +50,14 @@ export default async function ServicesPage() {
                       ))}
                     </ul>
                   </div>
-                  {service.cautions?.length ? <p className="mt-4 text-xs leading-5 text-text-sub">{service.cautions.join(" ")}</p> : null}
+                  {service.cautions?.length ? <p className="cms-lines mt-4 text-xs leading-5 text-text-sub">{service.cautions.join("\n")}</p> : null}
                 </div>
               </Card>
             ))}
           </div>
           <div className="mt-8 rounded-[18px] bg-background-main p-4 sm:mt-10 sm:rounded-[22px] sm:p-6">
-            <h2 className="text-xl font-medium text-brand-primary">{reservationNote?.title || "예약 전 확인사항"}</h2>
-            <p className="mt-3 text-sm leading-7 text-text-sub">
+            <h2 className="cms-lines text-xl font-medium text-brand-primary">{reservationNote?.title || "예약 전 확인사항"}</h2>
+            <p className="cms-lines mt-3 text-sm leading-7 text-text-sub">
               {reservationNote?.description || "브랜드와 모델명, 오염 부위 사진을 함께 보내주시면 세탁 가능 여부와 예상 금액을 더 정확하게 안내할 수 있습니다."}
             </p>
             <Button href={reservationNote?.ctaHref || "/branches"} className="mt-5">{reservationNote?.ctaLabel || "가까운 지점 확인"}</Button>

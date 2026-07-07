@@ -30,8 +30,8 @@ function IntroCard({ item }: { item: HomeCard }) {
           <Icon className="h-5 w-5" aria-hidden />
         </div>
       )}
-      <h3 className="text-lg font-medium text-green-dark sm:text-xl">{item.title}</h3>
-      {item.description ? <p className="mt-3 whitespace-pre-line text-sm leading-7 text-text-sub sm:whitespace-normal">{item.description}</p> : null}
+      <h3 className="cms-lines text-lg font-medium text-green-dark sm:text-xl">{item.title}</h3>
+      {item.description ? <p className="cms-lines mt-3 text-sm leading-7 text-text-sub">{item.description}</p> : null}
     </article>
   );
 }

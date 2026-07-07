@@ -208,7 +208,7 @@ function BranchContactCard({ branch }: { branch: Branch }) {
         <Badge>{branch.region}</Badge>
       </div>
       <h4 className="mt-3 text-xl font-semibold leading-tight text-green-dark">{branch.name}</h4>
-      {branch.description || branch.serviceArea ? <p className="mt-2 text-sm leading-6 text-text-sub">{branch.description || branch.serviceArea}</p> : null}
+      {branch.description || branch.serviceArea ? <p className="cms-lines mt-2 text-sm leading-6 text-text-sub">{branch.description || branch.serviceArea}</p> : null}
       {branch.address ? (
         <p className="mt-3 flex gap-2 text-sm leading-6 text-text-sub">
           <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary" aria-hidden />

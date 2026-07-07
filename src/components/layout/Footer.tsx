@@ -64,8 +64,7 @@ export function Footer({ settings }: { settings: SiteSettings }) {
         { label: "이메일", value: businessInfo.email },
       ].filter((item): item is { label: string; value: string } => Boolean(item.value))
     : contactInfo;
-  const extraLinks = homeFooter?.links?.filter((link) => link.label && link.href) || [];
-  const compactFooterLinks = [...footerMenus.flatMap((menu) => menu.links), ...extraLinks];
+  const compactFooterLinks = footerMenus.flatMap((menu) => menu.links);
 
   return (
     <footer className="border-t border-[rgba(223,217,179,0.12)] bg-[#082B25] pb-20 pt-8 text-[#F3EFE2] sm:pb-24 sm:pt-14 md:pb-14" aria-label="사이트 푸터">
@@ -81,8 +80,8 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 className={footerLogoClassName}
               />
             </Link>
-            <p className="mt-4 text-sm font-medium leading-6 text-[#F3EFE2] sm:mt-6 sm:text-lg sm:leading-7">{homeFooter?.brandName || "유모차와 카시트를 위한 프리미엄 세탁 케어 서비스"}</p>
-            <p className="mt-3 hidden max-w-md text-sm leading-7 text-[rgba(243,239,226,0.68)] sm:block">{footerText}</p>
+            <p className="cms-lines mt-4 text-sm font-medium leading-6 text-[#F3EFE2] sm:mt-6 sm:text-lg sm:leading-7">{homeFooter?.brandName || "유모차와 카시트를 위한 프리미엄 세탁 케어 서비스"}</p>
+            <p className="cms-lines mt-3 hidden max-w-md text-sm leading-7 text-[rgba(243,239,226,0.68)] sm:block">{footerText}</p>
 
             <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2 text-[13px] text-[rgba(243,239,226,0.68)] sm:mt-8 sm:gap-3 sm:text-sm">
               {contactItems.map((item) => (
@@ -117,20 +116,6 @@ export function Footer({ settings }: { settings: SiteSettings }) {
                 </ul>
               </div>
             ))}
-            {extraLinks.length ? (
-              <div>
-                <p className="text-sm font-medium text-[#F3EFE2]">바로가기</p>
-                <ul className="mt-4 grid gap-2.5">
-                  {extraLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href || "/"} className="inline-flex min-h-9 items-center text-sm font-semibold text-[rgba(243,239,226,0.82)] transition hover:text-[#DFD9B3]">
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ) : null}
           </nav>
         </div>
 

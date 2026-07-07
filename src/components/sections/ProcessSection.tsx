@@ -11,8 +11,8 @@ export function ProcessSection({ steps }: { steps: ProcessStep[] }) {
           {steps.map((step, index) => (
             <div key={`${step.title}-${index}`} className="relative rounded-[22px] border border-border-soft bg-background-light p-5 shadow-sm">
               <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-brand-primary text-sm font-medium text-text-inverse">{index + 1}</span>
-              <h3 className="text-lg font-medium text-brand-primary">{step.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-text-sub">{step.description}</p>
+              <h3 className="cms-lines text-lg font-medium text-brand-primary">{step.title}</h3>
+              <p className="cms-lines mt-2 text-sm leading-6 text-text-sub">{step.description}</p>
             </div>
           ))}
         </div>

@@ -27,7 +27,7 @@ export function BranchCard({ branch }: { branch: Branch }) {
           {branch.operatingHours}
         </p>
       ) : null}
-      {branch.description ? <p className="mt-3 text-sm leading-6 text-text-sub">{branch.description}</p> : null}
+      {branch.description ? <p className="cms-lines mt-3 text-sm leading-6 text-text-sub">{branch.description}</p> : null}
       <div className="mt-5 grid gap-2 sm:grid-cols-2">
         {branch.naverMapUrl ? (
           <Button href={branch.naverMapUrl} variant="outline" size="sm" className="gap-2">

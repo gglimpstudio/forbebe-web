@@ -17,11 +17,6 @@ const imageWithAlt = (name: string, title: string, description?: string) =>
     ],
   });
 
-const ctaFields = [
-  defineField({ name: "label", title: "버튼 문구", type: "string" }),
-  defineField({ name: "href", title: "버튼 링크", description: "예: /contact 또는 https://...", type: "string" }),
-];
-
 const cardMember = defineArrayMember({
   name: "homeCard",
   title: "카드",
@@ -109,8 +104,6 @@ export const homePage = defineType({
         defineField({ name: "signalsLabel", title: "추천 상황 라벨", type: "string" }),
         defineField({ name: "signalsTitle", title: "추천 상황 제목", type: "text", rows: 2 }),
         defineField({ name: "signals", title: "추천 상황 목록", type: "array", of: [defineArrayMember({ type: "string" })] }),
-        defineField({ name: "ctaLabel", title: "CTA 문구", type: "string" }),
-        defineField({ name: "ctaHref", title: "CTA 링크", type: "string" }),
         visibilityField,
       ],
     }),
@@ -136,21 +129,6 @@ export const homePage = defineType({
             }),
           ],
         }),
-        defineField({
-          name: "displayType",
-          title: "표시 방식",
-          type: "string",
-          options: {
-            list: [
-              { title: "페이드", value: "fade" },
-              { title: "슬라이드", value: "slide" },
-              { title: "고정", value: "static" },
-            ],
-            layout: "radio",
-          },
-          initialValue: "fade",
-        }),
-        imageWithAlt("backgroundImage", "배경 이미지"),
         visibilityField,
       ],
     }),
@@ -180,8 +158,6 @@ export const homePage = defineType({
             }),
           ],
         }),
-        defineField({ name: "ctaLabel", title: "CTA 문구", type: "string" }),
-        defineField({ name: "ctaHref", title: "CTA 링크", type: "string" }),
         visibilityField,
       ],
     }),
@@ -230,10 +206,7 @@ export const homePage = defineType({
         defineField({ name: "primaryCtaHref", title: "주요 CTA 링크", type: "string" }),
         defineField({ name: "secondaryCtaLabel", title: "보조 CTA 문구", type: "string" }),
         defineField({ name: "secondaryCtaHref", title: "보조 CTA 링크", type: "string" }),
-        defineField({ name: "tertiaryCtaLabel", title: "추가 CTA 문구", type: "string" }),
-        defineField({ name: "tertiaryCtaHref", title: "추가 CTA 링크", type: "string" }),
         defineField({ name: "note", title: "보조 안내문", type: "string" }),
-        imageWithAlt("backgroundImage", "배경 이미지"),
         visibilityField,
       ],
     }),
@@ -257,12 +230,6 @@ export const homePage = defineType({
             defineField({ name: "phone", title: "전화번호", type: "string" }),
             defineField({ name: "email", title: "이메일", type: "string" }),
           ],
-        }),
-        defineField({
-          name: "links",
-          title: "푸터 링크",
-          type: "array",
-          of: [defineArrayMember({ type: "object", fields: ctaFields, preview: { select: { title: "label", subtitle: "href" } } })],
         }),
         defineField({ name: "copyright", title: "저작권 문구", type: "string" }),
       ],
