@@ -30,9 +30,9 @@ const regionMarkers: Record<string, Array<{ cx: number; cy: number; label: strin
 };
 
 const activeRegionScale: Record<string, number> = {
-  KR28: 1.26,
-  KR41: 1.08,
-  KR44: 1.12,
+  KR28: 1.44,
+  KR41: 1.22,
+  KR44: 1.28,
 };
 
 export function KoreaMap({ activeRegion, className }: { activeRegion: string; className?: string }) {
@@ -59,11 +59,9 @@ export function KoreaMap({ activeRegion, className }: { activeRegion: string; cl
     return `
       <style>
         #features path { fill: #8CAE8D; stroke: #FFFDF7; stroke-width: 0.7; cursor: default; transform-box: fill-box; transform-origin: center; transition: fill 180ms ease, opacity 180ms ease, stroke-width 180ms ease, transform 180ms ease; }
-        #features path:hover { fill: #2C6F5C; opacity: 1; stroke-width: 1.6; transform: scale(1.07); }
         ${dimRule}
         .forbebe-active-region { fill: #1E584A; stroke: #FFFDF7; stroke-width: 2.4; pointer-events: none; transform-box: fill-box; transform-origin: center; filter: drop-shadow(0 16px 16px rgba(30, 88, 74, 0.28)); transition: transform 180ms ease; }
         #forbebe-service-markers circle { transition: opacity 180ms ease, r 180ms ease; }
-        #forbebe-service-markers:hover circle:first-child { opacity: 0.2; }
         #points, #label_points { display: none; }
         ${activeRules}
       </style>

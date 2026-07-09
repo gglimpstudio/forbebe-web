@@ -14,7 +14,7 @@ const preferredRegionOrder = ["본사", "충남", "인천", "경기도 북부", 
 const regionCardMeta: Record<string, { countLabel: string; description: string }> = {
   본사: { countLabel: "대표", description: "창업 문의와 지점 안내를 연결합니다." },
   충남: { countLabel: "3개", description: "천안·아산 중심의 세탁 상담 권역입니다." },
-  인천: { countLabel: "4개", description: "영종·송도·부평·검단 권역을 안내합니다." },
+  인천: { countLabel: "4개", description: "인천 전 지역(강화도 제외)을 안내합니다." },
   "경기도 북부": { countLabel: "3개", description: "김포·일산·덕양 인근 지점을 확인하세요." },
   "경기도 남부": { countLabel: "1개", description: "수지·광교 인근 상담이 가능합니다." },
 };
@@ -107,7 +107,7 @@ function RegionSelectionPanel({ value, branches, regionOrder, onChange }: { valu
             <Map className="h-4 w-4 text-brand-primary" aria-hidden />
             서비스 가능 지역
           </div>
-          <div className="relative mx-auto flex min-h-[260px] max-w-[220px] justify-center sm:max-w-[260px] lg:min-h-[390px] lg:max-w-[340px]">
+          <div className="relative mx-auto flex min-h-[320px] max-w-[270px] justify-center sm:max-w-[325px] lg:min-h-[470px] lg:max-w-[420px]">
             <KoreaMap activeRegion={mapPreviewRegion} />
             {showRegionBubble ? (
               <div

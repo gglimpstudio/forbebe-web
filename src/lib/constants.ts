@@ -183,7 +183,7 @@ export const defaultBranches: Branch[] = [
   {
     name: "포베베 인천점",
     region: "인천",
-    serviceArea: "인천 주요 지역 상담",
+    serviceArea: "인천 전 지역(강화도 제외) 상담",
     address: "인천 주소 입력",
     phone: "010-0000-0000",
     operatingHours: "평일 10:00-18:00",
