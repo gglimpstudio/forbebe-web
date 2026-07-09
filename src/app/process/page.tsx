@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bubbles, ClipboardCheck, PackageCheck, ShieldCheck, SprayCan, Wrench } from "lucide-react";
+import { Bubbles, ClipboardCheck, PackageCheck, ShieldCheck, Truck, Wrench } from "lucide-react";
 
 import { FinalCtaSection } from "@/components/sections/FinalCTASection";
 import { Container } from "@/components/ui/Container";
@@ -16,7 +16,21 @@ export const metadata: Metadata = {
 
 export const revalidate = 300;
 
-const coreCareItems = [
+type CareItem = {
+  title: string;
+  description: string;
+  photoGuide: string;
+  icon: typeof ClipboardCheck;
+  image?: ContentCard["image"];
+};
+
+const coreCareItems: CareItem[] = [
+  {
+    title: "수거",
+    description: "집 앞 수거로 고객과 비대면으로 제품을 맡길 수 있습니다.",
+    photoGuide: "집 앞에서 포장된 카시트나 유모차를 비대면으로 수거하는 장면",
+    icon: Truck,
+  },
   {
     title: "상태 확인",
     description: "땀, 먼지, 음식물, 틈새 이물질을 먼저 확인합니다.",
@@ -36,17 +50,25 @@ const coreCareItems = [
     icon: Bubbles,
   },
   {
-    title: "건조·최종 검수",
+    title: "최종 검수",
     description: "충분히 건조한 뒤 조립 상태와 주요 오염 부위를 다시 확인합니다.",
     photoGuide: "건조 후 깨끗하게 조립된 카시트와 검수 체크 장면",
     icon: ShieldCheck,
   },
+  {
+    title: "배송",
+    description: "세탁 완료 후 제품을 안전하게 포장해 고객에게 배송합니다.",
+    photoGuide: "세탁 완료 제품을 보호 포장한 뒤 배송 준비하는 장면",
+    icon: PackageCheck,
+  },
 ];
 
-function getCareItems(cmsItems?: ContentCard[]) {
-  return coreCareItems.map((fallback, index) => {
-    const cmsItem = cmsItems?.[index];
+function getCareItems(cmsItems?: ContentCard[]): CareItem[] {
+  const itemCount = Math.min(Math.max(cmsItems?.length || 0, coreCareItems.length), coreCareItems.length);
 
+  return Array.from({ length: itemCount }, (_, index) => {
+    const cmsItem = cmsItems?.[index];
+    const fallback = coreCareItems[index] || coreCareItems[coreCareItems.length - 1];
     return {
       ...fallback,
       title: cmsItem?.title || fallback.title,
@@ -78,12 +100,7 @@ export default async function ProcessPage() {
   const [steps, page] = await Promise.all([getProcessSteps(), getProcessPage()]);
   const hero = page?.hero;
   const careItems = getCareItems(page?.coreCareItems);
-  const noticeCards = page?.noticeCards?.length
-    ? page.noticeCards
-    : [
-        { title: "세탁 전 확인사항", description: "제품의 파손, 변색, 소재 약화, 분해 가능 여부를 확인합니다. 오래된 얼룩은 오염도에 따라 결과가 달라질 수 있습니다." },
-        { title: "고객 전달 전 검수", description: "건조 상태, 주요 오염 부위, 조립 상태를 확인한 뒤 고객에게 전달합니다. 사용 전 최종 상태 확인을 권장합니다." },
-      ];
+  const detailSection = page?.detailSection;
 
   return (
     <>
@@ -106,14 +123,18 @@ export default async function ProcessPage() {
 
       <section className="bg-background-light py-12 sm:py-16 lg:py-20">
         <Container className="!max-w-5xl 2xl:!max-w-7xl">
-          <SectionHeader eyebrow="Care Process" title="한눈에 보는 포베베 세탁 과정" description="고객이 가장 궁금해하는 흐름은 4단계로 먼저 보여주고, 아래에서 세부 진행 순서를 이어서 확인할 수 있게 구성했습니다." align="center" />
+          <SectionHeader eyebrow="Care Process" title="한눈에 보는 포베베 세탁 과정" description="수거부터 배송까지 고객이 가장 궁금해하는 흐름을 6단계로 먼저 보여주고, 아래에서 세부 진행 순서를 이어서 확인할 수 있게 구성했습니다." align="center" />
 
           <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {careItems.map((item) => {
+            {careItems.map((item, index) => {
               const Icon = item.icon;
+              const isCenteredFinalItem = careItems.length % 2 === 1 && index === careItems.length - 1;
 
               return (
-                <article key={item.title} className="overflow-hidden rounded-[22px] border border-border-soft bg-background-main shadow-[0_14px_38px_rgba(18,58,50,0.055)]">
+                <article
+                  key={`${item.title}-${index}`}
+                  className={`overflow-hidden rounded-[22px] border border-border-soft bg-background-main shadow-[0_14px_38px_rgba(18,58,50,0.055)] ${isCenteredFinalItem ? "md:col-span-2 md:mx-auto md:w-full md:max-w-[calc(50%-0.625rem)]" : ""}`}
+                >
                   {item.image ? (
                     <SanityImage image={item.image} alt={item.image.alt || item.title} className="aspect-[16/10] min-h-[170px] rounded-none shadow-none" sizes="(min-width: 768px) 45vw, 100vw" />
                   ) : (
@@ -128,34 +149,33 @@ export default async function ProcessPage() {
             })}
           </div>
 
-          <div className="mt-12 border-t border-border-soft pt-10">
-            <SectionHeader eyebrow="Detail" title="세부 진행 순서" description="실제 제품 상태와 소재에 따라 세부 과정은 달라질 수 있습니다." align="center" />
-          </div>
-
-          <div className="mt-8 grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
-            {steps.map((step, index) => (
-              <div key={`${step.title}-${index}`} className="flex flex-col">
-                {step.image ? (
-                  <SanityImage
-                    image={step.image}
-                    alt={step.image.alt || step.title}
-                    className="mb-4 aspect-[4/3] overflow-hidden rounded-[18px] border border-border-soft shadow-[0_14px_36px_rgba(18,58,50,0.055)] sm:rounded-[22px]"
-                  />
-                ) : null}
-                <ProcessStep step={step} index={index} />
+          {detailSection?.isVisible === false ? null : (
+            <>
+              <div className="mt-12 border-t border-border-soft pt-10">
+                <SectionHeader
+                  eyebrow={detailSection?.eyebrow || "Detail"}
+                  title={detailSection?.title || "세부 진행 순서"}
+                  description={detailSection?.description || "실제 제품 상태와 소재에 따라 세부 과정은 달라질 수 있습니다."}
+                  align="center"
+                />
               </div>
-            ))}
-          </div>
 
-          <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            {noticeCards.map((card) => (
-              <article key={card.title} className="rounded-[18px] border border-border-soft bg-background-main p-5 shadow-[0_12px_32px_rgba(18,58,50,0.045)]">
-                <SprayCan className="mb-4 h-7 w-7 text-brand-primary" aria-hidden />
-                <h2 className="cms-lines text-xl font-medium text-brand-primary">{card.title}</h2>
-                <p className="cms-lines mt-3 text-sm leading-7 text-text-sub">{card.description}</p>
-              </article>
-            ))}
-          </div>
+              <div className="mt-8 grid gap-5 md:grid-cols-2 2xl:grid-cols-3">
+                {steps.map((step, index) => (
+                  <div key={`${step.title}-${index}`} className="flex flex-col">
+                    {step.image ? (
+                      <SanityImage
+                        image={step.image}
+                        alt={step.image.alt || step.title}
+                        className="mb-4 aspect-[4/3] overflow-hidden rounded-[18px] border border-border-soft shadow-[0_14px_36px_rgba(18,58,50,0.055)] sm:rounded-[22px]"
+                      />
+                    ) : null}
+                    <ProcessStep step={step} index={index} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </Container>
       </section>
       {page?.finalCta?.isVisible === false ? null : <FinalCtaSection finalCta={page?.finalCta} />}

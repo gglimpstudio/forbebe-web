@@ -37,6 +37,20 @@ const finalCtaField = defineField({
   ],
 });
 
+const sectionHeaderField = (name: string, title: string, description?: string) =>
+  defineField({
+    name,
+    title,
+    description,
+    type: "object",
+    fields: [
+      defineField({ name: "isVisible", title: "노출 여부", type: "boolean", initialValue: true }),
+      defineField({ name: "eyebrow", title: "영문/상단 라벨", type: "string" }),
+      defineField({ name: "title", title: "제목", type: "text", rows: 2 }),
+      defineField({ name: "description", title: "설명", type: "text", rows: 3 }),
+    ],
+  });
+
 const cardMember = defineArrayMember({
   name: "contentCard",
   title: "카드",
@@ -48,17 +62,6 @@ const cardMember = defineArrayMember({
     imageWithAlt("image", "이미지"),
   ],
   preview: { select: { title: "title", subtitle: "description", media: "image" } },
-});
-
-const infoCardMember = defineArrayMember({
-  name: "infoCard",
-  title: "안내 카드",
-  type: "object",
-  fields: [
-    defineField({ name: "title", title: "제목", type: "string", validation: (Rule) => Rule.required() }),
-    defineField({ name: "description", title: "설명", type: "text", rows: 3 }),
-  ],
-  preview: { select: { title: "title", subtitle: "description" } },
 });
 
 const singletonPreview = (title: string) => ({
@@ -96,12 +99,12 @@ export const processPage = defineType({
     defineField({
       name: "coreCareItems",
       title: "한눈에 보는 세탁 과정 카드",
-      description: "세탁 과정 페이지 상단의 4개 대표 과정 카드입니다. 이미지를 넣으면 사이트에 사진으로 표시됩니다.",
+      description: "세탁 과정 페이지 상단의 6개 대표 과정 카드입니다. 이미지를 넣으면 사이트에 사진으로 표시됩니다.",
       type: "array",
       of: [cardMember],
-      validation: (Rule) => Rule.max(4).warning("권장 개수는 4개입니다."),
+      validation: (Rule) => Rule.max(6).warning("권장 개수는 6개입니다."),
     }),
-    defineField({ name: "noticeCards", title: "하단 안내 카드", type: "array", of: [infoCardMember] }),
+    sectionHeaderField("detailSection", "세부 진행 순서 섹션", "세부 진행 순서 영역의 라벨, 제목, 설명과 노출 여부를 관리합니다."),
     finalCtaField,
   ],
   preview: singletonPreview("세탁 과정 페이지"),

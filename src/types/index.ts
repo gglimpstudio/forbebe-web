@@ -150,6 +150,13 @@ export type InfoCard = {
   description?: string;
 };
 
+export type PageSection = {
+  isVisible?: boolean;
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+};
+
 export type PageCta = Pick<
   FinalCtaSection,
   "isVisible" | "title" | "description" | "primaryCtaLabel" | "primaryCtaHref" | "secondaryCtaLabel" | "secondaryCtaHref"
@@ -169,7 +176,7 @@ export type ServicesPage = {
 export type ProcessPage = {
   hero?: PageHero;
   coreCareItems?: ContentCard[];
-  noticeCards?: InfoCard[];
+  detailSection?: PageSection;
   finalCta?: PageCta;
 };
 

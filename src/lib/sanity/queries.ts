@@ -58,6 +58,12 @@ const pageFields = `{
     image ${imageFields}
   },
   coreCareItems[] ${homeCardFields},
+  detailSection {
+    isVisible,
+    eyebrow,
+    title,
+    description
+  },
   priceImage ${imageFields},
   strengths[] ${homeCardFields},
   benefits[] ${homeCardFields},
