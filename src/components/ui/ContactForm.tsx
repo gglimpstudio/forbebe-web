@@ -38,6 +38,10 @@ function getFormValue(formData: FormData, name: string) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function isScriptError(result: unknown): result is { ok: false; message?: string; error?: string } {
+  return typeof result === "object" && result !== null && "ok" in result && (result as { ok?: unknown }).ok === false;
+}
+
 export function ContactForm({ type }: { type: "franchise" | "partnership" }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
@@ -87,6 +91,14 @@ export function ContactForm({ type }: { type: "franchise" | "partnership" }) {
       if (!response.ok) {
         const detail = await response.text();
         throw new Error(detail || "문의 접수에 실패했습니다.");
+      }
+
+      const contentType = response.headers.get("content-type") || "";
+      if (contentType.includes("application/json")) {
+        const result = (await response.json()) as unknown;
+        if (isScriptError(result)) {
+          throw new Error(result.message || result.error || "문의 접수에 실패했습니다.");
+        }
       }
 
       setStatus("success");
