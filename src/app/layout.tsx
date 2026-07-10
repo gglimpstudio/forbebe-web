@@ -8,6 +8,7 @@ import { getSiteUrl } from "@/lib/utils";
 import "./globals.css";
 
 const publicSiteUrl = "https://www.forbebe.co.kr";
+const googleSiteVerification = "A-0Atu75qkSaT_eFn-ZKQAibVndHSCV6A0jIGUQkvG0";
 const naverSiteVerification = "10c34eb7fd07f593dbd2e6941bd611f49abc4a31";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -65,7 +66,7 @@ export async function generateMetadata(): Promise<Metadata> {
       },
     },
     verification: {
-      google: "",
+      google: googleSiteVerification,
       other: {
         "naver-site-verification": naverSiteVerification,
       },
