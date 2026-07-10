@@ -5,11 +5,14 @@ import { BranchLocationExperience } from "@/components/sections/BranchLocationEx
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { getBranches, getBranchesPage } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "지점 안내",
   description: "전국 주요 지역의 가까운 포베베 지점 연락처와 전화 문의 정보를 확인하세요.",
-};
+  path: "/branches",
+  keywords: ["지점 안내", "가까운 지점", "카시트 세탁 지점", "유모차 세탁 지점"],
+});
 
 export default async function BranchesPage() {
   const [branches, page] = await Promise.all([getBranches(), getBranchesPage()]);

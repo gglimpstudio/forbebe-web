@@ -7,12 +7,15 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getContentIcon } from "@/lib/contentIcons";
 import { getFranchisePage } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 import type { ContentCard } from "@/types";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "창업문의",
   description: "포베베 카시트와 유모차 세탁 지점 창업 상담을 신청하세요. 희망 지역과 문의 내용을 남기면 확인 후 연락드립니다.",
-};
+  path: "/franchise",
+  keywords: ["창업문의", "세탁 지점 창업", "포베베 창업"],
+});
 
 const benefits: ContentCard[] = [
   { title: "전문 품목 중심", description: "카시트와 유모차 세탁 수요에 집중한 운영 구조를 지향합니다.", icon: "ShieldCheck" },
@@ -34,6 +37,7 @@ export default async function FranchisePage() {
             eyebrow={hero?.eyebrow || "Franchise"}
             title={hero?.title || "포베베 창업문의"}
             description={hero?.description || "유아용품 위생 관리 수요가 있는 지역에서 포베베 지점 운영을 검토하고 있다면 희망 지역과 상담 내용을 남겨주세요."}
+            headingLevel="h1"
           />
         </Container>
       </section>

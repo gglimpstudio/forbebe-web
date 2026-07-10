@@ -1,15 +1,16 @@
 import type { MetadataRoute } from "next";
 
+import { indexableRoutes } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/utils";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getSiteUrl();
-  const routes = ["", "/services", "/process", "/pricing", "/branches", "/cases", "/faq"];
+  const lastModified = new Date();
 
-  return routes.map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: route === "" ? 1 : 0.8,
+  return indexableRoutes.map((route) => ({
+    url: `${baseUrl}${route.path === "/" ? "" : route.path}`,
+    lastModified,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
   }));
 }

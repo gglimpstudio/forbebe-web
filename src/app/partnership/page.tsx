@@ -6,12 +6,15 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getContentIcon } from "@/lib/contentIcons";
 import { getPartnershipPage } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 import type { ContentCard } from "@/types";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "제휴문의",
-  description: "포베베와 기업, 산후조리원, 유아용품 매장, 브랜드 제휴를 문의하세요.",
-};
+  description: "포베베와 마케팅, 서비스, 입점·판매, 기업·기관 제휴를 문의하세요. 담당자가 검토 후 연락드립니다.",
+  path: "/partnership",
+  keywords: ["제휴문의", "마케팅 제휴", "서비스 제휴", "입점 제휴", "기업 제휴"],
+});
 
 const partnershipTypes: ContentCard[] = [
   { title: "기업 복지", description: "임직원 육아 복지와 유아용품 케어 혜택을 함께 설계합니다.", icon: "Gift" },
@@ -33,6 +36,7 @@ export default async function PartnershipPage() {
             eyebrow={hero?.eyebrow || "Partnership"}
             title={hero?.title || "포베베 제휴문의"}
             description={hero?.description || "유아용품 위생 케어가 필요한 고객 접점이 있다면 포베베와 함께할 수 있는 제휴 방식을 문의해주세요."}
+            headingLevel="h1"
           />
         </Container>
       </section>

@@ -8,11 +8,14 @@ import { Container } from "@/components/ui/Container";
 import { SanityImage } from "@/components/ui/SanityImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getServices, getServicesPage } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "서비스",
   description: "포베베의 카시트, 유모차, 유아 이동용품 전문 세탁·살균 케어 서비스를 안내합니다.",
-};
+  path: "/services",
+  keywords: ["서비스 안내", "카시트 케어", "유모차 케어"],
+});
 
 export const revalidate = 300;
 
@@ -29,6 +32,7 @@ export default async function ServicesPage() {
             eyebrow={hero?.eyebrow || "Services"}
             title={hero?.title || "카시트와 유모차 구조에 맞춘 전문 케어"}
             description={hero?.description || "품목별 소재, 분해 가능 범위, 오염 상태를 먼저 확인하고 제품에 무리가 가지 않는 방식으로 진행합니다."}
+            headingLevel="h1"
           />
         </Container>
       </section>

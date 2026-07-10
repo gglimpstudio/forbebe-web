@@ -8,12 +8,15 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getContentIcon } from "@/lib/contentIcons";
 import { getWhyForbebePage } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 import type { ContentCard } from "@/types";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "왜 포베베인가",
   description: "포베베가 카시트와 유모차 전문 세탁 브랜드로 신뢰받는 이유와 케어 기준을 안내합니다.",
-};
+  path: "/why-forbebe",
+  keywords: ["왜 포베베인가", "전문 세탁", "유아용품 케어 기준"],
+});
 
 const strengths: ContentCard[] = [
   { title: "전문 품목 집중", description: "카시트와 유모차처럼 구조가 복잡한 유아 이동용품에 집중합니다.", icon: "ShieldCheck" },
@@ -36,6 +39,7 @@ export default async function WhyForbebePage() {
             eyebrow={hero?.eyebrow || "Why Forbebe"}
             title={hero?.title || "아이에게 닿는 제품이라, 세탁 기준도 달라야 합니다."}
             description={hero?.description || "포베베는 단순 세탁보다 제품 상태 확인, 오염 원인 분리, 건조 후 검수까지 이어지는 관리 흐름을 중요하게 봅니다."}
+            headingLevel="h1"
           />
         </Container>
       </section>

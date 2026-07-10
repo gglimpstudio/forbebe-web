@@ -8,6 +8,7 @@ import { IntroSection } from "@/components/sections/IntroSection";
 import { ProcessPreviewSection } from "@/components/sections/ProcessPreviewSection";
 import { SloganSection } from "@/components/sections/SloganSection";
 import { getHomeData, getSiteSettings } from "@/lib/sanity/queries";
+import { defaultAuthor, defaultCategory, defaultKeywords, defaultOgImage, defaultSeoDescription } from "@/lib/seo";
 
 export const revalidate = 300;
 
@@ -19,9 +20,34 @@ export async function generateMetadata(): Promise<Metadata> {
     title: {
       absolute: title,
     },
-    description:
-      settings.defaultSeoDescription ||
-      "카시트와 유모차를 전문적으로 세탁, 살균 관리하는 포베베의 서비스와 지점, 가격 정보를 확인하세요.",
+    description: settings.defaultSeoDescription || defaultSeoDescription,
+    authors: [defaultAuthor],
+    creator: settings.title || "포베베",
+    publisher: settings.title || "포베베",
+    category: defaultCategory,
+    keywords: defaultKeywords,
+    alternates: {
+      canonical: "/",
+    },
+    openGraph: {
+      title,
+      description: settings.defaultSeoDescription || defaultSeoDescription,
+      url: "/",
+      siteName: settings.title || "포베베",
+      images: [{ url: defaultOgImage, width: 1200, height: 630, alt: "포베베 카시트·유모차 세탁 케어" }],
+      locale: "ko_KR",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: settings.defaultSeoDescription || defaultSeoDescription,
+      images: [defaultOgImage],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

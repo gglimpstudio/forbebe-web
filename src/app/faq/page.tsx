@@ -5,11 +5,14 @@ import { Container } from "@/components/ui/Container";
 import { FaqFilter } from "@/components/ui/FaqFilter";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getFaqPage, getFaqs } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "FAQ",
   description: "포베베 세탁 기간, 방문 여부, 세탁 가능 품목, 얼룩 제거, 사용 가능 시점 등 자주 묻는 질문입니다.",
-};
+  path: "/faq",
+  keywords: ["자주 묻는 질문", "세탁 기간", "세탁 가능 품목", "얼룩 제거"],
+});
 
 export const revalidate = 300;
 
@@ -25,6 +28,7 @@ export default async function FaqPage() {
             eyebrow={hero?.eyebrow || "FAQ"}
             title={hero?.title || "자주 묻는 질문"}
             description={hero?.description || "예약 전 궁금한 내용을 확인하세요. 제품 상태가 다르면 가까운 지점 상담을 권장합니다."}
+            headingLevel="h1"
           />
         </Container>
       </section>

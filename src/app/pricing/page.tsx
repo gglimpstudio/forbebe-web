@@ -5,11 +5,14 @@ import { Container } from "@/components/ui/Container";
 import { SanityImage } from "@/components/ui/SanityImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getPricingPage } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "가격 안내",
   description: "카시트, 유모차, 세트 케어 등 포베베 세탁 가격 기준과 추가 비용 안내를 확인하세요.",
-};
+  path: "/pricing",
+  keywords: ["가격 안내", "카시트 세탁 가격", "유모차 세탁 가격"],
+});
 
 export const revalidate = 300;
 
@@ -25,6 +28,7 @@ export default async function PricingPage() {
             eyebrow={hero?.eyebrow || "Pricing"}
             title={hero?.title || "가격 안내"}
             description={hero?.description || "전 지점 동일 기준으로 안내되며 제품 종류, 오염도, 추가 케어 범위에 따라 최종 금액이 달라질 수 있습니다."}
+            headingLevel="h1"
           />
         </Container>
       </section>

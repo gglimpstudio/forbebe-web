@@ -7,12 +7,15 @@ import { ProcessStep } from "@/components/ui/ProcessStep";
 import { SanityImage } from "@/components/ui/SanityImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getProcessPage, getProcessSteps } from "@/lib/sanity/queries";
+import { createSeoMetadata } from "@/lib/seo";
 import type { ContentCard } from "@/types";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createSeoMetadata({
   title: "세탁 과정",
   description: "포베베의 예약 접수, 제품 상태 확인, 세척, 살균 케어, 건조, 최종 검수 과정을 안내합니다.",
-};
+  path: "/process",
+  keywords: ["세탁 과정", "살균 케어", "카시트 세척", "유모차 세척"],
+});
 
 export const revalidate = 300;
 
@@ -111,6 +114,7 @@ export default async function ProcessPage() {
               eyebrow={hero?.eyebrow || "Process"}
               title={hero?.title || "제품 상태를 확인하고 단계별로 케어합니다."}
               description={hero?.description || "분해 가능한 범위와 소재 상태를 먼저 확인한 뒤 세척, 살균 케어, 건조, 검수 순서로 진행합니다."}
+              headingLevel="h1"
             />
             {hero?.image ? (
               <SanityImage image={hero.image} alt={hero.image.alt || hero?.title || "세탁 완료 후 깨끗하게 정돈된 카시트와 유모차"} className="min-h-[260px] sm:min-h-[340px]" priority sizes="(min-width: 1024px) 48vw, 100vw" />
