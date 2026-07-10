@@ -22,14 +22,21 @@ const formFields: Record<"franchise" | "partnership", Field[]> = {
     { name: "message", label: "문의 내용", type: "textarea", required: true },
   ],
   partnership: [
-    { name: "name", label: "담당자명", required: true },
+    { name: "managerName", label: "담당자명", required: true },
     { name: "company", label: "회사명 / 기관명", required: true },
     { name: "phone", label: "연락처", type: "tel", required: true },
     { name: "email", label: "이메일", type: "email", required: true },
-    { name: "partnershipType", label: "제휴 유형", type: "select", required: true, options: ["기업 복지", "산후조리원", "유아용품 매장", "브랜드 제휴", "기타"] },
+    { name: "partnershipType", label: "제휴 유형", type: "select", required: true, options: ["마케팅 제휴", "서비스 제휴", "입점 / 판매 제휴", "기업 / 기관 제휴", "기타"] },
     { name: "message", label: "문의 내용", type: "textarea", required: true },
   ],
 };
+
+const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+
+function getFormValue(formData: FormData, name: string) {
+  const value = formData.get(name);
+  return typeof value === "string" ? value.trim() : "";
+}
 
 export function ContactForm({ type }: { type: "franchise" | "partnership" }) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -42,26 +49,58 @@ export function ContactForm({ type }: { type: "franchise" | "partnership" }) {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
 
-    const response = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...payload, type }),
-    });
-
-    const result = (await response.json()) as { message?: string };
-    setMessage(result.message || (response.ok ? "문의가 접수되었습니다." : "문의 접수에 실패했습니다."));
-    setStatus(response.ok ? "success" : "error");
-
-    if (response.ok) {
+    if (getFormValue(formData, "company_url")) {
+      setStatus("success");
+      setMessage("문의가 정상적으로 접수되었습니다.");
       form.reset();
+      return;
+    }
+
+    if (getFormValue(formData, "privacy") !== "true") {
+      setStatus("error");
+      setMessage("개인정보 수집 및 이용에 동의해주세요.");
+      return;
+    }
+
+    if (!scriptUrl) {
+      setStatus("error");
+      setMessage("문의 접수 URL이 설정되지 않았습니다.");
+      return;
+    }
+
+    const params = new URLSearchParams();
+    params.set("type", type);
+    params.set("privacy", "true");
+
+    for (const field of formFields[type]) {
+      params.set(field.name, getFormValue(formData, field.name));
+    }
+
+    try {
+      const response = await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8" },
+        body: params,
+      });
+
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(detail || "문의 접수에 실패했습니다.");
+      }
+
+      setStatus("success");
+      setMessage("문의가 정상적으로 접수되었습니다.");
+      form.reset();
+    } catch (error) {
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "문의 접수에 실패했습니다.");
     }
   }
 
   return (
     <form className="grid gap-4" onSubmit={handleSubmit}>
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <input type="text" name="company_url" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {formFields[type].map((field) => (
         <label key={field.name} className="grid gap-2 text-sm font-medium text-brand-primary">
           {field.label}
@@ -100,7 +139,7 @@ export function ContactForm({ type }: { type: "franchise" | "partnership" }) {
         </label>
       ))}
       <label className="flex items-start gap-3 rounded-2xl bg-background-main p-4 text-sm leading-6 text-text-sub">
-        <input name="privacyAgreed" value="true" type="checkbox" required className="mt-1 h-4 w-4 accent-brand-primary" />
+        <input name="privacy" value="true" type="checkbox" required className="mt-1 h-4 w-4 accent-brand-primary" />
         개인정보 수집 및 이용에 동의합니다.
       </label>
       <Button type="submit" size="lg" disabled={status === "submitting"}>
