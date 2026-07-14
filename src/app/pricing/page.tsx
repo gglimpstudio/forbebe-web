@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import { Container } from "@/components/ui/Container";
-import { SanityImage } from "@/components/ui/SanityImage";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getPricingPage } from "@/lib/sanity/queries";
+import { imageAlt, urlForImage } from "@/lib/sanity/image";
 import { createSeoMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createSeoMetadata({
@@ -19,6 +19,11 @@ export const revalidate = 300;
 export default async function PricingPage() {
   const page = await getPricingPage();
   const hero = page?.hero;
+  const priceImageBuilder = urlForImage(page?.priceImage);
+  const priceImageSrc = priceImageBuilder?.width(1684).fit("max").url();
+  const priceImageDimensions = page?.priceImage?.asset?.metadata?.dimensions;
+  const priceImageWidth = priceImageDimensions?.width || 1684;
+  const priceImageHeight = priceImageDimensions?.height || 2384;
 
   return (
     <>
@@ -35,8 +40,16 @@ export default async function PricingPage() {
       <section className="bg-background-light py-10 sm:py-14 lg:py-16">
         <Container>
           <div className="mb-8 overflow-hidden rounded-[20px] bg-brand-primary shadow-[0_22px_60px_rgba(27,89,74,0.16)] sm:mb-10 sm:rounded-[28px]">
-            {page?.priceImage ? (
-              <SanityImage image={page.priceImage} alt="포베베 카시트, 유모차, 옵션 가격표" className="h-auto w-full rounded-none" sizes="100vw" />
+            {priceImageSrc ? (
+              <Image
+                src={priceImageSrc}
+                alt={imageAlt(page?.priceImage, "포베베 카시트, 유모차, 옵션 가격표")}
+                width={priceImageWidth}
+                height={priceImageHeight}
+                className="h-auto w-full"
+                sizes="100vw"
+                priority
+              />
             ) : (
               <Image
                 src="/forbebe-price.png"
