@@ -3,6 +3,7 @@ import type { StructureResolver } from "sanity/structure";
 const listedTypes = [
   "siteSettings",
   "homePage",
+  "homePopup",
   "servicesPage",
   "processPage",
   "pricingPage",
@@ -34,6 +35,7 @@ export const structure: StructureResolver = (S) =>
     .items([
       singletonItem(S, "siteSettings", "사이트 설정"),
       singletonItem(S, "homePage", "홈페이지"),
+      singletonItem(S, "homePopup", "팝업 설정"),
       S.divider(),
       singletonItem(S, "whyForbebePage", "포베베에 맡겨야하는 이유"),
       singletonItem(S, "processPage", "세탁과정"),

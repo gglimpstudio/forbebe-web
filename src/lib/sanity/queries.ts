@@ -70,6 +70,23 @@ const pageFields = `{
   partnershipTypes[] ${homeCardFields}
 }`;
 
+const homePopupFields = `{
+  enabled,
+  listVersion,
+  items[] {
+    _key,
+    title,
+    enabled,
+    id,
+    version,
+    image ${imageFields},
+    url
+  },
+  id,
+  image ${imageFields},
+  url
+}`;
+
 const homePageFields = `{
   hero {
     eyebrow,
@@ -167,6 +184,7 @@ const homePageFields = `{
 
 export const homeQuery = groq`{
   "homePage": *[_type == "homePage"][0] ${homePageFields},
+  "popup": *[_type == "homePopup" && _id == "homePopup"][0] ${homePopupFields},
   "settings": *[_type == "siteSettings"][0],
   "navigation": *[_type == "navigation"] | order(order asc),
   "services": *[_type == "service"] | order(order asc){..., "slug": slug.current, image ${imageFields}},
@@ -218,6 +236,7 @@ export async function getHomeData(): Promise<HomeData> {
 
   return {
     homePage: data?.homePage || null,
+    popup: data?.popup || null,
     settings: data?.settings || defaultSettings,
     hero: defaultHero,
     navigation: withFallback<NavigationItem>(data?.navigation, defaultNavigation),

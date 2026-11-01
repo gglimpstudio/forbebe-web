@@ -1,0 +1,172 @@
+[
+  {
+    "name": "desktop-single",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "width": 864,
+    "height": 744,
+    "x": 288,
+    "y": 128,
+    "imageWidth": 864,
+    "imageHeight": 648,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "864px"
+  },
+  {
+    "name": "desktop-multiple",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "width": 864,
+    "height": 744,
+    "x": 288,
+    "y": 128,
+    "imageWidth": 864,
+    "imageHeight": 648,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "864px"
+  },
+  {
+    "name": "desktop-wide",
+    "viewport": {
+      "width": 1920,
+      "height": 1080
+    },
+    "width": 960,
+    "height": 301.328125,
+    "x": 480,
+    "y": 389.328125,
+    "imageWidth": 960,
+    "imageHeight": 205.328125,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "960px"
+  },
+  {
+    "name": "desktop-portrait",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "width": 615.953125,
+    "height": 968,
+    "x": 412.015625,
+    "y": 16,
+    "imageWidth": 615.953125,
+    "imageHeight": 872.015625,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "615.953px"
+  },
+  {
+    "name": "tablet",
+    "viewport": {
+      "width": 820,
+      "height": 1180
+    },
+    "width": 492,
+    "height": 465,
+    "x": 164,
+    "y": 357.5,
+    "imageWidth": 492,
+    "imageHeight": 369,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "492px"
+  },
+  {
+    "name": "mobile-375",
+    "viewport": {
+      "width": 375,
+      "height": 812
+    },
+    "width": 343,
+    "height": 353.25,
+    "x": 16,
+    "y": 229.375,
+    "imageWidth": 343,
+    "imageHeight": 257.25,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "343px"
+  },
+  {
+    "name": "mobile-390",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "width": 358,
+    "height": 364.5,
+    "x": 16,
+    "y": 239.75,
+    "imageWidth": 358,
+    "imageHeight": 268.5,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "358px"
+  },
+  {
+    "name": "low-height",
+    "viewport": {
+      "width": 1440,
+      "height": 400
+    },
+    "width": 362.65625,
+    "height": 367.984375,
+    "x": 538.671875,
+    "y": 16,
+    "imageWidth": 362.65625,
+    "imageHeight": 271.984375,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": false,
+    "computedWidth": "362.656px"
+  },
+  {
+    "name": "fallback-tall",
+    "viewport": {
+      "width": 375,
+      "height": 568
+    },
+    "width": 320,
+    "height": 536,
+    "x": 27.5,
+    "y": 16,
+    "imageWidth": 320,
+    "imageHeight": 1280,
+    "controlsHeight": 44,
+    "footerHeight": 44,
+    "scroll": true,
+    "computedWidth": "320px"
+  },
+  {
+    "name": "zoom-equivalent",
+    "viewport": {
+      "width": 240,
+      "height": 400
+    },
+    "width": 208,
+    "height": 340,
+    "x": 16,
+    "y": 30,
+    "imageWidth": 208,
+    "imageHeight": 156,
+    "controlsHeight": 88,
+    "footerHeight": 88,
+    "scroll": false,
+    "computedWidth": "208px"
+  }
+]

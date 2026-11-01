@@ -3,6 +3,7 @@ import { branch } from "./branch";
 import { cleaningCase } from "./cleaningCase";
 import { faq } from "./faq";
 import { homePage } from "./homePage";
+import { homePopup } from "./homePopup";
 import { legalPage } from "./legalPage";
 import { navigation } from "./navigation";
 import {
@@ -25,6 +26,7 @@ import { testimonial } from "./testimonial";
 export const schemaTypes = [
   siteSettings,
   homePage,
+  homePopup,
   service,
   processStep,
   pricingItem,

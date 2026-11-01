@@ -4,6 +4,7 @@ import { BeforeAfterSection } from "@/components/sections/BeforeAfterSection";
 import { CleaningNeedSection } from "@/components/sections/CleaningNeedSection";
 import { FinalCTASection } from "@/components/sections/FinalCTASection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { HomePopup } from "@/components/sections/HomePopup";
 import { IntroSection } from "@/components/sections/IntroSection";
 import { ProcessPreviewSection } from "@/components/sections/ProcessPreviewSection";
 import { SloganSection } from "@/components/sections/SloganSection";
@@ -57,6 +58,7 @@ export default async function Home() {
 
   return (
     <>
+      <HomePopup settings={data.popup} />
       {homePage?.hero?.isVisible === false ? null : <HeroSection hero={{ ...data.hero, ...homePage?.hero }} />}
       {homePage?.intro?.isVisible === false ? null : <IntroSection intro={homePage?.intro} />}
       {homePage?.necessity?.isVisible === false ? null : <CleaningNeedSection necessity={homePage?.necessity} />}

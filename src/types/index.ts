@@ -275,6 +275,36 @@ export type FooterData = {
   copyright?: string;
 };
 
+export type HomePopupItem = {
+  _type?: string;
+  _key?: string;
+  title?: string;
+  enabled?: boolean;
+  id?: string;
+  version?: number;
+  image?: SanityImage;
+  /** Preserved only for legacy CMS data; no longer displayed or editable. */
+  buttonLabel?: string;
+  url?: string;
+};
+
+export type HomePopupSettings = HomePopupItem & {
+  items?: HomePopupItem[] | null;
+  /** A persisted marker prevents legacy fallback after a list is cleared/unset. */
+  listVersion?: number;
+};
+
+export type PopupSlide = {
+  key: string;
+  id: string;
+  version: number;
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  href: string;
+};
+
 export type HomePage = {
   hero?: Hero;
   intro?: IntroSection;
@@ -375,6 +405,7 @@ export type NavigationItem = {
 
 export type HomeData = {
   homePage?: HomePage | null;
+  popup?: HomePopupSettings | null;
   settings: SiteSettings;
   hero: Hero;
   navigation: NavigationItem[];

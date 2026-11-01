@@ -27,6 +27,7 @@ const apiBaseUrl = `https://${projectId}.api.sanity.io/${apiVersion}`;
 const managedDocumentTypes = [
   "siteSettings",
   "homePage",
+  "homePopup",
   "servicesPage",
   "processPage",
   "pricingPage",
