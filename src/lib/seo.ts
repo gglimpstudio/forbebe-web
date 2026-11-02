@@ -26,6 +26,7 @@ export const indexableRoutes = [
   { path: "/pricing", priority: 0.85, changeFrequency: "weekly" },
   { path: "/branches", priority: 0.9, changeFrequency: "weekly" },
   { path: "/cases", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/videos", priority: 0.8, changeFrequency: "weekly" },
   { path: "/faq", priority: 0.7, changeFrequency: "monthly" },
   { path: "/franchise", priority: 0.65, changeFrequency: "monthly" },
   { path: "/partnership", priority: 0.65, changeFrequency: "monthly" },

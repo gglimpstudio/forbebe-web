@@ -40,6 +40,7 @@ const managedDocumentTypes = [
   "pricingItem",
   "branch",
   "testimonial",
+  "youtubeVideo",
   "navigation",
   "legalPage",
 ];

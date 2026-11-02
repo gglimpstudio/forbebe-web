@@ -18,6 +18,7 @@ export const defaultNavigation: NavigationItem[] = [
   { title: "세탁과정", href: "/process", order: 3 },
   { title: "가격안내", href: "/pricing", order: 4 },
   { title: "지점소개", href: "/branches", order: 5 },
+  { title: "영상", href: "/videos", order: 5.5 },
   { title: "창업문의", href: "/franchise", order: 6 },
   { title: "제휴문의", href: "/partnership", order: 7 },
 ];

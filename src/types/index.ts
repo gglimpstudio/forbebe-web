@@ -1,3 +1,11 @@
+export type YouTubeVideo = {
+  _id: string;
+  _createdAt: string;
+  url: string;
+  title?: string;
+  youtubeTitle?: string;
+};
+
 export type SanityImage = {
   asset?: {
     _ref?: string;

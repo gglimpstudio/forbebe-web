@@ -22,6 +22,7 @@ import { processStep } from "./processStep";
 import { service } from "./service";
 import { siteSettings } from "./siteSettings";
 import { testimonial } from "./testimonial";
+import { youtubeVideo } from "./youtubeVideo";
 
 export const schemaTypes = [
   siteSettings,
@@ -43,6 +44,7 @@ export const schemaTypes = [
   beforeAfterCase,
   cleaningCase,
   testimonial,
+  youtubeVideo,
   faq,
   navigation,
   legalPage,

@@ -9,6 +9,7 @@ const paths = [
   "/pricing",
   "/branches",
   "/cases",
+  "/videos",
   "/faq",
   "/franchise",
   "/partnership",
