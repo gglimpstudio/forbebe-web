@@ -21,7 +21,12 @@ export default async function VideosPage() {
     <>
       <section className="bg-background-main py-8 sm:py-10 lg:py-12">
         <Container>
-          <SectionHeader eyebrow="VIDEOS" title="포베베 영상" headingLevel="h1" />
+          <SectionHeader
+            eyebrow="VIDEOS"
+            title="포베베 영상"
+            description="포베베의 세탁 과정과 현장 이야기를 영상으로 만나보세요."
+            headingLevel="h1"
+          />
         </Container>
       </section>
       <section className="bg-background-light pb-10 pt-8 sm:pb-14 sm:pt-10 lg:pb-16 lg:pt-12">
