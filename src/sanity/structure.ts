@@ -21,6 +21,7 @@ const listedTypes = [
   "cleaningCase",
   "testimonial",
   "youtubeVideo",
+  "laundryStatusPage",
   "faq",
   "navigation",
   "legalPage",
@@ -48,6 +49,7 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("youtubeVideo").title("포베베 관련 영상").child(
         S.documentTypeList("youtubeVideo").title("포베베 관련 영상").defaultOrdering([{ field: "_createdAt", direction: "desc" }]),
       ),
+      singletonItem(S, "laundryStatusPage", "세탁현황"),
       ...S.documentTypeListItems().filter((item) => {
         const id = item.getId();
         return Boolean(id && !listedTypes.includes(id));

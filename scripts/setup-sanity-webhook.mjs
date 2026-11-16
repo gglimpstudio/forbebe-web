@@ -41,6 +41,7 @@ const managedDocumentTypes = [
   "branch",
   "testimonial",
   "youtubeVideo",
+  "laundryStatusPage",
   "navigation",
   "legalPage",
 ];

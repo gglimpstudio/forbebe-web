@@ -23,6 +23,7 @@ import type {
   FranchisePage,
   HomeData,
   HomePage,
+  LaundryStatusPage,
   NavigationItem,
   PartnershipPage,
   PricingPage,
@@ -201,6 +202,7 @@ export const homeQuery = groq`{
 
 export const servicesQuery = groq`*[_type == "service"] | order(order asc){..., "slug": slug.current, image ${imageFields}}`;
 export const navigationQuery = groq`*[_type == "navigation"] | order(order asc)`;
+export const laundryStatusPageQuery = groq`*[_type == "laundryStatusPage"][0]{title, description, showNotice, notice, slidesUrl, autoAdvanceSeconds, refreshMinutes}`;
 export const youtubeVideosQuery = groq`*[_type == "youtubeVideo"] | order(_createdAt desc, _id desc){_id, _createdAt, url, title, youtubeTitle}`;
 export const processStepsQuery = groq`*[_type == "processStep"] | order(order asc){..., image ${imageFields}}`;
 export const pricingItemsQuery = groq`*[_type == "pricingItem"] | order(order asc)`;
@@ -241,7 +243,7 @@ export async function getHomeData(): Promise<HomeData> {
     popup: data?.popup || null,
     settings: data?.settings || defaultSettings,
     hero: defaultHero,
-    navigation: withVideoNavigation(withFallback<NavigationItem>(data?.navigation, defaultNavigation)),
+    navigation: withRequiredNavigation(withFallback<NavigationItem>(data?.navigation, defaultNavigation)),
     services: withFallback<Service>(data?.services, defaultServices),
     processSteps: withFallback<ProcessStep>(data?.processSteps, defaultProcessSteps),
     pricingItems: withFallback<PricingItem>(data?.pricingItems, defaultPricingItems),
@@ -293,17 +295,28 @@ export async function getPartnershipPage() {
 }
 
 export async function getNavigation() {
-  return withVideoNavigation(withFallback<NavigationItem>(await fetchSanity<NavigationItem[]>(navigationQuery), defaultNavigation));
+  return withRequiredNavigation(withFallback<NavigationItem>(await fetchSanity<NavigationItem[]>(navigationQuery), defaultNavigation));
 }
 
-// Existing CMS navigation documents must also receive the new shared desktop/mobile entry.
-function withVideoNavigation(items: NavigationItem[]) {
-  const existing = items.findIndex((item) => item.href.replace(/\/$/, "") === "/videos");
-  if (existing >= 0) return items.map((item, index) => index === existing ? { ...item, title: "영상", href: "/videos" } : item);
-  const result = [...items];
-  const branchesIndex = result.findIndex((item) => item.href === "/branches");
-  result.splice(branchesIndex < 0 ? result.length : branchesIndex + 1, 0, { title: "영상", href: "/videos" });
-  return result;
+// Existing CMS navigation documents must also receive the new shared desktop/mobile entries.
+const requiredNavigation = [
+  { title: "영상", href: "/videos", after: "/branches" },
+  { title: "세탁현황", href: "/laundry-status", after: "/videos" },
+];
+
+function withRequiredNavigation(items: NavigationItem[]) {
+  return requiredNavigation.reduce((result, { title, href, after }) => {
+    const existing = result.findIndex((item) => item.href.replace(/\/$/, "") === href);
+    if (existing >= 0) return result.map((item, index) => index === existing ? { ...item, title, href } : item);
+    const next = [...result];
+    const afterIndex = next.findIndex((item) => item.href.replace(/\/$/, "") === after);
+    next.splice(afterIndex < 0 ? next.length : afterIndex + 1, 0, { title, href });
+    return next;
+  }, items);
+}
+
+export async function getLaundryStatusPage() {
+  return fetchSanity<LaundryStatusPage>(laundryStatusPageQuery);
 }
 
 export async function getYouTubeVideos() {
