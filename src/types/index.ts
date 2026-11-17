@@ -6,6 +6,16 @@ export type YouTubeVideo = {
   youtubeTitle?: string;
 };
 
+export type LaundryStatusPage = {
+  title?: string;
+  description?: string;
+  showNotice?: boolean;
+  notice?: string;
+  slidesUrl?: string;
+  autoAdvanceSeconds?: number | null;
+  refreshMinutes?: number | null;
+};
+
 export type SanityImage = {
   asset?: {
     _ref?: string;

@@ -19,6 +19,7 @@ export const defaultNavigation: NavigationItem[] = [
   { title: "가격안내", href: "/pricing", order: 4 },
   { title: "지점소개", href: "/branches", order: 5 },
   { title: "영상", href: "/videos", order: 5.5 },
+  { title: "세탁현황", href: "/laundry-status", order: 5.6 },
   { title: "창업문의", href: "/franchise", order: 6 },
   { title: "제휴문의", href: "/partnership", order: 7 },
 ];

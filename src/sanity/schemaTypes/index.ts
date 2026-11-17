@@ -4,6 +4,7 @@ import { cleaningCase } from "./cleaningCase";
 import { faq } from "./faq";
 import { homePage } from "./homePage";
 import { homePopup } from "./homePopup";
+import { laundryStatusPage } from "./laundryStatusPage";
 import { legalPage } from "./legalPage";
 import { navigation } from "./navigation";
 import {
@@ -45,6 +46,7 @@ export const schemaTypes = [
   cleaningCase,
   testimonial,
   youtubeVideo,
+  laundryStatusPage,
   faq,
   navigation,
   legalPage,
