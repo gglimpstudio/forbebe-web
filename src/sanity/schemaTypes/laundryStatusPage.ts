@@ -21,7 +21,7 @@ export const laundryStatusPage = defineType({
       title: "안내 배너 문구",
       type: "text",
       rows: 2,
-      description: "비워두면 ‘현재 테스트 중이라 천안아산점만 확인 가능합니다.’가 표시됩니다.",
+      description: "비워두면 ‘현재 시범 운영 중으로, 천안아산점 세탁 현황만 제공됩니다.’가 표시됩니다.",
       hidden: ({ document }) => document?.showNotice === false,
     }),
     defineField({

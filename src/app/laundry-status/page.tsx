@@ -9,7 +9,7 @@ import { getSlideAspect } from "@/lib/googleSlidesServer";
 import { getLaundryStatusPage } from "@/lib/sanity/queries";
 
 const defaultDescription = "포베베의 현재 세탁 진행 현황을 확인하세요.";
-const defaultNotice = "현재 테스트 중이라 천안아산점만 확인 가능합니다.";
+const defaultNotice = "현재 시범 운영 중으로, 천안아산점 세탁 현황만 제공됩니다.";
 
 // Customer status board: reachable from the menu, but kept out of search results and the sitemap.
 export const metadata: Metadata = {
