@@ -86,23 +86,23 @@ function InstallSession({ guide, aboveBottomCta }: { guide: InstallGuide; aboveB
           aboveBottomCta ? "bottom-[calc(86px+env(safe-area-inset-bottom))]" : "bottom-[calc(12px+env(safe-area-inset-bottom))]",
         )}
       >
-        <div className="flex items-start gap-3 pr-7">
-          <Image src="/icon-192x192.png" alt="" width={44} height={44} className="h-11 w-11 shrink-0 rounded-[12px]" />
-          <div className="min-w-0">
-            <p id={titleId} className="text-[14px] font-semibold leading-5 text-green-dark [word-break:keep-all]">
-              포베베를 앱처럼 편리하게 이용하세요!
-            </p>
-            <p className="mt-0.5 text-[12px] leading-[18px] text-text-sub [word-break:keep-all]">홈 화면에 포베베를 설치하면 언제든 빠르게 이용하실 수 있습니다.</p>
-          </div>
+        <div className="flex items-center gap-2 pr-8">
+          <Image src="/icon-192x192.png" alt="" width={22} height={22} className="h-[22px] w-[22px] shrink-0 rounded-[6px]" />
+          <p id={titleId} className="min-w-0 text-[14px] font-semibold leading-5 text-green-dark [word-break:keep-all]">
+            포베베를 앱처럼 편리하게 이용하세요!
+          </p>
         </div>
-        <button
-          type="button"
-          className="mt-2.5 flex h-10 w-full items-center justify-center gap-1.5 rounded-full bg-brand-primary text-[13px] font-semibold text-text-inverse shadow-[0_8px_18px_rgba(18,58,50,0.16)] transition hover:bg-green-dark"
-          onClick={install}
-        >
-          <Download className="h-4 w-4" aria-hidden />
-          포베베 앱 설치하기
-        </button>
+        <div className="mt-1 flex items-center gap-2.5">
+          <p className="min-w-0 flex-1 text-[12px] leading-[17px] text-text-sub [word-break:keep-all]">홈 화면에 포베베를 설치하면 언제든 빠르게 이용하실 수 있습니다.</p>
+          <button
+            type="button"
+            className="flex h-9 shrink-0 items-center justify-center gap-1 rounded-full bg-brand-primary px-3.5 text-[12.5px] font-semibold text-text-inverse shadow-[0_8px_18px_rgba(18,58,50,0.16)] transition hover:bg-green-dark"
+            onClick={install}
+          >
+            <Download className="h-3.5 w-3.5" aria-hidden />
+            포베베 앱 설치하기
+          </button>
+        </div>
         <button
           type="button"
           className="absolute right-2 top-2 flex h-9 w-9 items-center justify-center rounded-full text-text-sub transition hover:bg-background-soft"
