@@ -37,10 +37,12 @@ const footerMenus: { title: string; links: FooterLink[] }[] = [
 ];
 
 const contactInfo = [
-  { label: "대표번호", value: "준비중" },
-  { label: "이메일", value: "contact@forbebe.co.kr" },
-  { label: "운영시간", value: "지점별 상이" },
-  { label: "사업자정보", value: "추후 입력" },
+  { label: "상호명", value: "포베베" },
+  { label: "대표자", value: "윤아상" },
+  { label: "사업자등록번호", value: "305-46-07774" },
+  { label: "주소", value: "충남 천안시 서북구 성성11길 24-5" },
+  { label: "대표번호", value: "010-4445-4880" },
+  { label: "이메일", value: "forbebe01@gmail.com" },
 ];
 
 const FALLBACK_LOGO_SRC = "/forbebe-logo.png";

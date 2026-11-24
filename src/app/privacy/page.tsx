@@ -35,7 +35,7 @@ export default async function PrivacyPage() {
             <PortableText value={page.content} components={components} />
           ) : (
             <p className="leading-7 text-text-sub">
-              개인정보처리방침을 준비하고 있습니다. 개인정보 관련 문의는 contact@forbebe.co.kr로 연락해 주세요.
+              개인정보처리방침을 준비하고 있습니다. 개인정보 관련 문의는 forbebe01@gmail.com로 연락해 주세요.
             </p>
           )}
         </div>
