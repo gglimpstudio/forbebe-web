@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 
+import { AppInstallBanner } from "@/components/layout/AppInstallBanner";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { MobileBottomCta } from "@/components/layout/MobileBottomCta";
@@ -32,6 +33,7 @@ export function SiteChrome({
       <Header navigation={navigation} settings={settings} />
       <main className="flex-1">{children}</main>
       <Footer settings={settings} />
+      <AppInstallBanner aboveBottomCta={floatingCta?.isVisible !== false} />
       <MobileBottomCta settings={settings} branches={branches} floatingCta={floatingCta} />
     </div>
   );
