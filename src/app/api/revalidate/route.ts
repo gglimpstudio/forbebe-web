@@ -15,6 +15,7 @@ const paths = [
   "/franchise",
   "/partnership",
   "/why-forbebe",
+  "/privacy",
 ];
 
 function getSecret(request: Request) {

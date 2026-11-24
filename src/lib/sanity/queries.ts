@@ -1,4 +1,4 @@
-import { groq } from "next-sanity";
+import { groq, type PortableTextBlock } from "next-sanity";
 
 import {
   defaultBranches,
@@ -225,6 +225,7 @@ export const faqPageQuery = groq`*[_type == "faqPage"][0] ${pageFields}`;
 export const whyForbebePageQuery = groq`*[_type == "whyForbebePage"][0] ${pageFields}`;
 export const franchisePageQuery = groq`*[_type == "franchisePage"][0] ${pageFields}`;
 export const partnershipPageQuery = groq`*[_type == "partnershipPage"][0] ${pageFields}`;
+export const legalPageQuery = groq`*[_type == "legalPage" && slug.current == $slug][0]{title, content}`;
 
 function withFallback<T>(data: T[] | null | undefined, fallback: T[]) {
   return data && data.length > 0 ? data : fallback;
@@ -292,6 +293,10 @@ export async function getFranchisePage() {
 
 export async function getPartnershipPage() {
   return fetchSanity<PartnershipPage>(partnershipPageQuery);
+}
+
+export async function getLegalPage(slug: string) {
+  return fetchSanity<{ title?: string; content?: PortableTextBlock[] }>(legalPageQuery, { slug });
 }
 
 export async function getNavigation() {
