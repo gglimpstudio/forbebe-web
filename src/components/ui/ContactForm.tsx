@@ -31,6 +31,11 @@ const formFields: Record<"franchise" | "partnership", Field[]> = {
   ],
 };
 
+const collectionPurpose: Record<"franchise" | "partnership", string> = {
+  franchise: "창업 문의 접수 및 상담 연락",
+  partnership: "제휴 문의 접수 및 검토 회신",
+};
+
 const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
 
 function getFormValue(formData: FormData, name: string) {
@@ -150,10 +155,30 @@ export function ContactForm({ type }: { type: "franchise" | "partnership" }) {
           )}
         </label>
       ))}
-      <label className="flex items-start gap-3 rounded-2xl bg-background-main p-4 text-sm leading-6 text-text-sub">
-        <input name="privacy" value="true" type="checkbox" required className="mt-1 h-4 w-4 accent-brand-primary" />
-        개인정보 수집 및 이용에 동의합니다.
-      </label>
+      <div className="rounded-2xl bg-background-main p-4 text-sm leading-6 text-text-sub">
+        <p className="font-semibold text-green-dark">개인정보 수집·이용 안내</p>
+        <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 text-[13px] [word-break:keep-all]">
+          <dt className="font-medium text-text-main">목적</dt>
+          <dd>{collectionPurpose[type]}</dd>
+          <dt className="font-medium text-text-main">항목</dt>
+          <dd>{formFields[type].map((field) => field.label).join(", ")}</dd>
+          <dt className="font-medium text-text-main">보유 기간</dt>
+          <dd>문의 처리 완료 후 1년</dd>
+          <dt className="font-medium text-text-main">국외 이전</dt>
+          <dd>문의 내용 저장을 위해 Google LLC(미국)에 제출 즉시 전송</dd>
+        </dl>
+        <p className="mt-2 text-[13px] [word-break:keep-all]">
+          동의를 거부할 수 있으며, 거부하면 온라인 문의를 접수할 수 없습니다. 자세한 내용은{" "}
+          <a href="/privacy" target="_blank" rel="noopener noreferrer" className="font-medium text-brand-primary underline underline-offset-2">
+            개인정보처리방침
+          </a>
+          을 확인해 주세요.
+        </p>
+        <label className="mt-3 flex items-start gap-3 font-medium text-text-main [word-break:keep-all]">
+          <input name="privacy" value="true" type="checkbox" required className="mt-1 h-4 w-4 accent-brand-primary" />
+          위 개인정보 수집·이용 및 국외 이전에 동의합니다. (필수)
+        </label>
+      </div>
       <Button type="submit" size="lg" disabled={status === "submitting"}>
         {status === "submitting" ? "전송 중" : "문의 보내기"}
       </Button>
