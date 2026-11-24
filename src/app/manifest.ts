@@ -2,9 +2,11 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
+    id: "/",
     name: "포베베",
     short_name: "포베베",
     description: "카시트와 유모차를 전문적으로 세탁·살균 케어하는 유아용품 세탁 브랜드",
+    lang: "ko",
     start_url: "/",
     scope: "/",
     display: "standalone",
@@ -24,7 +26,7 @@ export default function manifest(): MetadataRoute.Manifest {
         purpose: "any",
       },
       {
-        src: "/icon-512x512.png",
+        src: "/icon-maskable-512x512.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
